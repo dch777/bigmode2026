@@ -32,5 +32,4 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		var brake_friction = 275 * -state.linear_velocity.normalized()
 		state.apply_force(brake_friction)
 	
-	print(state.linear_velocity.length())
 	skidding = abs(slip_angle) > PI/3 and state.linear_velocity.length() > 100
