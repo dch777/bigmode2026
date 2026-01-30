@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://crtbe75nqp500"]
+
+[ext_resource type="Script" uid="uid://b6em7amhitle4" path="res://scripts/tank.gd" id="1_72lju"]
+[ext_resource type="Script" uid="uid://ce42dxy7ea83l" path="res://levels/canvas.gd" id="1_lkjt4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_72lju"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdnw"]
+size = Vector2(40, 20)
+
+[sub_resource type="Gradient" id="Gradient_ny0t1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r4e4k"]
+gradient = SubResource("Gradient_ny0t1")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Node2D" type="Node2D" unique_id=571728021]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=657314820]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_72lju")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=2104785143]
+angular_damp = 2.0
+script = ExtResource("1_72lju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1094282976]
+shape = SubResource("RectangleShape2D_nfdnw")
+
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D" unique_id=796455672]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+editor_draw_drag_margin = true
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=780045495 node_paths=PackedStringArray("brush", "tank")]
+transparent_bg = true
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 2
+script = ExtResource("1_lkjt4")
+brush = NodePath("brush")
+tank = NodePath("../RigidBody2D")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1419095635]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1292224175]
+visible = false
+texture = SubResource("GradientTexture2D_r4e4k")
+
+[node name="brush" type="Node2D" parent="SubViewport" unique_id=323293426]
+
+[node name="track" type="ColorRect" parent="SubViewport/brush" unique_id=1016396099]
+offset_left = -15.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = 10.0
+color = Color(0.078431375, 0.078431375, 0.078431375, 0.15686275)
