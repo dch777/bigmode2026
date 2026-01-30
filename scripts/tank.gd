@@ -23,7 +23,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 	var forward_friction = 35 * -forward_velocity.normalized()
 	var slip_curve = abs(slip_angle) / PI if abs(slip_angle) > PI/8 and steering != 0.0 else 1.0
-	var sideways_friction = 150 * slip_curve * -sideways_velocity.normalized()
+	var sideways_friction = 175 * slip_curve * -sideways_velocity.normalized()
 
 	state.apply_force(forward_friction)
 	state.apply_force(sideways_friction)
@@ -32,4 +32,4 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		var brake_friction = 275 * -state.linear_velocity.normalized()
 		state.apply_force(brake_friction)
 	
-	skidding = abs(slip_angle) > PI/3 and state.linear_velocity.length() > 100
+	skidding = (abs(slip_angle) > PI/3 and state.linear_velocity.length() > 90) or (Input.is_action_pressed("brake") and state.linear_velocity.length() > 200)
