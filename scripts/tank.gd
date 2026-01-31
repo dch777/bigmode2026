@@ -2,9 +2,6 @@ class_name Tank extends RigidBody2D
 
 var skidding: bool = false
 
-func _process(delta):
-	pass
-
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var throttle = Input.get_axis("decelerate", "accelerate")
 	var steering = Input.get_axis("turn_left", "turn_right")

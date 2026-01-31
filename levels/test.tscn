@@ -1,13 +1,10 @@
 [gd_scene format=4 uid="uid://crtbe75nqp500"]
 
-[ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="1_6g8e2"]
-[ext_resource type="Script" uid="uid://b6em7amhitle4" path="res://scripts/tank.gd" id="1_72lju"]
 [ext_resource type="Script" uid="uid://ce42dxy7ea83l" path="res://scripts/canvas.gd" id="1_lkjt4"]
-[ext_resource type="Script" uid="uid://d3l87p78u53nv" path="res://scripts/turret.gd" id="1_ny0t1"]
 [ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/sprites/tileset.png" id="1_u45fp"]
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_2grjb"]
-[ext_resource type="Texture2D" uid="uid://cqnt77rd468mt" path="res://assets/sprites/tank_body.png" id="2_pnvjf"]
-[ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_6g8e2"]
+[ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="6_6g8e2"]
+[ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/Nuke.tscn" id="6_u45fp"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
@@ -146,19 +143,6 @@ custom_data_layer_0/name = "damping"
 custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_2grjb")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_72lju"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ny0t1"]
-radius = 16.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdnw"]
-size = Vector2(40, 20)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkjt4"]
-radius = 5.0
-height = 100.0
-
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ny0t1"]
 bounce = 1.0
 
@@ -172,6 +156,9 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6g8e2"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_72lju"]
+viewport_path = NodePath("canvas/SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_ny0t1"]
 offsets = PackedFloat32Array(0.5948718, 1)
@@ -191,65 +178,16 @@ tile_map_data = PackedByteArray("AADJ/8j/AAABAAIAAADJ/8f/AAAAAAIAAADJ/8b/AAACAAI
 tile_set = SubResource("TileSet_qhvcx")
 script = ExtResource("2_2grjb")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=657314820]
-texture_filter = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_72lju")
+[node name="tree" parent="bg" unique_id=1608202116 instance=ExtResource("9_qhvcx")]
+position = Vector2(618, 64)
 
-[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=825864975]
-node_a = NodePath("../body")
-node_b = NodePath("../turret")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1465434198]
-position = Vector2(-83, -35)
-mass = 0.1
-linear_damp = -0.2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2070958354]
-shape = SubResource("CircleShape2D_ny0t1")
-
-[node name="NukeBall" type="Sprite2D" parent="RigidBody2D" unique_id=555823869]
-texture = ExtResource("1_6g8e2")
-
-[node name="body" type="RigidBody2D" parent="." unique_id=2104785143]
-angular_damp = 2.0
-script = ExtResource("1_72lju")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="body" unique_id=1094282976]
-shape = SubResource("RectangleShape2D_nfdnw")
-
-[node name="Camera2D" type="Camera2D" parent="body" unique_id=796455672]
-zoom = Vector2(1.5, 1.5)
-drag_left_margin = 0.5
-drag_top_margin = 0.5
-drag_right_margin = 0.5
-drag_bottom_margin = 0.5
-editor_draw_drag_margin = true
-
-[node name="TankBody" type="Sprite2D" parent="body" unique_id=1279413782]
-position = Vector2(32, 0)
-rotation = 1.5707964
-texture = ExtResource("2_pnvjf")
-
-[node name="turret" type="RigidBody2D" parent="." unique_id=1381580035]
-mass = 0.1
-script = ExtResource("1_ny0t1")
-ki = 200.0
-kd = 2000.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=2094561006]
-position = Vector2(-45, 0)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_lkjt4")
-
-[node name="TankTurret" type="Sprite2D" parent="turret" unique_id=1528606084]
-position = Vector2(-32, 0)
+[node name="tree3" parent="bg" unique_id=929499783 instance=ExtResource("9_qhvcx")]
+position = Vector2(611, 96)
 rotation = -1.5707964
-texture = ExtResource("4_6g8e2")
+
+[node name="tree2" parent="bg" unique_id=1916765626 instance=ExtResource("9_qhvcx")]
+position = Vector2(641, 87)
+rotation = -3.1415925
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]
 physics_material_override = SubResource("PhysicsMaterial_ny0t1")
@@ -270,35 +208,44 @@ shape = SubResource("WorldBoundaryShape2D_ny0t1")
 position = Vector2(2048, 0)
 shape = SubResource("WorldBoundaryShape2D_6g8e2")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=780045495 node_paths=PackedStringArray("brush", "tank")]
+[node name="canvas" type="Node2D" parent="." unique_id=578343250]
+
+[node name="TextureRect" type="TextureRect" parent="canvas" unique_id=657314820]
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2048.0
+offset_top = -2048.0
+offset_right = 2048.0
+offset_bottom = 2048.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_72lju")
+
+[node name="SubViewport" type="SubViewport" parent="canvas" unique_id=780045495 node_paths=PackedStringArray("brush", "player")]
 transparent_bg = true
 size = Vector2i(4096, 4096)
 render_target_clear_mode = 2
 script = ExtResource("1_lkjt4")
 brush = NodePath("brush")
-tank = NodePath("../body")
+player = NodePath("../../Player")
 
-[node name="brush" type="Node2D" parent="SubViewport" unique_id=323293426]
+[node name="brush" type="Node2D" parent="canvas/SubViewport" unique_id=323293426]
+visible = false
 
-[node name="track" type="Sprite2D" parent="SubViewport/brush" unique_id=1292224175]
+[node name="track" type="Sprite2D" parent="canvas/SubViewport/brush" unique_id=1292224175]
 position = Vector2(0, 10)
 texture = SubResource("GradientTexture2D_r4e4k")
 
-[node name="track2" type="Sprite2D" parent="SubViewport/brush" unique_id=1842333138]
+[node name="track2" type="Sprite2D" parent="canvas/SubViewport/brush" unique_id=1842333138]
 position = Vector2(0, -10)
 texture = SubResource("GradientTexture2D_r4e4k")
 
-[node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1419095635]
+[node name="Camera2D" type="Camera2D" parent="canvas/SubViewport" unique_id=1419095635]
 
-[node name="areas" type="Node2D" parent="." unique_id=686215914]
+[node name="nuke" parent="." unique_id=663457491 node_paths=PackedStringArray("player") instance=ExtResource("6_u45fp")]
+player = NodePath("../Player")
 
-[node name="tree" parent="." unique_id=1608202116 instance=ExtResource("9_qhvcx")]
-position = Vector2(140, -14)
-
-[node name="tree3" parent="." unique_id=929499783 instance=ExtResource("9_qhvcx")]
-position = Vector2(133, 18)
-rotation = -1.5707964
-
-[node name="tree2" parent="." unique_id=1916765626 instance=ExtResource("9_qhvcx")]
-position = Vector2(163, 9)
-rotation = 3.1415927
+[node name="Player" parent="." unique_id=1003144878 instance=ExtResource("6_6g8e2")]
+position = Vector2(21, 106)
