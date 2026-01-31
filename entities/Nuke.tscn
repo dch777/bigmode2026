@@ -73,6 +73,7 @@ scale_amount_curve = SubResource("Curve_6cp8y")
 color_ramp = SubResource("Gradient_uilhl")
 
 [node name="BlastRadius" type="Area2D" parent="." unique_id=1831326541]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius" unique_id=324343477]
 shape = SubResource("CircleShape2D_uilhl")

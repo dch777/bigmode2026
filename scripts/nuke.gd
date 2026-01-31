@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 func explode() -> void:
 	await get_tree().create_timer(8.0).timeout
 
+	$BlastRadius.monitoring = true
 	player.camera.top_level = true
 	player.camera.global_position = player.tank.global_position
 	is_exploding = true
