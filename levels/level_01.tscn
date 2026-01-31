@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbt43h4egoj3y"]
 
 [ext_resource type="Script" uid="uid://bfo3ut3inl8i8" path="res://levels/level_01.gd" id="1_81a5f"]
-[ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://levels/player.tscn" id="2_mckh2"]
+[ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="2_mckh2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mckh2"]
 viewport_path = NodePath("SubViewport")

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bq3hj0oial6qb"]
+
+[ext_resource type="Script" uid="uid://cyv6smbnasxwx" path="res://entities/nuke.gd" id="1_uilhl"]
+[ext_resource type="Texture2D" uid="uid://108l8mqs34s3" path="res://assets/sprites/cloud1.png" id="2_6cp8y"]
+
+[sub_resource type="Gradient" id="Gradient_uilhl"]
+offsets = PackedFloat32Array(0, 0.34729064, 0.6477833, 0.9137931, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1, 0.24705882, 0.15686275, 0.19607843, 0)
+
+[sub_resource type="Curve" id="Curve_6cp8y"]
+_data = [Vector2(0, 0.098523855), 0.0, 0.0, 0, 0, Vector2(0.4957627, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uilhl"]
+
+[node name="Nuke" type="Node2D" unique_id=1115132730]
+script = ExtResource("1_uilhl")
+
+[node name="Explosion1" type="CPUParticles2D" parent="." unique_id=1772254961]
+emitting = false
+amount = 500
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+linear_accel_max = 200.0
+scale_amount_min = 20.0
+scale_amount_max = 40.0
+color_ramp = SubResource("Gradient_uilhl")
+
+[node name="Explosion2" type="CPUParticles2D" parent="." unique_id=958360898]
+emitting = false
+amount = 100
+texture = ExtResource("2_6cp8y")
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+lifetime_randomness = 0.4
+particle_flag_align_y = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_6cp8y")
+color_ramp = SubResource("Gradient_uilhl")
+
+[node name="BlastRadius" type="StaticBody2D" parent="." unique_id=1535607821]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius" unique_id=324343477]
+shape = SubResource("CircleShape2D_uilhl")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1980326192]
+zoom = Vector2(0.2, 0.2)
