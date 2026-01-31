@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c6rttyrq13p0g"]
+
+[ext_resource type="Texture2D" uid="uid://xcyyk0bcr56p" path="res://assets/sprites/tree.png" id="1_odf6j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0f8o"]
+
+[node name="tree" type="StaticBody2D" unique_id=1608202116]
+
+[node name="Tree" type="Sprite2D" parent="." unique_id=531045469]
+texture = ExtResource("1_odf6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1494771643]
+shape = SubResource("CircleShape2D_l0f8o")

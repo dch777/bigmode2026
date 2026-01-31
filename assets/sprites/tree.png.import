@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxm8qxeg30a5l"
-path="res://.godot/imported/nuke_ball.png-865693a010958d0602ff97b4ac9582ec.ctex"
+uid="uid://xcyyk0bcr56p"
+path="res://.godot/imported/tree.png-15cb16b197553088007c6ba3ce2f75b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/nuke_ball.png"
-dest_files=["res://.godot/imported/nuke_ball.png-865693a010958d0602ff97b4ac9582ec.ctex"]
+source_file="res://assets/sprites/tree.png"
+dest_files=["res://.godot/imported/tree.png-15cb16b197553088007c6ba3ce2f75b0.ctex"]
 
 [params]
 
