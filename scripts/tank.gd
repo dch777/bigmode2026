@@ -13,8 +13,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var forward_velocity = state.linear_velocity.project(facing)
 	var sideways_velocity = state.linear_velocity.slide(facing)
 
-	var scaled_speed = forward_velocity.length() / 100.0
-	var acceleration_curve = 100 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
+	var scaled_speed = forward_velocity.length() / 150.0
+	var acceleration_curve = 150 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
 	var throttle_force = acceleration_curve * facing * throttle
 
 	var slip_angle = state.linear_velocity.angle_to(facing if sign(throttle) >= 0 else -facing) if state.linear_velocity.length() > 1.0 else 0.0
@@ -32,7 +32,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	state.apply_force(sideways_friction)
 
 	if Input.is_action_pressed("brake"):
-		var brake_friction = 275 * -state.linear_velocity.normalized()
+		var brake_friction = 350 * -state.linear_velocity.normalized()
 		state.apply_force(brake_friction)
 	
-	skidding = (abs(slip_angle) > PI/3 and state.linear_velocity.length() > 90) or (Input.is_action_pressed("brake") and state.linear_velocity.length() > 200)
+	skidding = (abs(slip_angle) > PI/6 and state.linear_velocity.length() > 70) or (Input.is_action_pressed("brake") and state.linear_velocity.length() > 250)

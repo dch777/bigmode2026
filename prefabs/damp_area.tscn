@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://vj7h6ve0ytf7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iixcr"]
+size = Vector2(32, 32)
+
+[node name="DampArea" type="Area2D" unique_id=99849699]
+linear_damp_space_override = 3
+linear_damp = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1229085229]
+shape = SubResource("RectangleShape2D_iixcr")
