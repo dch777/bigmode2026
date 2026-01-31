@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bbt43h4egoj3y"]
+
+[ext_resource type="Script" uid="uid://bfo3ut3inl8i8" path="res://levels/level_01.gd" id="1_81a5f"]
+[ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://levels/player.tscn" id="2_mckh2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mckh2"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_mckh2"]
+offsets = PackedFloat32Array(0.5948718, 1)
+colors = PackedColorArray(0, 0, 0, 0.039215688, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_81a5f"]
+gradient = SubResource("Gradient_mckh2")
+width = 40
+height = 24
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Level01" type="Node2D" unique_id=1678770360]
+script = ExtResource("1_81a5f")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=993223002]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2048.0
+offset_top = -2048.0
+offset_right = 2048.0
+offset_bottom = 2048.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_mckh2")
+
+[node name="Player" parent="." unique_id=1666856693 instance=ExtResource("2_mckh2")]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=221438044]
+transparent_bg = true
+size = Vector2i(4096, 4096)
+render_target_clear_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport" unique_id=1556860877]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1861347430]
+visible = false
+texture = SubResource("GradientTexture2D_81a5f")
+
+[node name="brush" type="Node2D" parent="SubViewport" unique_id=301862605]
+visible = false
+
+[node name="track" type="ColorRect" parent="SubViewport/brush" unique_id=245847671]
+offset_left = -15.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = 10.0
+color = Color(0.078431375, 0.078431375, 0.078431375, 0.039215688)

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b3fhiy15db34q"]
+
+[ext_resource type="Script" uid="uid://b6em7amhitle4" path="res://scripts/tank.gd" id="1_3ktyq"]
+[ext_resource type="Script" uid="uid://d3l87p78u53nv" path="res://scripts/turret.gd" id="2_r3jqh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpqk7"]
+size = Vector2(40, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ktyq"]
+size = Vector2(74, 2)
+
+[node name="Player" type="Node2D" unique_id=1003144878]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1726474430]
+node_a = NodePath("../Tank")
+node_b = NodePath("../Turret")
+
+[node name="Tank" type="RigidBody2D" parent="." unique_id=2039973345]
+script = ExtResource("1_3ktyq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank" unique_id=1015306292]
+shape = SubResource("RectangleShape2D_hpqk7")
+
+[node name="Camera2D" type="Camera2D" parent="Tank" unique_id=659443370]
+zoom = Vector2(1.5, 1.5)
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
+editor_draw_drag_margin = true
+
+[node name="Turret" type="RigidBody2D" parent="." unique_id=1713946377]
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("2_r3jqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret" unique_id=1119494492]
+position = Vector2(35, 0)
+shape = SubResource("RectangleShape2D_3ktyq")

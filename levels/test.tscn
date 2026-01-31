@@ -83,10 +83,9 @@ shape = SubResource("CircleShape2D_ny0t1")
 [node name="NukeBall" type="Sprite2D" parent="RigidBody2D" unique_id=555823869]
 texture = ExtResource("1_6g8e2")
 
-[node name="body" type="RigidBody2D" parent="." unique_id=2104785143 node_paths=PackedStringArray("turret")]
+[node name="body" type="RigidBody2D" parent="." unique_id=2104785143]
 angular_damp = 2.0
 script = ExtResource("1_72lju")
-turret = NodePath("../turret")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body" unique_id=1094282976]
 shape = SubResource("RectangleShape2D_nfdnw")
@@ -109,15 +108,13 @@ mass = 0.1
 script = ExtResource("1_ny0t1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=2094561006]
-position = Vector2(-45, 0)
+position = Vector2(45, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_lkjt4")
 
-[node name="Sprite2D" type="Sprite2D" parent="turret" unique_id=1361490259]
-
 [node name="TankTurret" type="Sprite2D" parent="turret" unique_id=1528606084]
-position = Vector2(-32, 0)
-rotation = -1.5707964
+position = Vector2(32, 0)
+rotation = 1.5707964
 texture = ExtResource("4_6g8e2")
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]

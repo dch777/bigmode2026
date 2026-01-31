@@ -1,12 +1,9 @@
 class_name Tank extends RigidBody2D
 
-@export var turret: Turret
-
 var skidding: bool = false
 
 func _process(delta):
-	if Input.is_action_just_pressed("shoot"):
-		apply_impulse(Vector2.from_angle(turret.global_rotation) * 150)
+	pass
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var throttle = Input.get_axis("decelerate", "accelerate")
