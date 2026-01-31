@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6em7amhitle4" path="res://scripts/tank.gd" id="1_72lju"]
 [ext_resource type="Script" uid="uid://ce42dxy7ea83l" path="res://scripts/canvas.gd" id="1_lkjt4"]
-[ext_resource type="Script" uid="uid://d3l87p78u53nv" path="res://scripts/arm.gd" id="1_ny0t1"]
+[ext_resource type="Script" uid="uid://d3l87p78u53nv" path="res://scripts/turret.gd" id="1_ny0t1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_72lju"]
 viewport_path = NodePath("SubViewport")
@@ -15,6 +15,20 @@ height = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdnw"]
 size = Vector2(40, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ny0t1"]
+bounce = 1.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r4e4k"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pnvjf"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ny0t1"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6g8e2"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="Gradient" id="Gradient_ny0t1"]
 offsets = PackedFloat32Array(0.5948718, 1)
@@ -39,7 +53,7 @@ texture = SubResource("ViewportTexture_72lju")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=825864975]
 node_a = NodePath("../body")
-node_b = NodePath("../arm")
+node_b = NodePath("../turret")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1465434198]
 position = Vector2(-83, -35)
@@ -49,20 +63,19 @@ linear_damp = 0.02
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2070958354]
 shape = SubResource("CircleShape2D_ny0t1")
 
-[node name="arm" type="RigidBody2D" parent="." unique_id=1381580035]
+[node name="turret" type="RigidBody2D" parent="." unique_id=1381580035]
 mass = 0.1
 script = ExtResource("1_ny0t1")
-kp = 10000.0
-kd = 1000.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="arm" unique_id=2094561006]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=2094561006]
 position = Vector2(-45, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_lkjt4")
 
-[node name="body" type="RigidBody2D" parent="." unique_id=2104785143]
+[node name="body" type="RigidBody2D" parent="." unique_id=2104785143 node_paths=PackedStringArray("turret")]
 angular_damp = 2.0
 script = ExtResource("1_72lju")
+turret = NodePath("../turret")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body" unique_id=1094282976]
 shape = SubResource("RectangleShape2D_nfdnw")
@@ -74,6 +87,25 @@ drag_top_margin = 0.5
 drag_right_margin = 0.5
 drag_bottom_margin = 0.5
 editor_draw_drag_margin = true
+
+[node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]
+physics_material_override = SubResource("PhysicsMaterial_ny0t1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls" unique_id=1308039068]
+position = Vector2(0, 2048)
+shape = SubResource("WorldBoundaryShape2D_r4e4k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="walls" unique_id=2082189973]
+position = Vector2(0, -2048)
+shape = SubResource("WorldBoundaryShape2D_pnvjf")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls" unique_id=875378262]
+position = Vector2(-2048, 0)
+shape = SubResource("WorldBoundaryShape2D_ny0t1")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls" unique_id=1252346333]
+position = Vector2(2048, 0)
+shape = SubResource("WorldBoundaryShape2D_6g8e2")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=780045495 node_paths=PackedStringArray("brush", "tank")]
 transparent_bg = true

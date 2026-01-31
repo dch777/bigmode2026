@@ -1,8 +1,8 @@
-class_name Arm extends RigidBody2D
+class_name Turret extends RigidBody2D
 
-@export var kp: float = 1000.0
+@export var kp: float = 10000.0
 @export var ki: float = 100.0
-@export var kd: float = 500.0
+@export var kd: float = 1000.0
 
 var _prev_error: float = 0.0
 var _integral: float = 0.0
