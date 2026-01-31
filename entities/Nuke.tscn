@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bq3hj0oial6qb"]
 
-[ext_resource type="Script" uid="uid://cyv6smbnasxwx" path="res://entities/nuke.gd" id="1_uilhl"]
+[ext_resource type="Script" uid="uid://cyv6smbnasxwx" path="res://scripts/nuke.gd" id="1_uilhl"]
 [ext_resource type="Texture2D" uid="uid://108l8mqs34s3" path="res://assets/sprites/cloud1.png" id="2_6cp8y"]
+[ext_resource type="AudioStream" uid="uid://cmnxap2br2644" path="res://assets/audio/bomb-explosion-2-369633_MRW3H9UG.mp3" id="3_p7qpb"]
+[ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_ykym1"]
 
 [sub_resource type="Gradient" id="Gradient_uilhl"]
 offsets = PackedFloat32Array(0, 0.34729064, 0.6477833, 0.9137931, 1)
@@ -12,6 +14,7 @@ _data = [Vector2(0, 0.098523855), 0.0, 0.0, 0, 0, Vector2(0.4957627, 1), 0.0, 0.
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uilhl"]
+radius = 50.0
 
 [node name="Nuke" type="Node2D" unique_id=1115132730]
 script = ExtResource("1_uilhl")
@@ -21,8 +24,10 @@ emitting = false
 amount = 500
 lifetime = 10.0
 one_shot = true
+speed_scale = 3.0
 explosiveness = 1.0
 use_fixed_seed = true
+seed = 2113642073
 lifetime_randomness = 1.0
 particle_flag_align_y = true
 direction = Vector2(0, 0)
@@ -41,8 +46,10 @@ amount = 100
 texture = ExtResource("2_6cp8y")
 lifetime = 10.0
 one_shot = true
+speed_scale = 3.0
 explosiveness = 1.0
 use_fixed_seed = true
+seed = 2717985813
 lifetime_randomness = 0.4
 particle_flag_align_y = true
 direction = Vector2(0, 0)
@@ -56,10 +63,18 @@ scale_amount_max = 20.0
 scale_amount_curve = SubResource("Curve_6cp8y")
 color_ramp = SubResource("Gradient_uilhl")
 
-[node name="BlastRadius" type="StaticBody2D" parent="." unique_id=1535607821]
+[node name="BlastZone" type="StaticBody2D" parent="." unique_id=1535607821]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastRadius" unique_id=324343477]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastZone" unique_id=324343477]
 shape = SubResource("CircleShape2D_uilhl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=12173433]
+stream = ExtResource("3_p7qpb")
+volume_db = -15.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=1939692034]
+stream = ExtResource("4_ykym1")
+volume_db = -15.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1980326192]
 zoom = Vector2(0.2, 0.2)
