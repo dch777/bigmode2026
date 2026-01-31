@@ -9,12 +9,12 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ny0t1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdnw"]
+size = Vector2(40, 20)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkjt4"]
 radius = 5.0
 height = 100.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdnw"]
-size = Vector2(40, 20)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ny0t1"]
 bounce = 1.0
@@ -53,6 +53,7 @@ offset_right = 2048.0
 offset_bottom = 2048.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.7647059, 0.8745098, 0.8784314, 1)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=657314820]
 anchors_preset = 15
@@ -74,15 +75,6 @@ linear_damp = 0.02
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=2070958354]
 shape = SubResource("CircleShape2D_ny0t1")
 
-[node name="turret" type="RigidBody2D" parent="." unique_id=1381580035]
-mass = 0.1
-script = ExtResource("1_ny0t1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=2094561006]
-position = Vector2(-45, 0)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_lkjt4")
-
 [node name="body" type="RigidBody2D" parent="." unique_id=2104785143 node_paths=PackedStringArray("turret")]
 angular_damp = 2.0
 script = ExtResource("1_72lju")
@@ -98,6 +90,31 @@ drag_top_margin = 0.5
 drag_right_margin = 0.5
 drag_bottom_margin = 0.5
 editor_draw_drag_margin = true
+
+[node name="track" type="Polygon2D" parent="body" unique_id=319541650]
+color = Color(0.6136725, 0.662918, 0.7367649, 1)
+polygon = PackedVector2Array(18, 8, 18, 14, -18, 14, -18, 8)
+
+[node name="body" type="Polygon2D" parent="body" unique_id=1321472954]
+color = Color(0.23137255, 0.22352941, 0.2784314, 1)
+polygon = PackedVector2Array(20, -10, 20, 10, 14, 10, 14, 12, -14, 12, -14, 10, -20, 10, -20, -10, -14, -10, -14, -12, 14, -12, 14, -10)
+
+[node name="turret" type="RigidBody2D" parent="." unique_id=1381580035]
+mass = 0.1
+script = ExtResource("1_ny0t1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=2094561006]
+position = Vector2(-45, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_lkjt4")
+
+[node name="barrel" type="Polygon2D" parent="turret" unique_id=1824105842]
+color = Color(0.5529412, 0.6156863, 0.6313726, 1)
+polygon = PackedVector2Array(0, -5, 0, 5, -95, 5, -95, -5)
+
+[node name="head" type="Polygon2D" parent="turret" unique_id=517314833]
+color = Color(0.37254903, 0.39215687, 0.4392157, 1)
+polygon = PackedVector2Array(0, 8, 12, 6, 12, -6, 0, -8, -12, -6, -16, -6, -16, 6, -12, 6)
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]
 physics_material_override = SubResource("PhysicsMaterial_ny0t1")
