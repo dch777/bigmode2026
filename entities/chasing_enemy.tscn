@@ -36,9 +36,11 @@ script = ExtResource("1_npjdl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xotmo")
-animation = &"chase"
-frame_progress = 0.74939656
+frame_progress = 0.18927766
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=996480441]
+[node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=996480441]
 rotation = 1.5707964
 polygon = PackedVector2Array(-8, -24, -8, -8, -17, -2, -17, 8, -22, 24, -16, 24, -6, 18, 6, 18, 16, 24, 22, 24, 17, 8, 17, -2, 8, -8, 8, -24)
+
+[node name="DefaultHitbox" type="CollisionPolygon2D" parent="." unique_id=63225758]
+polygon = PackedVector2Array(13, -19, -15, -17, -24, -8, -24, 8, -15, 17, 14, 19, 5, 9, 22, 4, 22, -4, 6, -9)

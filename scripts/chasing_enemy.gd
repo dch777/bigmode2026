@@ -4,6 +4,8 @@ extends RigidBody2D
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
+	$DefaultHitbox.disabled = false
+	$ChasingHitbox.disabled = true
 
 func _physics_process(delta: float) -> void:
 	var to_target = target.global_position - global_position
@@ -16,3 +18,5 @@ func _physics_process(delta: float) -> void:
 	look_at(target.global_position)
 	
 	$AnimatedSprite2D.play("chase")
+	$DefaultHitbox.disabled = true
+	$ChasingHitbox.disabled = false
