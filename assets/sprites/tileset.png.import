@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxm8qxeg30a5l"
-path="res://.godot/imported/nuke_ball.png-865693a010958d0602ff97b4ac9582ec.ctex"
+uid="uid://cx8fqjvsafdl0"
+path="res://.godot/imported/tileset.png-b50fc1806457686cf91872f682d34a54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/nuke_ball.png"
-dest_files=["res://.godot/imported/nuke_ball.png-865693a010958d0602ff97b4ac9582ec.ctex"]
+source_file="res://assets/sprites/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-b50fc1806457686cf91872f682d34a54.ctex"]
 
 [params]
 

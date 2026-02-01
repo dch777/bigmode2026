@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://crtbe75nqp500"]
 
-[ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/nuke_ball.png" id="1_6g8e2"]
+[ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="1_6g8e2"]
 [ext_resource type="Script" uid="uid://b6em7amhitle4" path="res://scripts/tank.gd" id="1_72lju"]
 [ext_resource type="Script" uid="uid://ce42dxy7ea83l" path="res://scripts/canvas.gd" id="1_lkjt4"]
 [ext_resource type="Script" uid="uid://d3l87p78u53nv" path="res://scripts/turret.gd" id="1_ny0t1"]
-[ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/tileset.png" id="1_u45fp"]
+[ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/sprites/tileset.png" id="1_u45fp"]
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_2grjb"]
-[ext_resource type="Texture2D" uid="uid://cqnt77rd468mt" path="res://assets/tank_body.png" id="2_pnvjf"]
-[ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/tank_turret.png" id="4_6g8e2"]
+[ext_resource type="Texture2D" uid="uid://cqnt77rd468mt" path="res://assets/sprites/tank_body.png" id="2_pnvjf"]
+[ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_6g8e2"]
 [ext_resource type="PackedScene" uid="uid://bl7u30bepjh1f" path="res://entities/chasing_enemy.tscn" id="9_qhvcx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
