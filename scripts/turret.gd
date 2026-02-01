@@ -4,6 +4,8 @@ class_name Turret extends RigidBody2D
 @export var ki: float = 100.0
 @export var kd: float = 1000.0
 
+@export var active: bool = false
+
 var _integral: float = 0.0
 var _int_max = 200
 

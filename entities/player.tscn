@@ -17,9 +17,13 @@ height = 100.0
 script = ExtResource("1_qly61")
 camera = NodePath("body/Camera2D")
 
-[node name="PinJoint2D2" type="PinJoint2D" parent="." unique_id=509480387]
+[node name="turret_pin" type="PinJoint2D" parent="." unique_id=509480387]
 node_a = NodePath("../body")
 node_b = NodePath("../turret")
+
+[node name="balance_pin" type="PinJoint2D" parent="." unique_id=1373815208]
+node_a = NodePath("../body")
+node_b = NodePath("../balance_turret")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
 angular_damp = 2.0
@@ -29,7 +33,6 @@ script = ExtResource("1_3ktyq")
 shape = SubResource("RectangleShape2D_qsoyl")
 
 [node name="Camera2D" type="Camera2D" parent="body" unique_id=620282691]
-zoom = Vector2(1.5, 1.5)
 drag_left_margin = 0.5
 drag_top_margin = 0.5
 drag_right_margin = 0.5
@@ -44,9 +47,10 @@ texture = ExtResource("2_rfe5m")
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 mass = 0.1
 script = ExtResource("2_r3jqh")
-kp = 12000.0
-ki = 200.0
-kd = 2000.0
+kp = 30000.0
+ki = 400.0
+kd = 3000.0
+active = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=1510013369]
 position = Vector2(-45, 0)
@@ -57,3 +61,17 @@ shape = SubResource("CapsuleShape2D_6nm46")
 position = Vector2(-32, 0)
 rotation = -1.5707964
 texture = ExtResource("4_qly61")
+
+[node name="balance_turret" type="RigidBody2D" parent="." unique_id=594409546]
+collision_layer = 0
+collision_mask = 0
+mass = 0.1
+script = ExtResource("2_r3jqh")
+kp = 30000.0
+ki = 400.0
+kd = 3000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="balance_turret" unique_id=186025037]
+position = Vector2(45, 0)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_6nm46")

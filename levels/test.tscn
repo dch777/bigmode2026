@@ -143,6 +143,10 @@ custom_data_layer_0/name = "damping"
 custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_2grjb")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6g8e2"]
+agent_radius = 16.0
+baking_rect = Rect2(-2048, -2048, 4096, 4096)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ny0t1"]
 bounce = 1.0
 
@@ -188,6 +192,11 @@ rotation = -1.5707964
 [node name="tree2" parent="bg" unique_id=1916765626 instance=ExtResource("9_qhvcx")]
 position = Vector2(641, 87)
 rotation = -3.1415925
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=314867571]
+navigation_polygon = SubResource("NavigationPolygon_6g8e2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationRegion2D" unique_id=277751984]
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]
 physics_material_override = SubResource("PhysicsMaterial_ny0t1")

@@ -7,7 +7,8 @@ var is_exploding = false
 var pushed_bodies: Dictionary[RigidBody2D, bool]
 
 func _ready() -> void:
-	explode()
+	# explode()
+	pass
 
 func _process(delta: float) -> void:
 	if is_exploding:
