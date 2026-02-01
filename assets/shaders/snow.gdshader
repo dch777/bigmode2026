@@ -16,8 +16,8 @@ void start() {
 	TRANSFORM = EMISSION_TRANSFORM;
 	
 	CUSTOM.y = seed(TIME + (1000.0 * CUSTOM.y));
-	TRANSFORM[0].xy = vec2(1.0 * CUSTOM.y, 0.0);
-	TRANSFORM[1].xy = vec2(0.0, 1.0 * CUSTOM.y);
+	TRANSFORM[0].xy = vec2(0.5 * CUSTOM.y + 0.5, 0.0);
+	TRANSFORM[1].xy = vec2(0.0, 0.5 * CUSTOM.y + 0.5);
 	
 	CUSTOM.y = random(CUSTOM.y);
 	TRANSFORM[3].x += 2.0 * EMITTER_VELOCITY.x + window_size.x * CUSTOM.y - window_size.x / 2.0;

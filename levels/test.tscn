@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://ew1504ayq36e" path="res://assets/sprites/bigrock.png" id="10_kqvnf"]
+[ext_resource type="PackedScene" uid="uid://bl7u30bepjh1f" path="res://entities/chasing_enemy.tscn" id="11_eudka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
 texture = ExtResource("1_u45fp")
@@ -182,6 +183,9 @@ height = 10
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_eudka"]
+bounce = 1.0
+
 [node name="Node2D" type="Node2D" unique_id=571728021]
 
 [node name="bg" type="TileMapLayer" parent="." unique_id=239484704]
@@ -289,3 +293,18 @@ texture = ExtResource("9_kqvnf")
 [node name="Bigrock" type="Sprite2D" parent="." unique_id=521710349]
 position = Vector2(243, -276)
 texture = ExtResource("10_kqvnf")
+
+[node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("11_eudka")]
+position = Vector2(177, 17)
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_eudka")
+target = NodePath("../nuke")
+player = NodePath("../Player")
+
+[node name="ChasingEnemy2" parent="." unique_id=1223039436 node_paths=PackedStringArray("target", "player") instance=ExtResource("11_eudka")]
+position = Vector2(177, 17)
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_eudka")
+target = NodePath("../nuke")
+player = NodePath("../Player")
+patrol = Vector2(2000, 0)

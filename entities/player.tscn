@@ -8,6 +8,10 @@
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="4_6nm46"]
 [ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_qly61"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i623q"]
+bounce = 1.0
+absorbent = true
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsoyl"]
 size = Vector2(40, 20)
 
@@ -21,6 +25,10 @@ width = 12
 height = 12
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6nm46"]
+bounce = 1.0
+absorbent = true
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6nm46"]
 radius = 5.0
@@ -39,6 +47,7 @@ node_a = NodePath("../body")
 node_b = NodePath("../balance_turret")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
+physics_material_override = SubResource("PhysicsMaterial_i623q")
 angular_damp = 2.0
 script = ExtResource("1_3ktyq")
 
@@ -69,6 +78,7 @@ texture = ExtResource("2_rfe5m")
 
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_6nm46")
 script = ExtResource("2_r3jqh")
 kp = 30000.0
 ki = 400.0

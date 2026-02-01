@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_ykym1"]
 [ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="5_kd12q"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kd12q"]
+bounce = 1.0
+
 [sub_resource type="Gradient" id="Gradient_uilhl"]
 offsets = PackedFloat32Array(0, 0.34729064, 0.6477833, 0.9137931, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1, 0.24705882, 0.15686275, 0.19607843, 0)
@@ -22,6 +25,7 @@ radius = 16.0
 
 [node name="Nuke" type="RigidBody2D" unique_id=622365965]
 mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_kd12q")
 linear_damp = -0.2
 script = ExtResource("1_uilhl")
 
