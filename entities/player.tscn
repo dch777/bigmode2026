@@ -44,6 +44,7 @@ texture = ExtResource("2_rfe5m")
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 mass = 0.1
 script = ExtResource("2_r3jqh")
+kp = 12000.0
 ki = 200.0
 kd = 2000.0
 
