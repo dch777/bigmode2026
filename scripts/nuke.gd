@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 		player.camera.zoom = player.camera.zoom.lerp(Vector2(0.5, 0.5), delta)
 
 func explode() -> void:
-	await get_tree().create_timer(8.0).timeout
+	await get_tree().create_timer(70.0).timeout
 
 	$BlastRadius.monitoring = true
 	player.camera.top_level = true
