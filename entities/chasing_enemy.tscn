@@ -1,28 +1,22 @@
 [gd_scene format=3 uid="uid://bl7u30bepjh1f"]
 
 [ext_resource type="Script" uid="uid://bbrhvosbwmnop" path="res://scripts/chasing_enemy.gd" id="1_npjdl"]
-[ext_resource type="Texture2D" uid="uid://c7sppw1tb1dh2" path="res://assets/sprites/cyber_dog.png" id="2_xexde"]
+[ext_resource type="Texture2D" uid="uid://dd4rqpwh7jsfq" path="res://assets/sprites/cyber_dog_active.png" id="2_paqql"]
+[ext_resource type="Texture2D" uid="uid://t786ep0jpcrm" path="res://assets/sprites/cyber_dog_inactive.png" id="3_mrngq"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_paqql"]
-atlas = ExtResource("2_xexde")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xexde"]
-atlas = ExtResource("2_xexde")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xotmo"]
+atlas = ExtResource("2_paqql")
 region = Rect2(48, 48, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mrngq"]
-atlas = ExtResource("2_xexde")
-region = Rect2(0, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe2xd"]
+atlas = ExtResource("3_mrngq")
+region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xotmo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_paqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xexde")
+"texture": SubResource("AtlasTexture_xotmo")
 }],
 "loop": true,
 "name": &"chase",
@@ -30,7 +24,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mrngq")
+"texture": SubResource("AtlasTexture_pe2xd")
 }],
 "loop": true,
 "name": &"default",
@@ -44,8 +38,6 @@ script = ExtResource("1_npjdl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xotmo")
-animation = &"chase"
-frame_progress = 0.20765975
 
 [node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=996480441]
 rotation = 1.5707964
