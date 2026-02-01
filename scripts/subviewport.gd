@@ -1,4 +1,5 @@
-class_name Canvas extends SubViewport
+class_name SkidCanvas extends SubViewport
+
 
 @export var brush: Node2D
 @export var player: Player
