@@ -5,7 +5,11 @@
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_2grjb"]
 [ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="6_6g8e2"]
 [ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/Nuke.tscn" id="6_u45fp"]
+[ext_resource type="Texture2D" uid="uid://dlscp540njl57" path="res://assets/sprites/rock.png" id="7_u45fp"]
+[ext_resource type="Texture2D" uid="uid://dveenj71j6arf" path="res://assets/sprites/tree2.png" id="8_qhvcx"]
+[ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
+[ext_resource type="Texture2D" uid="uid://ew1504ayq36e" path="res://assets/sprites/bigrock.png" id="10_kqvnf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
 texture = ExtResource("1_u45fp")
@@ -144,6 +148,9 @@ custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_2grjb")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6g8e2"]
+vertices = PackedVector2Array(653.5625, 20, 2032, -2032, 2032, 2032, 650, 33.28125, 650, 6.71875, 640.28125, -3, -2032, -2032, 627, -6.5625, 613.71875, -3, 640.28125, 43, 604, 6.71875, 589, 11.4375, 575.71875, 15, 604.5625, 72, 601.64844, 61.15625, 602.28125, 61, 612, 51.28125, 614.1797, 43.117188, 627, 46.5625, 564.71875, 95, -2032, 2032, 555, 85.28125, 601.8125, 14.8671875, 566, 24.71875, 562.4375, 38, 565.34375, 48.828125, 564.71875, 49, 601, 85.28125, 591.28125, 95, 578, 98.5625, 555, 58.71875, 551.4375, 72)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(1, 0, 4), PackedInt32Array(1, 4, 5), PackedInt32Array(6, 1, 5, 7), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 3, 2), PackedInt32Array(6, 8, 10, 11, 12), PackedInt32Array(13, 14, 15, 2), PackedInt32Array(16, 17, 18, 2), PackedInt32Array(19, 2, 20, 6, 21), PackedInt32Array(10, 22, 11), PackedInt32Array(6, 12, 23), PackedInt32Array(24, 25, 26), PackedInt32Array(18, 9, 2), PackedInt32Array(15, 16, 2), PackedInt32Array(27, 13, 2), PackedInt32Array(28, 27, 2), PackedInt32Array(29, 28, 2), PackedInt32Array(6, 23, 24, 30), PackedInt32Array(24, 26, 30), PackedInt32Array(6, 30, 31), PackedInt32Array(19, 29, 2), PackedInt32Array(6, 31, 21)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-2117, -2138, -2099, 2136, 2147, 2184, 2140, -2102)])
 agent_radius = 16.0
 baking_rect = Rect2(-2048, -2048, 4096, 4096)
 
@@ -182,21 +189,23 @@ tile_map_data = PackedByteArray("AADJ/8j/AAABAAIAAADJ/8f/AAAAAAIAAADJ/8b/AAACAAI
 tile_set = SubResource("TileSet_qhvcx")
 script = ExtResource("2_2grjb")
 
-[node name="tree" parent="bg" unique_id=1608202116 instance=ExtResource("9_qhvcx")]
-position = Vector2(618, 64)
-
-[node name="tree3" parent="bg" unique_id=929499783 instance=ExtResource("9_qhvcx")]
-position = Vector2(611, 96)
-rotation = -1.5707964
-
-[node name="tree2" parent="bg" unique_id=1916765626 instance=ExtResource("9_qhvcx")]
-position = Vector2(641, 87)
-rotation = -3.1415925
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=314867571]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_6g8e2")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationRegion2D" unique_id=277751984]
+[node name="props" type="Node2D" parent="NavigationRegion2D" unique_id=1560068628]
+position = Vector2(618, 64)
+
+[node name="tree" parent="NavigationRegion2D/props" unique_id=1608202116 instance=ExtResource("9_qhvcx")]
+position = Vector2(9, -44)
+
+[node name="tree3" parent="NavigationRegion2D/props" unique_id=929499783 instance=ExtResource("9_qhvcx")]
+position = Vector2(-40, 8)
+rotation = -1.5707964
+
+[node name="tree2" parent="NavigationRegion2D/props" unique_id=1916765626 instance=ExtResource("9_qhvcx")]
+position = Vector2(-29, -26)
+rotation = -3.1415925
 
 [node name="walls" type="StaticBody2D" parent="." unique_id=2073104936]
 physics_material_override = SubResource("PhysicsMaterial_ny0t1")
@@ -258,3 +267,25 @@ player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=1003144878 instance=ExtResource("6_6g8e2")]
 position = Vector2(21, 106)
+
+[node name="Rock" type="Sprite2D" parent="." unique_id=1672165835]
+position = Vector2(589, 9.000046)
+rotation = 0.7956937
+texture = ExtResource("7_u45fp")
+
+[node name="Tree3" type="Sprite2D" parent="." unique_id=1027332626]
+position = Vector2(624, 84.000015)
+rotation = 1.2984608
+texture = ExtResource("8_qhvcx")
+
+[node name="Tree2" type="Sprite2D" parent="." unique_id=1111249941]
+position = Vector2(620, 52)
+texture = ExtResource("8_qhvcx")
+
+[node name="Tree4" type="Sprite2D" parent="." unique_id=333809973]
+position = Vector2(594, 77)
+texture = ExtResource("9_kqvnf")
+
+[node name="Bigrock" type="Sprite2D" parent="." unique_id=521710349]
+position = Vector2(243, -276)
+texture = ExtResource("10_kqvnf")
