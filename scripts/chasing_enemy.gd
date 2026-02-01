@@ -8,13 +8,13 @@ func _ready() -> void:
 	$ChasingHitbox.disabled = true
 
 func _physics_process(delta: float) -> void:
-	var to_target = target.global_position - global_position
-	var distance = to_target.length()
-
-	var force = to_target.normalized() * distance * 5.0
-	var damp = -linear_velocity * 1.0
-
-	apply_central_force(force + damp)
+	var dir = target.global_position - global_position
+	var distance = dir.length()
+		
+	dir = dir.normalized()
+		
+	apply_central_force(dir * 30.0)	# recoil
+	
 	look_at(target.global_position)
 	
 	$AnimatedSprite2D.play("chase")

@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://bbrhvosbwmnop" path="res://scripts/chasing_enemy.gd" id="1_npjdl"]
 [ext_resource type="Texture2D" uid="uid://c7sppw1tb1dh2" path="res://assets/sprites/cyber_dog.png" id="2_xexde"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xexde"]
+bounce = 0.5
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_paqql"]
 atlas = ExtResource("2_xexde")
 region = Rect2(0, 48, 48, 48)
@@ -31,6 +34,8 @@ animations = [{
 }]
 
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_xexde")
 script = ExtResource("1_npjdl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
