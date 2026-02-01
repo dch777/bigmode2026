@@ -7,6 +7,10 @@
 atlas = ExtResource("2_xexde")
 region = Rect2(0, 48, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xexde"]
+atlas = ExtResource("2_xexde")
+region = Rect2(48, 48, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrngq"]
 atlas = ExtResource("2_xexde")
 region = Rect2(0, 0, 48, 48)
@@ -16,6 +20,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_paqql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xexde")
 }],
 "loop": true,
 "name": &"chase",
@@ -31,12 +38,14 @@ animations = [{
 }]
 
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
+mass = 0.2
 script = ExtResource("1_npjdl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xotmo")
-frame_progress = 0.18927766
+animation = &"chase"
+frame_progress = 0.20765975
 
 [node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=996480441]
 rotation = 1.5707964
