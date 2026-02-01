@@ -13,7 +13,7 @@ size = Vector2(40, 20)
 
 [sub_resource type="Gradient" id="Gradient_6nm46"]
 offsets = PackedFloat32Array(0, 0.6512821)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(0.78431374, 0.78431374, 0.78431374, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i623q"]
 gradient = SubResource("Gradient_6nm46")
@@ -54,6 +54,7 @@ editor_draw_drag_margin = true
 script = ExtResource("3_qsoyl")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="body/Camera2D" unique_id=1625252881]
+z_index = 100
 amount = 1000
 texture = SubResource("GradientTexture2D_i623q")
 lifetime = 2.0
