@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bbrhvosbwmnop" path="res://scripts/chasing_enemy.gd" id="1_npjdl"]
 [ext_resource type="Texture2D" uid="uid://c7sppw1tb1dh2" path="res://assets/sprites/cyber_dog.png" id="2_xexde"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_paqql"]
+[ext_resource type="Texture2D" uid="uid://dkrhf7s7c4pqi" path="res://assets/sprites/alert.png" id="4_mrngq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_paqql"]
 atlas = ExtResource("2_xexde")
@@ -39,7 +40,6 @@ animations = [{
 }]
 
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
-mass = 0.2
 script = ExtResource("1_npjdl")
 
 [node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_paqql")]
@@ -50,7 +50,6 @@ active = false
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xotmo")
 animation = &"chase"
-frame_progress = 0.20765975
 
 [node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=996480441]
 rotation = 1.5707964
@@ -58,3 +57,12 @@ polygon = PackedVector2Array(-8, -24, -8, -8, -17, -2, -17, 8, -22, 24, -16, 24,
 
 [node name="DefaultHitbox" type="CollisionPolygon2D" parent="." unique_id=63225758]
 polygon = PackedVector2Array(13, -19, -15, -17, -24, -8, -24, 8, -15, 17, 14, 19, 5, 9, 22, 4, 22, -4, 6, -9)
+
+[node name="Alert" type="Sprite2D" parent="." unique_id=457255755]
+top_level = true
+texture = ExtResource("4_mrngq")
+offset = Vector2(0, -40)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=2096868711]
+remote_path = NodePath("../Alert")
+update_rotation = false

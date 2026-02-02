@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/sprites/tileset.png" id="1_u45fp"]
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_2grjb"]
-[ext_resource type="Script" uid="uid://x8nlxf74dec" path="res://scripts/subviewport.gd" id="4_qtvpr"]
+[ext_resource type="Script" path="res://scripts/subviewport.gd" id="4_qtvpr"]
 [ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="6_6g8e2"]
-[ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/Nuke.tscn" id="6_u45fp"]
-[ext_resource type="Texture2D" uid="uid://dlscp540njl57" path="res://assets/sprites/rock.png" id="7_u45fp"]
+[ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/nuke.tscn" id="6_u45fp"]
+[ext_resource type="Texture2D" uid="uid://311kwtr6j0jb" path="res://assets/sprites/rock.png" id="7_u45fp"]
 [ext_resource type="Texture2D" uid="uid://dveenj71j6arf" path="res://assets/sprites/tree2.png" id="8_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
@@ -293,5 +293,6 @@ texture = ExtResource("10_kqvnf")
 
 [node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("13_drwxn")]
 position = Vector2(272, 65)
+mass = 0.2
 target = NodePath("../nuke")
 player = NodePath("../Player")
