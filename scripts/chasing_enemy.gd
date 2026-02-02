@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	var to_player = player.tank.global_position - global_position
 	var to_patrol = patrol - global_position
 	var target_to_patrol = target.global_position - patrol
-
+	
 	# patrol mechanic
 	var force = Vector2(0.0, 0.0)
 	if target_to_patrol.length() < 1000:
