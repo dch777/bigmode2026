@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dcovnee365jb4"]
+
+[ext_resource type="Script" uid="uid://b181qtqwgb7l0" path="res://levels/lens.gd" id="1_52kd3"]
+[ext_resource type="Script" uid="uid://buibls1co5g4g" path="res://levels/arrow_indicator.gd" id="2_f5g5m"]
+
+[sub_resource type="Gradient" id="Gradient_epu3l"]
+offsets = PackedFloat32Array(0.3794872, 0.3846154)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lqn8c"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_epu3l")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_rmkky"]
+offsets = PackedFloat32Array(0.548718, 0.7897436)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_epu3l"]
+gradient = SubResource("Gradient_rmkky")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_52kd3"]
+viewport_path = NodePath("CanvasLayer/SubViewport")
+
+[node name="lens" type="Camera2D" unique_id=147503076]
+enabled = false
+zoom = Vector2(0.8, 0.8)
+script = ExtResource("1_52kd3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1982002948]
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer" unique_id=1833364735]
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="circle" type="Sprite2D" parent="CanvasLayer" unique_id=261711098]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = SubResource("GradientTexture2D_lqn8c")
+script = ExtResource("2_f5g5m")
+margin = 64.0
+rotate = false
+
+[node name="mask" type="Sprite2D" parent="CanvasLayer/circle" unique_id=1735893369]
+clip_children = 1
+texture = SubResource("GradientTexture2D_epu3l")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/circle/mask" unique_id=717142036]
+texture = SubResource("ViewportTexture_52kd3")

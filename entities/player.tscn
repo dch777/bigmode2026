@@ -34,6 +34,10 @@ absorbent = true
 radius = 5.0
 height = 100.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i623q"]
+radius = 1.0
+height = 10.0
+
 [node name="Player" type="Node2D" unique_id=1003144878 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_qly61")
 camera = NodePath("body/Camera2D")
@@ -83,7 +87,6 @@ script = ExtResource("2_r3jqh")
 kp = 30000.0
 ki = 400.0
 kd = 3000.0
-active = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=1510013369]
 position = Vector2(-45, 0)
@@ -108,3 +111,46 @@ kd = 3000.0
 position = Vector2(45, 0)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_6nm46")
+
+[node name="flag" type="Node2D" parent="." unique_id=146509786]
+process_mode = 4
+
+[node name="flag1_pin" type="PinJoint2D" parent="flag" unique_id=418991499]
+process_mode = 4
+visible = false
+position = Vector2(19, 12)
+node_a = NodePath("../../body")
+node_b = NodePath("../flag1")
+
+[node name="flag2_pin" type="PinJoint2D" parent="flag" unique_id=1436612750]
+process_mode = 4
+visible = false
+position = Vector2(19, 20)
+node_a = NodePath("../flag1")
+node_b = NodePath("../flag2")
+
+[node name="flag1" type="RigidBody2D" parent="flag" unique_id=1131488984]
+process_mode = 4
+visible = false
+position = Vector2(19, 12)
+collision_layer = 0
+collision_mask = 2
+mass = 0.001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag/flag1" unique_id=1251390378]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_i623q")
+
+[node name="flag2" type="RigidBody2D" parent="flag" unique_id=898752797]
+process_mode = 4
+visible = false
+position = Vector2(19, 20)
+collision_layer = 0
+collision_mask = 2
+mass = 0.001
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag/flag2" unique_id=1693999521]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_i623q")

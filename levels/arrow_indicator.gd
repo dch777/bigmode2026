@@ -1,7 +1,9 @@
-extends AnimatedSprite2D
+class_name Indicator extends Node2D
 
-@export var target: Node2D   # drag your Nuke node here
+@export var target: Node2D
 @export var margin: float = 32.0
+@export var rotate: bool = true
+@export var active: bool = true
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(target):
@@ -16,7 +18,7 @@ func _process(_delta: float) -> void:
 	var target_screen: Vector2 = target.get_global_transform_with_canvas().origin
 
 	# If target is on-screen, hide arrow
-	if inner_rect.has_point(target_screen):
+	if inner_rect.has_point(target_screen) or !active:
 		hide()
 		return
 
@@ -34,4 +36,5 @@ func _process(_delta: float) -> void:
 	position = center + rel / scale
 
 	# Arrow sprite points UP by default
-	rotation = rel.angle() + deg_to_rad(90.0)
+	if rotate:
+		rotation = rel.angle() + deg_to_rad(90.0)

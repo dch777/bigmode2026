@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbrhvosbwmnop" path="res://scripts/chasing_enemy.gd" id="1_npjdl"]
 [ext_resource type="Texture2D" uid="uid://c7sppw1tb1dh2" path="res://assets/sprites/cyber_dog.png" id="2_xexde"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_paqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_paqql"]
 atlas = ExtResource("2_xexde")
@@ -40,6 +41,10 @@ animations = [{
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
 mass = 0.2
 script = ExtResource("1_npjdl")
+
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_paqql")]
+color = Color(1, 0, 0.26666668, 1)
+active = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
 rotation = 1.5707964

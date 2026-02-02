@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://ew1504ayq36e" path="res://assets/sprites/bigrock.png" id="10_kqvnf"]
-[ext_resource type="Texture2D" uid="uid://dtm47lgop2bvl" path="res://assets/sprites/arrow indicator.png" id="11_qtvpr"]
-[ext_resource type="Script" uid="uid://buibls1co5g4g" path="res://levels/arrow_indicator.gd" id="12_drwxn"]
 [ext_resource type="PackedScene" uid="uid://bl7u30bepjh1f" path="res://entities/chasing_enemy.tscn" id="13_drwxn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
@@ -185,17 +183,6 @@ height = 10
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rmkky"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_qtvpr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="Node2D" unique_id=287528865]
 
 [node name="bg" type="TileMapLayer" parent="." unique_id=976263891]
@@ -303,14 +290,6 @@ texture = ExtResource("9_kqvnf")
 [node name="Bigrock" type="Sprite2D" parent="." unique_id=475654700]
 position = Vector2(243, -276)
 texture = ExtResource("10_kqvnf")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=485155341]
-
-[node name="arrowIndicator" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1719588704 node_paths=PackedStringArray("target")]
-scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_rmkky")
-script = ExtResource("12_drwxn")
-target = NodePath("../../nuke")
 
 [node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("13_drwxn")]
 position = Vector2(272, 65)
