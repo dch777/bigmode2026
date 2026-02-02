@@ -1,13 +1,12 @@
 extends RigidBody2D
 
 @export var player: Player
-
-@export var max_speed: float = 400.0
+@export var max_speed: float = 350.0
 
 
 @export var drive_force: float = 800.0
 
-# Predator behavior
+
 @export var aggro_radius: float = 1400.0
 @export var lead_amount: float = 0.35          
 @export var velocity_match: float = 0.25       
