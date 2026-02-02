@@ -5,12 +5,14 @@
 [ext_resource type="Script" uid="uid://x8nlxf74dec" path="res://scripts/subviewport.gd" id="4_qtvpr"]
 [ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="6_6g8e2"]
 [ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/Nuke.tscn" id="6_u45fp"]
-[ext_resource type="Texture2D" uid="uid://dlscp540njl57" path="res://assets/sprites/rock.png" id="7_u45fp"]
+[ext_resource type="Texture2D" uid="uid://311kwtr6j0jb" path="res://assets/sprites/rock.png" id="7_u45fp"]
 [ext_resource type="Texture2D" uid="uid://dveenj71j6arf" path="res://assets/sprites/tree2.png" id="8_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://ew1504ayq36e" path="res://assets/sprites/bigrock.png" id="10_kqvnf"]
+[ext_resource type="PackedScene" uid="uid://dxlqdapu4e1lt" path="res://entities/bumrushdrone.tscn" id="11_qtvpr"]
 [ext_resource type="PackedScene" uid="uid://bl7u30bepjh1f" path="res://entities/chasing_enemy.tscn" id="13_drwxn"]
+[ext_resource type="PackedScene" uid="uid://ddl22oocp5u2u" path="res://entities/magnetdroen.tscn" id="13_rmkky"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2grjb"]
 texture = ExtResource("1_u45fp")
@@ -291,7 +293,15 @@ texture = ExtResource("9_kqvnf")
 position = Vector2(243, -276)
 texture = ExtResource("10_kqvnf")
 
+[node name="Bumrushdrone" parent="." unique_id=977656969 node_paths=PackedStringArray("player") instance=ExtResource("11_qtvpr")]
+position = Vector2(-35, 193)
+player = NodePath("../Player")
+
 [node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("13_drwxn")]
-position = Vector2(22, 239)
+position = Vector2(66, 237)
 target = NodePath("../nuke")
+player = NodePath("../Player")
+
+[node name="MagnetDrone" parent="." unique_id=423548414 node_paths=PackedStringArray("player") instance=ExtResource("13_rmkky")]
+visible = false
 player = NodePath("../Player")
