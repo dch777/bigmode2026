@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dcovnee365jb4"]
 
-[ext_resource type="Script" uid="uid://b181qtqwgb7l0" path="res://levels/lens.gd" id="1_52kd3"]
-[ext_resource type="Script" uid="uid://buibls1co5g4g" path="res://levels/arrow_indicator.gd" id="2_f5g5m"]
+[ext_resource type="Script" uid="uid://b181qtqwgb7l0" path="res://scripts/lens.gd" id="1_52kd3"]
+[ext_resource type="Script" uid="uid://buibls1co5g4g" path="res://scripts/arrow_indicator.gd" id="2_f5g5m"]
 
 [sub_resource type="Gradient" id="Gradient_epu3l"]
 offsets = PackedFloat32Array(0.3794872, 0.3846154)

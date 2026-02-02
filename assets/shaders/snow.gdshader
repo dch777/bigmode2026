@@ -34,9 +34,11 @@ void start() {
 		vec2 dir = normalize(TRANSFORM[3].xy - explosion);
 		VELOCITY.xy += dir * 1000.0;
 		COLOR = vec4(0.0, 0.0, 0.0, 1.0);
+		CUSTOM.z = 0.0;
 	} else {
-		VELOCITY -= EMITTER_VELOCITY * 0.3 * CUSTOM.y;
+		VELOCITY -= EMITTER_VELOCITY * 0.1 * CUSTOM.y;
 		COLOR = vec4(0.75, 0.8, 0.86, 1.0);
+		CUSTOM.z = 1.0;
 	}
 }
 
@@ -50,10 +52,12 @@ void process() {
 	CUSTOM.y = random(CUSTOM.y);
 	VELOCITY *= 0.95;
 	if (!is_exploding) {
-		VELOCITY -= EMITTER_VELOCITY * 0.15 * CUSTOM.y;
+		VELOCITY -= EMITTER_VELOCITY * 0.1 * CUSTOM.y;
 		COLOR.a = 9.0 * (CUSTOM.x + 0.02) * exp(6.0 * -CUSTOM.x);
 	} else {
 		vec2 dir = normalize(TRANSFORM[3].xy - explosion);
 		VELOCITY.xy += dir * 10.0;
+		VELOCITY.xy += dir * 1000.0 * CUSTOM.z;
+		CUSTOM.z = 0.0;
 	}
 }

@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:assets/sprites/rock.png.import
-uid="uid://dlscp540njl57"
-path="res://.godot/imported/rock.png-bcf52a497742222238feaf1e96d9860c.ctex"
-========
-uid="uid://nqfd5orid68s"
+uid="uid://c1i6yxueja0ik"
 path="res://.godot/imported/cloud2.png-151b43441b59cee1103798b0f2d26cc8.ctex"
->>>>>>>> origin/willy:assets/sprites/cloud2.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:assets/sprites/rock.png.import
-source_file="res://assets/sprites/rock.png"
-dest_files=["res://.godot/imported/rock.png-bcf52a497742222238feaf1e96d9860c.ctex"]
-========
 source_file="res://assets/sprites/cloud2.png"
 dest_files=["res://.godot/imported/cloud2.png-151b43441b59cee1103798b0f2d26cc8.ctex"]
->>>>>>>> origin/willy:assets/sprites/cloud2.png.import
 
 [params]
 

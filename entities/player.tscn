@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://dk886mb3aphxw" path="res://scripts/camera.gd" id="3_qsoyl"]
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="4_6nm46"]
 [ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_qly61"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="8_i623q"]
+[ext_resource type="Script" uid="uid://br8nwq74xlf2b" path="res://scripts/engine_handler.gd" id="9_ef06p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i623q"]
 bounce = 1.0
@@ -14,6 +16,10 @@ absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsoyl"]
 size = Vector2(40, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i623q"]
+radius = 3.0
+height = 50.0
 
 [sub_resource type="Gradient" id="Gradient_6nm46"]
 offsets = PackedFloat32Array(0, 0.6512821)
@@ -34,6 +40,9 @@ absorbent = true
 radius = 5.0
 height = 100.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i623q"]
+size = Vector2(25, 10)
+
 [node name="Player" type="Node2D" unique_id=1003144878 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_qly61")
 camera = NodePath("body/Camera2D")
@@ -48,11 +57,23 @@ node_b = NodePath("../balance_turret")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
 physics_material_override = SubResource("PhysicsMaterial_i623q")
-angular_damp = 2.0
+angular_damp = 0.5
 script = ExtResource("1_3ktyq")
+
+[node name="lens" parent="body" unique_id=147503076 instance=ExtResource("8_i623q")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body" unique_id=387666631]
 shape = SubResource("RectangleShape2D_qsoyl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="body" unique_id=887097116]
+position = Vector2(0, 13)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i623q")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="body" unique_id=268499928]
+position = Vector2(0, -13)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i623q")
 
 [node name="Camera2D" type="Camera2D" parent="body" unique_id=620282691]
 drag_left_margin = 0.5
@@ -76,9 +97,13 @@ position = Vector2(32, 0)
 rotation = 1.5707964
 texture = ExtResource("2_rfe5m")
 
+[node name="engine_polyphony" type="Node2D" parent="body" unique_id=1859317804]
+script = ExtResource("9_ef06p")
+
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_6nm46")
+linear_damp_mode = 1
 script = ExtResource("2_r3jqh")
 kp = 30000.0
 ki = 400.0
@@ -88,6 +113,12 @@ kd = 3000.0
 position = Vector2(-45, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_6nm46")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="turret" unique_id=1248397092]
+position = Vector2(-90, 0)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_i623q")
+one_way_collision = true
 
 [node name="TankTurret" type="Sprite2D" parent="turret" unique_id=954784464]
 position = Vector2(-32, 0)

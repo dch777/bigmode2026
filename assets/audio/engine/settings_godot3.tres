@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SVA" format=3 uid="uid://cv1qotlm5pnrl"]
+
+[ext_resource type="Script" uid="uid://yeux4wqlhstv" path="res://scripts/engine_settings.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pitch_calibrate = 7700.0
+on_throttle_offset = -0.5
+off_throttle_offset = 0.5
+overall_volume = 0.2
+off_volume_multiplier = 0.5
+before_vvt_index = 10000.0
+Streams = [["1.ogg", 0, 448985, 1.0, 1.0], ["2.ogg", 1, 299661, 1.0, 1.0], ["3.ogg", 2, 224492, 1.0, 1.0], ["4.ogg", 3, 178180, 1.0, 1.0], ["5.ogg", 4, 149831, 1.0, 1.0], ["6.ogg", 5, 125992, 1.0, 1.0], ["7.ogg", 6, 112246, 1.0, 1.0], ["8.ogg", 7, 100000, 1.0, 1.0]]

@@ -3,5 +3,8 @@
 [ext_resource type="Shader" uid="uid://bu4uy5308vhu4" path="res://assets/shaders/snow.gdshader" id="1_yd6c2"]
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_yd6c2")
 shader_parameter/window_size = Vector2(1280, 720)
+shader_parameter/explosion = Vector2(0, 0)
+shader_parameter/is_exploding = false
