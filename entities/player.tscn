@@ -83,7 +83,6 @@ script = ExtResource("2_r3jqh")
 kp = 30000.0
 ki = 400.0
 kd = 3000.0
-active = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=1510013369]
 position = Vector2(-45, 0)

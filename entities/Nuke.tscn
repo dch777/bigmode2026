@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cmnxap2br2644" path="res://assets/audio/bomb-explosion-2-369633_MRW3H9UG.mp3" id="3_p7qpb"]
 [ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_ykym1"]
 [ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="5_kd12q"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="6_uwpkm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kd12q"]
 bounce = 1.0
@@ -94,5 +95,8 @@ shape = SubResource("CircleShape2D_465ar")
 
 [node name="NukeBall" type="Sprite2D" parent="." unique_id=755685988]
 texture = ExtResource("5_kd12q")
+
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("6_uwpkm")]
+priority = 99
 
 [connection signal="area_entered" from="BlastZone" to="." method="blast_radius_entered"]

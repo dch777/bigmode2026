@@ -2,16 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<<< HEAD:assets/sprites/cloud3.png.import
 uid="uid://yqo6ckbjx5bw"
 path="res://.godot/imported/cloud3.png-1de9b230cf104dc7191b7c34bb74ccf4.ctex"
+========
+uid="uid://lt27w2n62qey"
+path="res://.godot/imported/tileset_alt.png-c2d0389e914fa3905e1623c0b8752a78.ctex"
+>>>>>>>> origin/willy:assets/sprites/tileset_alt.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:assets/sprites/cloud3.png.import
 source_file="res://assets/sprites/cloud3.png"
 dest_files=["res://.godot/imported/cloud3.png-1de9b230cf104dc7191b7c34bb74ccf4.ctex"]
+========
+source_file="res://assets/sprites/tileset_alt.png"
+dest_files=["res://.godot/imported/tileset_alt.png-c2d0389e914fa3905e1623c0b8752a78.ctex"]
+>>>>>>>> origin/willy:assets/sprites/tileset_alt.png.import
 
 [params]
 

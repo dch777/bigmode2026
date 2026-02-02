@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7sppw1tb1dh2"
-path="res://.godot/imported/cyber_dog.png-b521fac7ae62e60c861449ac9015328c.ctex"
+uid="uid://lt27w2n62qey"
+path="res://.godot/imported/tileset_alt.png-c2d0389e914fa3905e1623c0b8752a78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cyber_dog.png"
-dest_files=["res://.godot/imported/cyber_dog.png-b521fac7ae62e60c861449ac9015328c.ctex"]
+source_file="res://assets/sprites/tileset_alt.png"
+dest_files=["res://.godot/imported/tileset_alt.png-c2d0389e914fa3905e1623c0b8752a78.ctex"]
 
 [params]
 

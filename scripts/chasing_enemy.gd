@@ -4,6 +4,8 @@ extends RigidBody2D
 @export var player: Player
 @export var patrol: Vector2
 
+@onready var lens: Lens = $lens
+
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
 	$DefaultHitbox.disabled = false
@@ -18,9 +20,11 @@ func _physics_process(delta: float) -> void:
 	var force = Vector2(0.0, 0.0)
 	if target_to_patrol.length() < 1000:
 		force = to_target.normalized() * 200.0 + to_target * 0.1
+		lens.active = true
 		$AnimatedSprite2D.play("chase")
 	else:
 		force = to_patrol * 0.1
+		lens.active = false
 		$AnimatedSprite2D.play("default")
 
 	if to_player.length() < 300 and to_target.length() > 30:
