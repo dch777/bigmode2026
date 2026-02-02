@@ -267,7 +267,7 @@ texture = SubResource("GradientTexture2D_r4e4k")
 player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=1172187415 instance=ExtResource("6_6g8e2")]
-position = Vector2(21, 106)
+position = Vector2(17, 137)
 
 [node name="Rock" type="Sprite2D" parent="." unique_id=1431773599]
 position = Vector2(589, 9.000046)
@@ -292,6 +292,6 @@ position = Vector2(243, -276)
 texture = ExtResource("10_kqvnf")
 
 [node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("13_drwxn")]
-position = Vector2(272, 65)
+position = Vector2(22, 239)
 target = NodePath("../nuke")
 player = NodePath("../Player")

@@ -1,29 +1,23 @@
 [gd_scene format=3 uid="uid://bl7u30bepjh1f"]
 
 [ext_resource type="Script" uid="uid://bbrhvosbwmnop" path="res://scripts/chasing_enemy.gd" id="1_npjdl"]
-[ext_resource type="Texture2D" uid="uid://c7sppw1tb1dh2" path="res://assets/sprites/cyber_dog.png" id="2_xexde"]
+[ext_resource type="Texture2D" uid="uid://dd4rqpwh7jsfq" path="res://assets/sprites/cyber_dog_active.png" id="2_paqql"]
+[ext_resource type="Texture2D" uid="uid://t786ep0jpcrm" path="res://assets/sprites/cyber_dog_inactive.png" id="3_mrngq"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_paqql"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_paqql"]
-atlas = ExtResource("2_xexde")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xexde"]
-atlas = ExtResource("2_xexde")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xotmo"]
+atlas = ExtResource("2_paqql")
 region = Rect2(48, 48, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mrngq"]
-atlas = ExtResource("2_xexde")
-region = Rect2(0, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe2xd"]
+atlas = ExtResource("3_mrngq")
+region = Rect2(48, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xotmo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_paqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xexde")
+"texture": SubResource("AtlasTexture_xotmo")
 }],
 "loop": true,
 "name": &"chase",
@@ -31,7 +25,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mrngq")
+"texture": SubResource("AtlasTexture_pe2xd")
 }],
 "loop": true,
 "name": &"default",
@@ -42,15 +36,9 @@ animations = [{
 mass = 0.2
 script = ExtResource("1_npjdl")
 
-[node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_paqql")]
-color = Color(1, 0, 0.26666668, 1)
-active = false
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_xotmo")
-animation = &"chase"
-frame_progress = 0.20765975
 
 [node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=996480441]
 rotation = 1.5707964
@@ -58,3 +46,6 @@ polygon = PackedVector2Array(-8, -24, -8, -8, -17, -2, -17, 8, -22, 24, -16, 24,
 
 [node name="DefaultHitbox" type="CollisionPolygon2D" parent="." unique_id=63225758]
 polygon = PackedVector2Array(13, -19, -15, -17, -24, -8, -24, 8, -15, 17, 14, 19, 5, 9, 22, 4, 22, -4, 6, -9)
+
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_paqql")]
+color = Color(1, 0, 0.26666668, 1)
