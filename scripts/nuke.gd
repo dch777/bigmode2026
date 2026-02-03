@@ -11,8 +11,7 @@ var is_exploding = false
 var pushed_bodies: Dictionary[RigidBody2D, bool]
 
 func _ready() -> void:
-	# await get_tree().create_timer(60.0).timeout
-	# explode()
+	#explode()
 	pass
 
 func _process(delta: float) -> void:
@@ -28,6 +27,8 @@ func _process(delta: float) -> void:
 		explode()
 	
 func explode() -> void:
+	await get_tree().create_timer(1.0).timeout
+
 	$BlastZone.monitoring = true
 	camera.top_level = true
 	camera.particle_material.set_shader_parameter("explosion", global_position)

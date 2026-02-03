@@ -1,33 +1,51 @@
 extends RigidBody2D
 
-@export var target: Node2D
-
-@onready var lens: Lens = $lens
 @onready var patrol = global_position
 
-var go_right = true
+@onready var lens: Lens = $lens
+@onready var chasing = false
+
+var target: RigidBody2D
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
-	$DefaultHitbox.disabled = false
-	$ChasingHitbox.disabled = true
+	# $DefaultHitbox.disabled = false
+	# $ChasingHitbox.disabled = true
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	var to_target = target.global_position - global_position
 	var to_patrol = patrol - global_position
-	var target_to_patrol = target.global_position - patrol
-
+	
+	# patrol mechanic
 	var force = Vector2(0.0, 0.0)
-	if target_to_patrol.length() < 1000:
-		force = to_target.normalized() * 100.0 # + to_target * 0.1
+	if target != null:
+		var to_target = target.global_position - global_position
+		var target_to_patrol = target.global_position - patrol
+
+		force = to_target.normalized() * 100.0
 		lens.active = true
 		$AnimatedSprite2D.play("chase")
+
+		if target_to_patrol.length() > 1000:
+			target = null
+			$viewcone.visible = true
 	else:
-		if to_patrol.length() > 20.0:
+		if $viewcone.suspected_bodies.size() == 0 and to_patrol.length() > 20.0:
 			force = to_patrol * 0.1
+
+		for body in $viewcone.detected_bodies:
+			var body_to_patrol = body.global_position - patrol
+
+			if body_to_patrol.length() < 1000:
+				if body is Tank:
+					target = body
+				elif body is Turret:
+					target = body.tank
+
+				$viewcone.visible = false
+
 		lens.active = false
 		$AnimatedSprite2D.play("default")
-
+		
 	var straight = $straight.is_colliding() and $straight.get_collider() != target
 	var right = $right.is_colliding() and $right.get_collider() != target
 	var left = $left.is_colliding() and $left.get_collider() != target
@@ -49,11 +67,13 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 	var damp = -linear_velocity * 0.1
 	apply_central_force(force + damp)
-	# look_at(global_position + linear_velocity)
-	if linear_velocity.length() > 2.0:
+
+	if (target == null or $viewcone.suspected_bodies.size() == 0) and linear_velocity.length() > 2.0:
 		var goal = (global_position + linear_velocity + force * 0.1)
 		var error = wrapf(goal.angle_to_point(state.transform.origin) - global_rotation + PI, -PI, PI)
 		state.apply_torque(1000 * error - 200 * angular_velocity)
+	if target == null and $viewcone.suspected_bodies.size() > 0:
+		state.angular_velocity = clamp(state.angular_velocity, -2, 2)
 
 func collided_with(body):
 	if body is Tank:

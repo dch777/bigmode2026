@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c4g3ydn8vni6t"]
+
+[ext_resource type="Script" uid="uid://ck7qwqmlx8mkd" path="res://scripts/viewcone.gd" id="1_ur4j1"]
+[ext_resource type="Texture2D" uid="uid://bxk1tdviqa7rs" path="res://assets/sprites/viewcone.svg" id="2_3akc0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pe2xd"]
+radius = 512.0
+
+[node name="viewcone" type="Area2D" unique_id=863788715]
+script = ExtResource("1_ur4j1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=376273450]
+shape = SubResource("CircleShape2D_pe2xd")
+
+[node name="suspicion" type="PointLight2D" parent="." unique_id=115378871]
+color = Color(0, 1, 1, 0.39215687)
+blend_mode = 1
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("2_3akc0")
+texture_scale = 0.01
+
+[node name="danger" type="PointLight2D" parent="." unique_id=1232952051]
+color = Color(1, 1, 1, 0.19607843)
+blend_mode = 1
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("2_3akc0")
+texture_scale = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
