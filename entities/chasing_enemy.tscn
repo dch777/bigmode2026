@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://t786ep0jpcrm" path="res://assets/sprites/cyber_dog_inactive.png" id="3_mrngq"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_paqql"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mrngq"]
+bounce = 2.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xotmo"]
 atlas = ExtResource("2_paqql")
 region = Rect2(48, 48, 48, 48)
@@ -33,7 +36,13 @@ animations = [{
 }]
 
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
+collision_layer = 3
+collision_mask = 3
 mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_mrngq")
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_npjdl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=293210881]
@@ -44,8 +53,23 @@ sprite_frames = SubResource("SpriteFrames_xotmo")
 rotation = 1.5707964
 polygon = PackedVector2Array(-8, -24, -8, -8, -17, -2, -17, 8, -22, 24, -16, 24, -6, 18, 6, 18, 16, 24, 22, 24, 17, 8, 17, -2, 8, -8, 8, -24)
 
-[node name="DefaultHitbox" type="CollisionPolygon2D" parent="." unique_id=63225758]
-polygon = PackedVector2Array(13, -19, -15, -17, -24, -8, -24, 8, -15, 17, 14, 19, 5, 9, 22, 4, 22, -4, 6, -9)
+[node name="DefaultHitbox" type="CollisionPolygon2D" parent="." unique_id=564461365]
+rotation = 1.5707964
+polygon = PackedVector2Array(-8, -24, -8, -8, -17, -2, -17, 8, -22, 24, -16, 24, -6, 18, 6, 18, 16, 24, 22, 24, 17, 8, 17, -2, 8, -8, 8, -24)
 
 [node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_paqql")]
 color = Color(1, 0, 0.26666668, 1)
+
+[node name="straight" type="RayCast2D" parent="." unique_id=1308130055]
+target_position = Vector2(70, 0)
+collision_mask = 3
+
+[node name="right" type="RayCast2D" parent="." unique_id=1007308419]
+target_position = Vector2(70, 70)
+collision_mask = 3
+
+[node name="left" type="RayCast2D" parent="." unique_id=1714049111]
+target_position = Vector2(70, -70)
+collision_mask = 3
+
+[connection signal="body_entered" from="." to="." method="collided_with"]

@@ -1,40 +1,62 @@
 extends RigidBody2D
 
-@export var target: RigidBody2D
-@export var player: Player
-@export var patrol: Vector2
+@export var target: Node2D
 
 @onready var lens: Lens = $lens
+@onready var patrol = global_position
+
+var go_right = true
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
 	$DefaultHitbox.disabled = false
 	$ChasingHitbox.disabled = true
 
-func _physics_process(delta: float) -> void:
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var to_target = target.global_position - global_position
-	var to_player = player.tank.global_position - global_position
 	var to_patrol = patrol - global_position
 	var target_to_patrol = target.global_position - patrol
 
 	var force = Vector2(0.0, 0.0)
 	if target_to_patrol.length() < 1000:
-		force = to_target.normalized() * 200.0 + to_target * 0.1
+		force = to_target.normalized() * 100.0 # + to_target * 0.1
 		lens.active = true
 		$AnimatedSprite2D.play("chase")
 	else:
-		force = to_patrol * 0.1
+		if to_patrol.length() > 20.0:
+			force = to_patrol * 0.1
 		lens.active = false
 		$AnimatedSprite2D.play("default")
 
-	if to_player.length() < 300 and to_target.length() > 30:
-		force += -to_player.normalized() * (300 - to_player.length()) * 2.0
-	if to_player.length() < 200:
-		force += -to_player.normalized() * 3.0
-	var damp = -linear_velocity * 0.1
+	var straight = $straight.is_colliding() and $straight.get_collider() != target
+	var right = $right.is_colliding() and $right.get_collider() != target
+	var left = $left.is_colliding() and $left.get_collider() != target
 
+	if straight:
+		force = force.project(-global_transform.x)
+		var dist = $straight.get_collision_point() - global_position
+		force += (100 - dist.length()) * -global_transform.x
+	if left:
+		var dist = $left.get_collision_point() - global_position
+		force = force.length() * global_transform.y * (120 - dist.length()) / 100
+		if !straight:
+			force += 40 * global_transform.x
+	if right:
+		var dist = $right.get_collision_point() - global_position
+		force = force.length() * -global_transform.y * (120 - dist.length()) / 100
+		if !straight:
+			force += 40 * global_transform.x
+
+	var damp = -linear_velocity * 0.1
 	apply_central_force(force + damp)
-	look_at(global_position + linear_velocity)
-	
-	$DefaultHitbox.disabled = true
-	$ChasingHitbox.disabled = false
+	# look_at(global_position + linear_velocity)
+	if linear_velocity.length() > 2.0:
+		var goal = (global_position + linear_velocity + force * 0.1)
+		var error = wrapf(goal.angle_to_point(state.transform.origin) - global_rotation + PI, -PI, PI)
+		state.apply_torque(1000 * error - 200 * angular_velocity)
+
+func collided_with(body):
+	if body is Tank:
+		if linear_velocity.length() > 50.0:
+			var dir = body.global_position - global_position
+			body.apply_impulse(dir.normalized() * 300)
