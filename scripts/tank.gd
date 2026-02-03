@@ -37,6 +37,9 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var steer_curve = exp(-state.linear_velocity.length()) + 1
 	var steering_torque = 750 * steer_curve * steering
 
+	if Input.is_action_pressed("brake") and state.linear_velocity.length() > 50:
+		steering_torque *= 1.5
+	
 	state.apply_force(throttle_force)
 	state.apply_torque(steering_torque)
 
@@ -50,8 +53,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if Input.is_action_pressed("brake"):
 		var brake_friction = 350 * -state.linear_velocity.normalized()
 		state.apply_force(brake_friction)
-	
-	skidding = default_throttle != 0 or (abs(slip_angle) > PI/6 and state.linear_velocity.length() > 70) or (Input.is_action_pressed("brake") and state.linear_velocity.length() > 250)
+
+	skidding = default_throttle != 0 or \
+			(abs(slip_angle) > PI/6 and state.linear_velocity.length() > 150) or \
+			(Input.is_action_pressed("brake") and abs(slip_angle) > PI/6 and state.linear_velocity.length() > 70) or \
+			(Input.is_action_pressed("brake") and state.linear_velocity.length() > 200)
 
 	if throttle != 0:
 		audio_throttle += state.step
