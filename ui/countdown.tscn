@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqojdc5g4c7xa"]
 
 [ext_resource type="Script" uid="uid://8tpimls3lbbx" path="res://scripts/countdown.gd" id="1_yggkt"]
-[ext_resource type="FontFile" uid="uid://vux6iqxsqu22" path="res://assets/fonts/Px437_IBM_BIOS.ttf" id="2_yggkt"]
+[ext_resource type="FontFile" uid="uid://bmdryr0jiwkgl" path="res://assets/fonts/DS-DIGI.TTF" id="2_yggkt"]
 
 [node name="Countdown" type="CanvasLayer" unique_id=1570198400]
 script = ExtResource("1_yggkt")
