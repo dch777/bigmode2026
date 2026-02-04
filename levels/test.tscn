@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="9_kqvnf"]
 [ext_resource type="PackedScene" uid="uid://c6rttyrq13p0g" path="res://prefabs/tree.tscn" id="9_qhvcx"]
 [ext_resource type="Texture2D" uid="uid://ew1504ayq36e" path="res://assets/sprites/bigrock.png" id="10_kqvnf"]
+[ext_resource type="PackedScene" uid="uid://dxlqdapu4e1lt" path="res://entities/bumrushdrone.tscn" id="11_qtvpr"]
 [ext_resource type="PackedScene" uid="uid://bl7u30bepjh1f" path="res://entities/chasing_enemy.tscn" id="13_drwxn"]
+[ext_resource type="PackedScene" uid="uid://ddl22oocp5u2u" path="res://entities/magnetdroen.tscn" id="13_rmkky"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6g8e2"]
 vertices = PackedVector2Array(653.5625, 20, 2032, -2032, 2032, 2032, 650, 33.28125, 650, 6.71875, 640.28125, -3, -2032, -2032, 627, -6.5625, 613.71875, -3, 640.28125, 43, 604, 6.71875, 589, 11.4375, 575.71875, 15, 604.5625, 72, 601.64844, 61.15625, 602.28125, 61, 612, 51.28125, 614.1797, 43.117188, 627, 46.5625, 564.71875, 95, -2032, 2032, 555, 85.28125, 601.8125, 14.8671875, 566, 24.71875, 562.4375, 38, 565.34375, 48.828125, 564.71875, 49, 601, 85.28125, 591.28125, 95, 578, 98.5625, 555, 58.71875, 551.4375, 72)
@@ -162,7 +164,15 @@ texture = ExtResource("9_kqvnf")
 position = Vector2(243, -276)
 texture = ExtResource("10_kqvnf")
 
+[node name="Bumrushdrone" parent="." unique_id=977656969 node_paths=PackedStringArray("player") instance=ExtResource("11_qtvpr")]
+position = Vector2(-35, 193)
+player = NodePath("../Player")
+
 [node name="ChasingEnemy" parent="." unique_id=691843535 node_paths=PackedStringArray("target", "player") instance=ExtResource("13_drwxn")]
-position = Vector2(22, 239)
+position = Vector2(66, 237)
 target = NodePath("../nuke")
+player = NodePath("../Player")
+
+[node name="MagnetDrone" parent="." unique_id=423548414 node_paths=PackedStringArray("player") instance=ExtResource("13_rmkky")]
+visible = false
 player = NodePath("../Player")

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dxlqdapu4e1lt"]
+
+[ext_resource type="Script" uid="uid://2k5gpk7vod6w" path="res://rushdrone.gd" id="1_d5u5g"]
+[ext_resource type="Texture2D" uid="uid://bya4i568ltbhw" path="res://assets/sprites/bumrushdrone.png" id="2_plddn"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_mmbox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0xtx"]
+atlas = ExtResource("2_plddn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7i5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0xtx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_d5u5g"]
+offsets = PackedFloat32Array(0, 0.4473684, 1)
+colors = PackedColorArray(0.94057995, 0.25019675, 0.075768985, 1, 0.87151915, 0.63534844, 0.31279063, 1, 0.8816921, 0.21108583, 0.85644823, 1)
+
+[node name="Bumrushdrone" type="RigidBody2D" unique_id=977656969]
+script = ExtResource("1_d5u5g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1658321179]
+position = Vector2(5, 0)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_o7i5h")
+
+[node name="ChasingHitbox" type="CollisionPolygon2D" parent="." unique_id=1926097480]
+position = Vector2(-1, 0)
+rotation = 1.5707964
+polygon = PackedVector2Array(-14.000001, -22, -14, -6.9999995, -14, 1.0000007, -14, 6.0000005, -12, 8.000001, -3.9999995, 9, 1.0000004, 8, 4.0000005, 8, 6.0000005, 5.9999995, 5.9999995, -8, 5.999999, -26, 1.9999989, -26, -10.000001, -26, -14.000001, -26)
+
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("3_mmbox")]
+color = Color(1, 0, 0.26666668, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=210942751]
+position = Vector2(-25, -4)
+scale = Vector2(2, 2)
+amount = 300
+lifetime = 0.09999999999999999
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector2(-1000, 0)
+radial_accel_min = -50.0
+radial_accel_max = -40.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_d5u5g")
