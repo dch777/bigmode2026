@@ -161,7 +161,7 @@ height = 10
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ty7c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lppu5"]
 resource_local_to_scene = true
 shader = ExtResource("5_7ty7c")
 shader_parameter/window_size = Vector2(1280, 720)
@@ -179,7 +179,7 @@ height = 12
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_lppu5"]
+[sub_resource type="Gradient" id="Gradient_6xkr4"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.20942408, 0.39267015, 0.55497384)
 colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1)
@@ -288,7 +288,7 @@ texture = SubResource("GradientTexture2D_nwbki")
 position = Vector2(-300, 300)
 rotation = 0.7853982
 
-[node name="body" parent="Player" index="3" unique_id=1588423890]
+[node name="body" parent="Player" index="2" unique_id=1588423890]
 default_throttle = 1.0
 
 [node name="lens" parent="Player/body" index="0" unique_id=147503076]
@@ -299,13 +299,13 @@ visible = false
 enabled = false
 
 [node name="GPUParticles2D" parent="Player/body/Camera2D" index="0" unique_id=1625252881]
-process_material = SubResource("ShaderMaterial_7ty7c")
+process_material = SubResource("ShaderMaterial_lppu5")
 
-[node name="turret" parent="Player" index="4" unique_id=699706274]
+[node name="turret" parent="Player" index="3" unique_id=699706274]
 rotation = 1.5707964
 breakout_mode = true
 
-[node name="balance_turret" parent="Player" index="5" unique_id=594409546]
+[node name="balance_turret" parent="Player" index="4" unique_id=594409546]
 breakout_mode = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=377332612]
@@ -333,12 +333,12 @@ breakout_mode = true
 next_scene = ExtResource("7_6flho")
 
 [node name="Explosion1" parent="Nuke" index="0" unique_id=1772254961]
-color_ramp = SubResource("Gradient_lppu5")
+color_ramp = SubResource("Gradient_6xkr4")
 
 [node name="Explosion2" parent="Nuke" index="1" unique_id=958360898]
 lifetime_randomness = 0.0
 scale_amount_max = 40.0
-color_ramp = SubResource("Gradient_lppu5")
+color_ramp = SubResource("Gradient_6xkr4")
 
 [node name="lens" parent="Nuke" index="7" unique_id=147503076]
 active = false
