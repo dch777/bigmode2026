@@ -8,7 +8,8 @@
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="4_6nm46"]
 [ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_qly61"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="8_i623q"]
-[ext_resource type="Script" uid="uid://br8nwq74xlf2b" path="res://scripts/engine_handler.gd" id="9_ef06p"]
+[ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="8_tjdhl"]
+[ext_resource type="Script" path="res://scripts/engine_handler.gd" id="9_ef06p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i623q"]
 bounce = 1.0
@@ -32,6 +33,9 @@ height = 12
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ef06p"]
+radius = 2.0
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6nm46"]
 bounce = 1.0
 absorbent = true
@@ -42,6 +46,66 @@ height = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i623q"]
 size = Vector2(25, 10)
+
+[sub_resource type="Animation" id="Animation_x08pd"]
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/TankBody:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("turret/TankTurret:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_tjdhl"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("turret:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x08pd"]
+_data = {
+&"RESET": SubResource("Animation_x08pd"),
+&"death": SubResource("Animation_tjdhl")
+}
 
 [node name="Player" type="Node2D" unique_id=1003144878 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_qly61")
@@ -101,6 +165,14 @@ texture = ExtResource("2_rfe5m")
 [node name="engine_polyphony" type="Node2D" parent="body" unique_id=1859317804]
 script = ExtResource("9_ef06p")
 
+[node name="center_of_mass" type="Area2D" parent="body" unique_id=1626110473]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("8_tjdhl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/center_of_mass" unique_id=1690523716]
+shape = SubResource("CircleShape2D_ef06p")
+
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 collision_layer = 2
 collision_mask = 2
@@ -141,3 +213,8 @@ kd = 3000.0
 position = Vector2(45, 0)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_6nm46")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1784308078]
+libraries/ = SubResource("AnimationLibrary_x08pd")
+
+[connection signal="death" from="body/center_of_mass" to="." method="_on_center_of_mass_death"]

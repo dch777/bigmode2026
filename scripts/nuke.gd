@@ -10,6 +10,8 @@ class_name Nuke extends RigidBody2D
 var is_exploding = false
 var pushed_bodies: Dictionary[RigidBody2D, bool]
 
+signal end_game
+
 func _ready() -> void:
 	#explode()
 	pass
@@ -47,6 +49,8 @@ func explode() -> void:
 	if breakout_mode:
 		await get_tree().create_timer(3.2).timeout
 		TransitionScreen.transition(next_scene)
+		
+	# TODO idk where, but you can emit signal "end_game" to trigger rest. signal must be handled by level script
 
 func blast_radius_entered(body: Node2D):
 	if body is RigidBody2D:
@@ -60,3 +64,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		if fmod(deg, PI/2) == 0:
 			deg += PI/4
 		state.linear_velocity = Vector2.from_angle(deg) * max(state.linear_velocity.length(), 500.0)
+
+
+func _on_center_o_mass_death() -> void:
+	$AnimationPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
+	$AnimationPlayer.play("death")
+
+	process_mode = Node.PROCESS_MODE_DISABLED
+	
+	emit_signal("end_game")

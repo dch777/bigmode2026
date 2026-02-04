@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_ykym1"]
 [ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="5_kd12q"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="6_uwpkm"]
+[ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="7_okag4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kd12q"]
 bounce = 1.0
@@ -24,6 +25,44 @@ radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_465ar"]
 radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uwpkm"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_px5pb"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NukeBall:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_okag4"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NukeBall:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_px5pb"]
+_data = {
+&"RESET": SubResource("Animation_px5pb"),
+&"death": SubResource("Animation_okag4")
+}
 
 [node name="Nuke" type="RigidBody2D" unique_id=622365965]
 collision_layer = 3
@@ -102,4 +141,18 @@ texture = ExtResource("5_kd12q")
 [node name="lens" parent="." unique_id=147503076 instance=ExtResource("6_uwpkm")]
 priority = 99
 
+[node name="CenterOMass" type="Area2D" parent="." unique_id=1203206553]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("7_okag4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterOMass" unique_id=767660860]
+shape = SubResource("CircleShape2D_uwpkm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=448348539]
+libraries/ = SubResource("AnimationLibrary_px5pb")
+
+[node name="Timer" type="Timer" parent="." unique_id=107499934]
+
 [connection signal="body_entered" from="BlastZone" to="." method="blast_radius_entered"]
+[connection signal="death" from="CenterOMass" to="." method="_on_center_o_mass_death"]
