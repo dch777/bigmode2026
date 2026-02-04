@@ -25,6 +25,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		lens.active = true
 		$AnimatedSprite2D.play("chase")
 
+		for body in $viewcone.detected_bodies:
+			var body_to_patrol = body.global_position - patrol
+			if body_to_patrol.length() < 1000:
+				if body is Nuke:
+					target = body
+
 		if target_to_patrol.length() > 1000:
 			target = null
 			$viewcone.visible = true
@@ -36,12 +42,15 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			var body_to_patrol = body.global_position - patrol
 
 			if body_to_patrol.length() < 1000:
+				$viewcone.visible = false
+
 				if body is Tank:
 					target = body
 				elif body is Turret:
 					target = body.tank
-
-				$viewcone.visible = false
+				elif body is Nuke:
+					target = body
+					break
 
 		lens.active = false
 		$AnimatedSprite2D.play("default")
@@ -76,7 +85,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		state.angular_velocity = clamp(state.angular_velocity, -2, 2)
 
 func collided_with(body):
+	if body is Turret and target == null:
+		target = body.tank
 	if body is Tank:
+		if target == null:
+			target = body
+
 		if linear_velocity.length() > 50.0:
 			var dir = body.global_position - global_position
 			body.apply_impulse(dir.normalized() * 300)
