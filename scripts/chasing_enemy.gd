@@ -33,7 +33,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 		if target_to_patrol.length() > 1000:
 			target = null
-			$viewcone.visible = true
 	else:
 		if $viewcone.suspected_bodies.size() == 0 and to_patrol.length() > 20.0:
 			force = to_patrol * 0.1
@@ -42,8 +41,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			var body_to_patrol = body.global_position - patrol
 
 			if body_to_patrol.length() < 1000:
-				$viewcone.visible = false
-
 				if body is Tank:
 					target = body
 				elif body is Turret:
@@ -54,6 +51,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 		lens.active = false
 		$AnimatedSprite2D.play("default")
+	$viewcone.visible = target == null
 		
 	var straight = $straight.is_colliding() and $straight.get_collider() != target
 	var right = $right.is_colliding() and $right.get_collider() != target
@@ -86,7 +84,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func collided_with(body):
 	if body is Turret and target == null:
-		target = body.tank
+		target = body.body
 	if body is Tank:
 		if target == null:
 			target = body

@@ -1,8 +1,8 @@
 class_name ViewCone extends Area2D
 
-var bodies_in_range: Dictionary[RigidBody2D, bool]
-var suspected_bodies: Dictionary[RigidBody2D, bool]
-var detected_bodies: Dictionary[RigidBody2D, bool]
+var bodies_in_range: Dictionary[Node2D, bool]
+var suspected_bodies: Dictionary[Node2D, bool]
+var detected_bodies: Dictionary[Node2D, bool]
 var enabled: bool = true
 
 func _process(delta):
@@ -35,6 +35,9 @@ func _on_body_entered(body: Node2D):
 		bodies_in_range.set(body, true)
 
 func _on_body_exited(body: Node2D):
-	bodies_in_range.erase(body)
-	suspected_bodies.erase(body)
-	detected_bodies.erase(body)
+	if bodies_in_range.has(body):
+		bodies_in_range.erase(body)
+	if suspected_bodies.has(body):
+		suspected_bodies.erase(body)
+	if detected_bodies.has(body):
+		detected_bodies.erase(body)
