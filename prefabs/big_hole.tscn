@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cg6v4muggndvc"]
+
+[ext_resource type="Script" uid="uid://blqwcg31wc1j0" path="res://scripts/big_hole.gd" id="1_ipdqu"]
+[ext_resource type="Texture2D" uid="uid://byl7603d8nsnn" path="res://assets/sprites/big_hole.png" id="1_owh0s"]
+
+[node name="BigHole" type="Area2D" unique_id=111843547]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("1_ipdqu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771138380]
+texture = ExtResource("1_owh0s")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=821023722]
+polygon = PackedVector2Array(12, -50, -6, -50, -26, -38, -42, -34, -50, -22, -46, -5, -45, 21, -32, 38, -17, 45, -3, 48, 8, 49, 20, 46, 37, 34, 50, 18, 48, 0, 46, -19, 40, -30)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cig7h3i4j72kx"]
+[gd_scene format=4 uid="uid://bb3v6115sye2c"]
 
 [ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/sprites/tileset.png" id="1_6ymyu"]
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_7rktv"]
@@ -246,6 +246,7 @@ script = ExtResource("2_7rktv")
 [node name="canvas" type="Node2D" parent="." unique_id=2020544095]
 
 [node name="TextureRect" type="TextureRect" parent="canvas" unique_id=1152020621]
+visible = false
 texture_filter = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -287,7 +288,7 @@ texture = SubResource("GradientTexture2D_nwbki")
 position = Vector2(-300, 300)
 rotation = 0.7853982
 
-[node name="body" parent="Player" index="2" unique_id=1588423890]
+[node name="body" parent="Player" index="3" unique_id=1588423890]
 default_throttle = 1.0
 
 [node name="lens" parent="Player/body" index="0" unique_id=147503076]
@@ -300,11 +301,11 @@ enabled = false
 [node name="GPUParticles2D" parent="Player/body/Camera2D" index="0" unique_id=1625252881]
 process_material = SubResource("ShaderMaterial_7ty7c")
 
-[node name="turret" parent="Player" index="3" unique_id=699706274]
+[node name="turret" parent="Player" index="4" unique_id=699706274]
 rotation = 1.5707964
 breakout_mode = true
 
-[node name="balance_turret" parent="Player" index="4" unique_id=594409546]
+[node name="balance_turret" parent="Player" index="5" unique_id=594409546]
 breakout_mode = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=377332612]
