@@ -24,7 +24,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		if abs(global_position.y) > 420:
 			state.transform.origin.y = -420 * sign(global_position.y)
 
-	var facing = Vector2.from_angle(global_rotation)
+	var facing = global_transform.x
 
 	var forward_velocity = state.linear_velocity.project(facing)
 	var sideways_velocity = state.linear_velocity.slide(facing)

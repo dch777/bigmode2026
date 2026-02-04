@@ -21,13 +21,13 @@ func _process(delta):
 			suspected_bodies.erase(body)
 
 	if enabled and suspected_bodies.size() > 0 and $suspicion.texture_scale < $danger.texture_scale:
-		$suspicion.texture_scale += 0.01
+		$suspicion.texture_scale += 0.02
 	elif $suspicion.texture_scale > 0:
-		$suspicion.texture_scale -= 0.01
+		$suspicion.texture_scale -= 0.02
 
 	for body in suspected_bodies:
 		var to_body = body.global_position - global_position
-		if to_body.length() <= $suspicion.texture_scale * 512 - 400:
+		if to_body.length() <= $suspicion.texture_scale * 256:
 			detected_bodies.set(body, true)
 
 func _on_body_entered(body: Node2D):

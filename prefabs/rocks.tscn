@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://38epfbhc0p5l"]
+
+[ext_resource type="Script" uid="uid://2q4b28xr3fkl" path="res://scripts/rocks.gd" id="1_2l77g"]
+
+[node name="Rocks" type="MultiMeshInstance2D" unique_id=1944635563]
+script = ExtResource("1_2l77g")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1590008524]

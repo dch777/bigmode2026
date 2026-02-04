@@ -57,6 +57,7 @@ node_b = NodePath("../balance_turret")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
 physics_material_override = SubResource("PhysicsMaterial_i623q")
+continuous_cd = 2
 angular_damp = 0.5
 script = ExtResource("1_3ktyq")
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jp38nhsn0x6x"]
 
-[ext_resource type="Script" uid="uid://dcmqxy0wtj5qf" path="res://prefabs/transition_screen.gd" id="1_ef2wo"]
+[ext_resource type="Script" uid="uid://dcmqxy0wtj5qf" path="res://scripts/transition_screen.gd" id="1_ef2wo"]
 
 [sub_resource type="Animation" id="Animation_j8cnc"]
 length = 0.001
