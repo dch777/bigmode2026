@@ -6,22 +6,45 @@ class_name Turret extends RigidBody2D
 
 @export var active: bool = false
 @export var breakout_mode: bool = false
+@export var bullet: PackedScene
+
+@export var attraction_force: float = 800.0
 
 var _integral: float = 0.0
 var _int_max = 200
 var goal_rotation = 0.0
+var cooldown_timer = 0.0
 
 @onready var body = $"../body"
 
 func calculate_error(state: PhysicsDirectBodyState2D) -> float:
 	var error = wrapf(get_global_mouse_position().angle_to_point(state.transform.origin) - global_rotation, -PI, PI)
-	if Input.is_action_pressed("lock_turret"):
-		error = wrapf(goal_rotation - (rotation - body.rotation), -PI, PI)
+	# if Input.is_action_pressed("lock_turret"):
+	# 	error = wrapf(goal_rotation - (rotation - body.rotation), -PI, PI)
 	return error
 
+func _process(delta):
+	if active:
+		$attractor.gravity = attraction_force if Input.is_action_pressed("lock_turret") else 0
+
+		cooldown_timer -= delta
+		if Input.is_action_just_pressed("shoot") and cooldown_timer <= 0:
+			cooldown_timer = 5.0
+			$TankTurret.play("shoot")
+
+			var new_bullet = bullet.instantiate()
+			new_bullet.top_level = true
+			new_bullet.global_rotation = global_rotation + PI
+			new_bullet.global_position = $end.global_position
+
+			var dir = Vector2.from_angle(global_rotation + PI)
+			new_bullet.linear_velocity = dir * 1000
+			body.apply_impulse(-dir * 500)
+			add_child(new_bullet)
+
 func _integrate_forces(state: PhysicsDirectBodyState2D):
-	if Input.is_action_just_pressed("lock_turret"):
-		goal_rotation = rotation - body.rotation
+	# if Input.is_action_just_pressed("lock_turret"):
+	# 	goal_rotation = rotation - body.rotation
 
 	var error = calculate_error(state)
 	var delta = state.get_step()

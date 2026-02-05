@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cqnt77rd468mt" path="res://assets/sprites/tank_body.png" id="2_rfe5m"]
 [ext_resource type="Script" uid="uid://dk886mb3aphxw" path="res://scripts/camera.gd" id="3_qsoyl"]
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="4_6nm46"]
-[ext_resource type="Texture2D" uid="uid://bixfl33vkyd3q" path="res://assets/sprites/tank_turret.png" id="4_qly61"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="8_i623q"]
 [ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="8_tjdhl"]
-[ext_resource type="Script" path="res://scripts/engine_handler.gd" id="9_ef06p"]
+[ext_resource type="Script" uid="uid://br8nwq74xlf2b" path="res://scripts/engine_handler.gd" id="9_ef06p"]
+[ext_resource type="Texture2D" uid="uid://gyin18y6oc7u" path="res://assets/sprites/tank_turret_sheet.png" id="10_tjdhl"]
+[ext_resource type="PackedScene" uid="uid://mxc1383i0g7x" path="res://prefabs/bullet.tscn" id="10_x08pd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i623q"]
 bounce = 1.0
@@ -36,6 +37,10 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ef06p"]
 radius = 2.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjdhl"]
+radius = 5.0
+height = 10.0
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6nm46"]
 bounce = 1.0
 absorbent = true
@@ -46,6 +51,49 @@ height = 100.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i623q"]
 size = Vector2(25, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdgjc"]
+atlas = ExtResource("10_tjdhl")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dchgp"]
+atlas = ExtResource("10_tjdhl")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x08pd"]
+atlas = ExtResource("10_tjdhl")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0i8f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdgjc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dchgp")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_x08pd")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_dchgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdgjc")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tjdhl"]
+radius = 200.0
 
 [sub_resource type="Animation" id="Animation_x08pd"]
 loop_mode = 2
@@ -122,7 +170,6 @@ node_b = NodePath("../balance_turret")
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
 physics_material_override = SubResource("PhysicsMaterial_i623q")
 continuous_cd = 2
-angular_damp = 0.5
 script = ExtResource("1_3ktyq")
 
 [node name="lens" parent="body" unique_id=147503076 instance=ExtResource("8_i623q")]
@@ -173,9 +220,22 @@ script = ExtResource("8_tjdhl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="body/center_of_mass" unique_id=1690523716]
 shape = SubResource("CircleShape2D_ef06p")
 
-[node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
+[node name="ball_keeper" type="Area2D" parent="body" unique_id=1168544412]
+position = Vector2(30, 0)
 collision_layer = 2
 collision_mask = 2
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/ball_keeper" unique_id=225956463]
+shape = SubResource("CapsuleShape2D_tjdhl")
+
+[node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
+collision_layer = 2
+collision_mask = 0
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_6nm46")
 linear_damp_mode = 1
@@ -183,6 +243,8 @@ script = ExtResource("2_r3jqh")
 kp = 30000.0
 ki = 400.0
 kd = 3000.0
+active = true
+bullet = ExtResource("10_x08pd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret" unique_id=1510013369]
 position = Vector2(-45, 0)
@@ -195,10 +257,29 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_i623q")
 one_way_collision = true
 
-[node name="TankTurret" type="Sprite2D" parent="turret" unique_id=954784464]
+[node name="TankTurret" type="AnimatedSprite2D" parent="turret" unique_id=1425571813]
 position = Vector2(-32, 0)
 rotation = -1.5707964
-texture = ExtResource("4_qly61")
+sprite_frames = SubResource("SpriteFrames_q0i8f")
+animation = &"shoot"
+frame = 3
+frame_progress = 1.0
+
+[node name="attractor" type="Area2D" parent="turret" unique_id=910278294]
+position = Vector2(-80, 0)
+collision_layer = 128
+collision_mask = 128
+gravity_space_override = 3
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="turret/attractor" unique_id=802214443]
+shape = SubResource("CircleShape2D_tjdhl")
+
+[node name="end" type="Node2D" parent="turret" unique_id=87258729]
+position = Vector2(-95, 0)
 
 [node name="balance_turret" type="RigidBody2D" parent="." unique_id=594409546]
 collision_layer = 0

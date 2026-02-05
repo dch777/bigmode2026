@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://tdkjqp2lu0b2"]
+
+[ext_resource type="Texture2D" uid="uid://dxmv5vntrpfl6" path="res://assets/sprites/target.png" id="1_hkmll"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="2_my4ps"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hkmll"]
+radius = 64.0
+
+[node name="target" type="Sprite2D" unique_id=2140751424]
+scale = Vector2(2, 2)
+texture = ExtResource("1_hkmll")
+
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("2_my4ps")]
+zoom = Vector2(0.25, 0.25)
+priority = 98
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1709781636]
+collision_layer = 2
+collision_mask = 2
+linear_damp_space_override = 3
+linear_damp = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1791462277]
+shape = SubResource("CircleShape2D_hkmll")

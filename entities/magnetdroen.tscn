@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ddl22oocp5u2u"]
 
 [ext_resource type="Texture2D" uid="uid://dwpbvs4d04aqv" path="res://assets/sprites/magnetdroneactive.png" id="1_8qcm6"]
-[ext_resource type="Script" uid="uid://2muv52cj1grk" path="res://entities/magnetdroen.gd" id="1_esd6y"]
+[ext_resource type="Script" uid="uid://2muv52cj1grk" path="res://scripts/magnetdroen.gd" id="1_esd6y"]
 [ext_resource type="Texture2D" uid="uid://5hls6t5mt3gh" path="res://assets/sprites/magnetdrone.png" id="2_esd6y"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="3_w1pcj"]
 

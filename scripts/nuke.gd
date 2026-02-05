@@ -29,8 +29,6 @@ func _process(delta: float) -> void:
 		explode()
 	
 func explode() -> void:
-	await get_tree().create_timer(1.0).timeout
-
 	$BlastZone.monitoring = true
 	camera.top_level = true
 	camera.particle_material.set_shader_parameter("explosion", global_position)

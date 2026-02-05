@@ -48,8 +48,8 @@ animations = [{
 }]
 
 [node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 131
+collision_mask = 131
 mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_mrngq")
 continuous_cd = 1
@@ -85,15 +85,12 @@ color = Color(1, 0, 0.26666668, 1)
 
 [node name="straight" type="RayCast2D" parent="." unique_id=1308130055]
 target_position = Vector2(70, 0)
-collision_mask = 3
 
 [node name="right" type="RayCast2D" parent="." unique_id=1007308419]
 target_position = Vector2(70, 70)
-collision_mask = 3
 
 [node name="left" type="RayCast2D" parent="." unique_id=1714049111]
 target_position = Vector2(70, -70)
-collision_mask = 3
 
 [node name="Alert" type="Sprite2D" parent="." unique_id=457255755]
 visible = false

@@ -1,7 +1,8 @@
 class_name Player extends Node2D
 
 @export var camera: Camera2D
-@onready var tank: Tank = find_child("body")
+@onready var tank: Tank = $body
+@onready var turret: Turret = $turret
 
 signal end_game
 
@@ -19,4 +20,5 @@ func _on_center_of_mass_death() -> void:
 	$AnimationPlayer.play("death")
 	
 	# propagate up, lets level script reset
-	emit_signal("end_game")
+	await get_tree().create_timer(1.0).timeout
+	TransitionScreen.transition(load(get_tree().current_scene.scene_file_path))
