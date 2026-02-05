@@ -93,7 +93,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjdhl"]
-radius = 200.0
+radius = 300.0
 
 [sub_resource type="Animation" id="Animation_x08pd"]
 loop_mode = 2
@@ -170,6 +170,7 @@ node_b = NodePath("../balance_turret")
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
 physics_material_override = SubResource("PhysicsMaterial_i623q")
 continuous_cd = 2
+angular_damp = 0.1
 script = ExtResource("1_3ktyq")
 
 [node name="lens" parent="body" unique_id=147503076 instance=ExtResource("8_i623q")]

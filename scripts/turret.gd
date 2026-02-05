@@ -13,7 +13,7 @@ class_name Turret extends RigidBody2D
 var _integral: float = 0.0
 var _int_max = 200
 var goal_rotation = 0.0
-var cooldown_timer = 0.0
+var cooldown_timer = 5.0
 
 @onready var body = $"../body"
 

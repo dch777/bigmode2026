@@ -46,7 +46,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 				if body is Tank:
 					target = body
 				elif body is Turret:
-					target = body.tank
+					target = body.body
 				elif body is Nuke:
 					target = body
 					break

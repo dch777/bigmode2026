@@ -23,7 +23,7 @@ func _ready():
 func _update_multimesh():
 	multimesh.instance_count = round(draw_box.get_area() * density / pow(32, 2))
 	for i in multimesh.instance_count:
-		var angle = randf_range(-PI, PI)
+		var angle = snapped(randf_range(-PI, PI), PI/4)
 		var pos = Vector2(randf_range(draw_box.position.x, draw_box.end.x),
 						  randf_range(draw_box.position.y, draw_box.end.y))
 

@@ -69,6 +69,7 @@ collision_layer = 131
 collision_mask = 131
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kd12q")
+linear_velocity = Vector2(5, 0)
 linear_damp = -0.2
 script = ExtResource("1_uilhl")
 

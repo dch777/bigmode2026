@@ -54,7 +54,7 @@ mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_mrngq")
 continuous_cd = 1
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 2
 script = ExtResource("1_npjdl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1680710833]
