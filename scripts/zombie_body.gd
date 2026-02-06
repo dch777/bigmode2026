@@ -60,7 +60,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if body is Tank and body.linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.4:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			die()
-		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and body.linear_velocity.length() > 150:
+		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and (body.linear_velocity - linear_velocity).length() > 300:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			die()
 		elif body == target and body is RigidBody2D:
@@ -73,7 +73,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 func die():
 	$joint.node_a = ""
 
-	# $oof.playing = true
+	$oof.playing = true
 
 	$body.visible = false
 	$fallen_body.visible = true

@@ -87,6 +87,7 @@ motor_enabled = true
 
 [node name="oof" type="AudioStreamPlayer2D" parent="body" unique_id=1858798383]
 stream = ExtResource("5_mwpml")
+volume_db = -10.0
 
 [node name="head" type="RigidBody2D" parent="." unique_id=1886154448]
 z_index = 1
