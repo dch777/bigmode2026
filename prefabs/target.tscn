@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxmv5vntrpfl6" path="res://assets/sprites/target.png" id="1_hkmll"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="2_my4ps"]
+[ext_resource type="Script" uid="uid://dw766kdc7b2nu" path="res://scripts/spawner.gd" id="2_thquc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkmll"]
 radius = 64.0
@@ -9,6 +10,7 @@ radius = 64.0
 [node name="target" type="Sprite2D" unique_id=2140751424]
 scale = Vector2(2, 2)
 texture = ExtResource("1_hkmll")
+script = ExtResource("2_thquc")
 
 [node name="lens" parent="." unique_id=147503076 instance=ExtResource("2_my4ps")]
 zoom = Vector2(0.25, 0.25)

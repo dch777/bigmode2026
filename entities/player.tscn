@@ -172,7 +172,8 @@ node_b = NodePath("../balance_turret")
 collision_layer = 5
 collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_i623q")
-continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 5
 angular_damp = 0.2
 script = ExtResource("1_3ktyq")
 
@@ -238,7 +239,7 @@ gravity = 0.0
 shape = SubResource("CapsuleShape2D_tjdhl")
 
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
-collision_layer = 2
+collision_layer = 3
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_6nm46")
 linear_damp_mode = 1

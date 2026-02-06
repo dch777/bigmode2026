@@ -66,3 +66,9 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	audio_throttle = clamp(audio_throttle, 0.0, 1)
 
 	$engine_polyphony.update(rpm, audio_throttle, true)
+
+	for i in range(state.get_contact_count()):
+		var body = state.get_contact_collider_object(i)
+
+		if body is ZombieBody and linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.4:
+			apply_impulse(-state.get_contact_impulse(i) * 0.88, state.get_contact_local_position(i) - global_position)

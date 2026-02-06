@@ -52,20 +52,19 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	# if target:
 	# 	goal = target.global_position
 	error = wrapf(goal.angle_to_point(head.global_transform.origin) - head.global_rotation + PI, -PI, PI)
-	$joint.motor_target_velocity = 2 * error - head.angular_velocity
+	# $joint.motor_target_velocity = 2 * error - head.angular_velocity
 
 	for i in range(state.get_contact_count()):
 		var body = state.get_contact_collider_object(i)
 
-		if body is Tank and body.linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 12:
-			head.apply_impulse(state.get_contact_impulse(i))
-			body.apply_impulse(state.get_contact_impulse(i), state.get_contact_collider_position(i) - body.global_position)
+		if body is Tank and body.linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.4:
+			head.apply_impulse(-state.get_contact_impulse(i))
 			die()
-		elif body is not Tank and body is not ZombieBody and state.get_contact_impulse(i).length() > 20:
-			head.apply_impulse(state.get_contact_impulse(i))
+		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and body.linear_velocity.length() > 150:
+			head.apply_impulse(-state.get_contact_impulse(i))
 			die()
 		elif body == target and body is RigidBody2D:
-			body.apply_force(global_transform.x * 100)
+			body.apply_force(global_transform.x * 300)
 
 # 	if (head.global_position - $joint.global_position).length() > 4:
 # 		print((head.global_position - $joint.global_position).length())
@@ -83,6 +82,7 @@ func die():
 	head.linear_damp = 5.0
 	head.z_index = 0
 	head.collision_layer = 0
+	head.collision_mask = 0
 	head.dead = true
 
 	angular_damp = 10.0
