@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_7rktv"]
 [ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="3_3ye4h"]
 [ext_resource type="Script" uid="uid://x8nlxf74dec" path="res://scripts/subviewport.gd" id="4_7rktv"]
-[ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/Nuke.tscn" id="5_3ye4h"]
+[ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/nuke.tscn" id="5_3ye4h"]
 [ext_resource type="Shader" uid="uid://bu4uy5308vhu4" path="res://assets/shaders/snow.gdshader" id="5_7ty7c"]
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="5_nwbki"]
 [ext_resource type="Script" uid="uid://dk886mb3aphxw" path="res://scripts/camera.gd" id="5_ofye2"]
@@ -258,13 +258,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_3ye4h")
 
-[node name="SubViewport" type="SubViewport" parent="canvas" unique_id=2108770642 node_paths=PackedStringArray("brush", "player")]
+[node name="SubViewport" type="SubViewport" parent="canvas" unique_id=2108770642 node_paths=PackedStringArray("player")]
 transparent_bg = true
 size = Vector2i(4096, 4096)
 render_target_clear_mode = 1
 render_target_update_mode = 4
 script = ExtResource("4_7rktv")
-brush = NodePath("brush")
 player = NodePath("../../Player")
 
 [node name="brush" type="Node2D" parent="canvas/SubViewport" unique_id=724209258]

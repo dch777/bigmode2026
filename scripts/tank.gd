@@ -33,7 +33,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var throttle_force = acceleration_curve * facing * throttle
 
 	var steer_curve = exp(-state.linear_velocity.length()) + 1
-	var steering_torque = 750 * steer_curve * steering
+	var steering_torque = 1000 * steer_curve * steering
 
 	if Input.is_action_pressed("brake") and state.linear_velocity.length() > 200:
 		steering_torque *= 1.75

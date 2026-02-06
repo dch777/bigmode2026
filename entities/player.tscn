@@ -156,6 +156,7 @@ _data = {
 }
 
 [node name="Player" type="Node2D" unique_id=1003144878 node_paths=PackedStringArray("camera")]
+z_index = 1
 script = ExtResource("1_qly61")
 camera = NodePath("body/Camera2D")
 
@@ -168,9 +169,11 @@ node_a = NodePath("../body")
 node_b = NodePath("../balance_turret")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=1588423890]
+collision_layer = 5
+collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_i623q")
 continuous_cd = 2
-angular_damp = 0.1
+angular_damp = 0.2
 script = ExtResource("1_3ktyq")
 
 [node name="lens" parent="body" unique_id=147503076 instance=ExtResource("8_i623q")]
@@ -236,7 +239,6 @@ shape = SubResource("CapsuleShape2D_tjdhl")
 
 [node name="turret" type="RigidBody2D" parent="." unique_id=699706274]
 collision_layer = 2
-collision_mask = 0
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_6nm46")
 linear_damp_mode = 1
@@ -274,7 +276,7 @@ gravity_space_override = 3
 gravity_point = true
 gravity_point_center = Vector2(0, 0)
 gravity_direction = Vector2(0, 0)
-gravity = 1000.0
+gravity = 2000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="turret/attractor" unique_id=802214443]
 shape = SubResource("CircleShape2D_tjdhl")

@@ -47,7 +47,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ChasingEnemy" type="RigidBody2D" unique_id=691843535]
+[node name="ChasingEnemy2" type="RigidBody2D" unique_id=691843535]
 collision_layer = 131
 collision_mask = 131
 mass = 0.2

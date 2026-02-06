@@ -9,7 +9,7 @@ func _process(delta: float):
 		expire()
 
 func body_hit(body: Node):
-	if $Bullet.visible:
+	if body is not Turret and $Bullet.visible:
 		$ExplosionSound.playing = true
 		$Bullet.visible = false
 		$CPUParticles2D.emitting = true

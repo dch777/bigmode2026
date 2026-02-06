@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bq3hj0oial6qb"]
 
-[ext_resource type="Script" uid="uid://cyv6smbnasxwx" path="res://scripts/nuke.gd" id="1_uilhl"]
-[ext_resource type="Texture2D" uid="uid://bpr5c157a56lj" path="res://assets/sprites/cloud1.png" id="2_6cp8y"]
-[ext_resource type="AudioStream" uid="uid://cmnxap2br2644" path="res://assets/audio/bomb-explosion-2-369633_MRW3H9UG.mp3" id="3_p7qpb"]
-[ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_ykym1"]
-[ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="5_kd12q"]
-[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="6_uwpkm"]
-[ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="7_okag4"]
+[ext_resource type="Script" uid="uid://cyv6smbnasxwx" path="res://scripts/nuke.gd" id="1_oembp"]
+[ext_resource type="Texture2D" uid="uid://bpr5c157a56lj" path="res://assets/sprites/cloud1.png" id="2_32r2y"]
+[ext_resource type="AudioStream" uid="uid://cmnxap2br2644" path="res://assets/audio/bomb-explosion-2-369633_MRW3H9UG.mp3" id="3_7nfae"]
+[ext_resource type="AudioStream" uid="uid://bdkeaw8ibxtbi" path="res://assets/audio/nuke-333673.mp3" id="4_xqcm3"]
+[ext_resource type="Texture2D" uid="uid://bxm8qxeg30a5l" path="res://assets/sprites/nuke_ball.png" id="5_53bv6"]
+[ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="6_t6qwq"]
+[ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="7_m74uh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kd12q"]
 bounce = 1.0
@@ -64,14 +64,15 @@ _data = {
 &"death": SubResource("Animation_okag4")
 }
 
-[node name="Nuke" type="RigidBody2D" unique_id=622365965]
-collision_layer = 131
-collision_mask = 131
+[node name="nuke" type="RigidBody2D" unique_id=622365965]
+z_index = 1
+collision_layer = 134
+collision_mask = 135
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kd12q")
 linear_velocity = Vector2(5, 0)
 linear_damp = -0.2
-script = ExtResource("1_uilhl")
+script = ExtResource("1_oembp")
 
 [node name="Explosion1" type="CPUParticles2D" parent="." unique_id=1772254961]
 z_index = 99
@@ -99,7 +100,7 @@ color_ramp = SubResource("Gradient_uilhl")
 z_index = 99
 emitting = false
 amount = 100
-texture = ExtResource("2_6cp8y")
+texture = ExtResource("2_32r2y")
 lifetime = 15.0
 one_shot = true
 speed_scale = 3.0
@@ -126,26 +127,26 @@ monitoring = false
 shape = SubResource("CircleShape2D_uilhl")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=12173433]
-stream = ExtResource("3_p7qpb")
+stream = ExtResource("3_7nfae")
 volume_db = -15.0
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=1939692034]
-stream = ExtResource("4_ykym1")
+stream = ExtResource("4_xqcm3")
 volume_db = -15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2128683539]
 shape = SubResource("CircleShape2D_465ar")
 
 [node name="NukeBall" type="Sprite2D" parent="." unique_id=755685988]
-texture = ExtResource("5_kd12q")
+texture = ExtResource("5_53bv6")
 
-[node name="lens" parent="." unique_id=147503076 instance=ExtResource("6_uwpkm")]
+[node name="lens" parent="." unique_id=147503076 instance=ExtResource("6_t6qwq")]
 priority = 99
 
 [node name="CenterOMass" type="Area2D" parent="." unique_id=1203206553]
 collision_layer = 32768
 collision_mask = 32768
-script = ExtResource("7_okag4")
+script = ExtResource("7_m74uh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CenterOMass" unique_id=767660860]
 shape = SubResource("CircleShape2D_uwpkm")
