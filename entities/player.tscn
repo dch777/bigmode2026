@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="4_6nm46"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="8_i623q"]
 [ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="8_tjdhl"]
-[ext_resource type="Script" uid="uid://br8nwq74xlf2b" path="res://scripts/engine_handler.gd" id="9_ef06p"]
+[ext_resource type="Script" path="res://scripts/engine_handler.gd" id="9_ef06p"]
 [ext_resource type="Texture2D" uid="uid://gyin18y6oc7u" path="res://assets/sprites/tank_turret_sheet.png" id="10_tjdhl"]
 [ext_resource type="PackedScene" uid="uid://mxc1383i0g7x" path="res://prefabs/bullet.tscn" id="10_x08pd"]
 

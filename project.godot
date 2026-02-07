@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TransitionScreen="*uid://jp38nhsn0x6x"
+StatCounter="*uid://dlc8vugb8j5fa"
 
 [display]
 

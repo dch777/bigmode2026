@@ -3,8 +3,8 @@ class_name Player extends Node2D
 @export var camera: Camera2D
 @onready var tank: Tank = $body
 @onready var turret: Turret = $turret
+@onready var game_over_screen = load("res://ui/game_over.tscn")
 
-signal end_game
 
 func _process(delta):
 	get_window().title = "fps: " + str(Engine.get_frames_per_second())
@@ -21,7 +21,7 @@ func _on_center_of_mass_death() -> void:
 	$balance_pin.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	$AnimationPlayer.play("death")
-	
-	# propagate up, lets level script reset
+		
+	# transition to game over
 	await get_tree().create_timer(1.0).timeout
-	TransitionScreen.transition(load(get_tree().current_scene.scene_file_path))
+	TransitionScreen.transition(game_over_screen)

@@ -92,6 +92,8 @@ func die():
 	z_index = 0
 	dead = true
 	$CollisionShape2D.set_deferred("disabled", true)
+	
+	StatCounter.add_gore()
 
 func screen_exited():
 	if dead:
