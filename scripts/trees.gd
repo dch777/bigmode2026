@@ -16,11 +16,20 @@ extends MultiMeshInstance2D
 		if value != density:
 			density = value
 			_update_multimesh()
-
+			
+@export var seed_val: int:
+	get:
+		return seed_val
+	set(value):
+		if value != seed_val:
+			seed_val = value
+			_update_multimesh()
+			
 func _ready():
 	_update_multimesh()
 
 func _update_multimesh():
+	seed(seed_val)
 	multimesh.instance_count = round(draw_box.get_area() * density / pow(32, 2))
 	for i in multimesh.instance_count:
 		var angle = snapped(randf_range(-PI, PI), PI/4)
