@@ -14,7 +14,7 @@ func _integrate_forces(state):
 		if body is Bullet:
 			apply_impulse(body.linear_velocity.normalized() * 100)
 			zombie_body.die()
-		if body is Turret and state.get_contact_impulse(i).length() > 10:
+		if body is Turret and state.get_contact_impulse(i).length() > 28:
 			apply_impulse(-state.get_contact_impulse(i) * 0.9)
 			body.apply_impulse(-state.get_contact_impulse(i) * 0.9, state.get_contact_collider_position(i) - body.global_position)
 			zombie_body.die()

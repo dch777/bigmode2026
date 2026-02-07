@@ -49,19 +49,23 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if slip_curve > 0.3 and throttle != 0 and steering != 0:
 		boost += 5 * state.step * slip_curve
 	elif slip_curve > 0.8:
-		boost -= state.step * 5.0
+		boost -= state.step * 8.0
 	else:
-		boost -= state.step
+		boost -= state.step * 1.5
 	
 	boost = clamp(boost, 0, 5)
 	if steering == 0:
-		throttle_force *= 1 + boost * clamp(1 - (slip_curve * 2), 0, 1)
+		throttle_force *= 1 + boost * clamp(1 - (1.7 * slip_curve), 0, 1)
 
 	state.apply_force(throttle_force)
 	state.apply_torque(steering_torque)
 	state.apply_force(forward_friction)
 	state.apply_force(sideways_friction)
 
+	if linear_velocity.length() > 300 or boost > 2.0:
+		collision_mask = 1
+	else:
+		collision_mask = 5
 	if state.linear_velocity.length() > 20:
 		state.apply_torque(state.linear_velocity.length() * slip_curve * -sign(slip_angle))
 
@@ -83,7 +87,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	for i in range(state.get_contact_count()):
 		var body = state.get_contact_collider_object(i)
 
-		if body is ZombieBody and linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.1:
-			apply_impulse(-state.get_contact_impulse(i), state.get_contact_local_position(i) - global_position)
+		if body is ZombieBody and not (linear_velocity.length() > 300 or boost > 2.0):
+			apply_impulse(-state.get_contact_impulse(i) * 0.1, state.get_contact_local_position(i) - global_position)
 		if body is Nuke:
 			apply_impulse(-state.get_contact_impulse(i), state.get_contact_local_position(i) - global_position)

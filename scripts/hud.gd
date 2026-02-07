@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	$Label.add_theme_color_override("font_color", get_color($Timer.time_left))
 	$Label.text = format_time($Timer.time_left)
 
-	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta), 0, PI + 0.1)
+	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta * 5.0), 0, PI + 0.1)
 	$dashboard/base/compass.rotation = player.tank.global_rotation + PI/2
 
 	if Input.is_action_just_pressed("detonate"):
