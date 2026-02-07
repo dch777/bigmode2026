@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b4xwc4gtybyp6" path="res://scripts/game_over.gd" id="1_5eixk"]
 [ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="1_oo8kp"]
 [ext_resource type="AudioStream" uid="uid://hpu8tddoiaed" path="res://assets/audio/lordsonny-cinematic-boom-171285.mp3" id="3_j1fe5"]
+[ext_resource type="AudioStream" uid="uid://8c6cftfrax2g" path="res://assets/audio/freesound_community-badass-victory-85546.mp3" id="4_xjda6"]
 
 [sub_resource type="Animation" id="Animation_5eixk"]
 length = 0.001
@@ -21,91 +22,91 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TimeUsed:scale")
+tracks/1/path = NodePath("GoreScore:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(100, 100)]
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TotalRadness:scale")
+tracks/2/path = NodePath("Retry:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(100, 100)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CinematicBoom:playing")
+tracks/3/path = NodePath("MainMenu:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CinematicBoom2:playing")
+tracks/4/path = NodePath("NukesUsed:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(100, 100)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CinematicBoom3:playing")
+tracks/5/path = NodePath("BasesDestroyed:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(100, 100)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("GoreScore:visible")
+tracks/6/path = NodePath("TimeUsed:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(100, 100)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("TimeUsed:visible")
+tracks/7/path = NodePath("TotalRadness:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(100, 100)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("TotalRadness:visible")
+tracks/8/path = NodePath("NukesUsed:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -114,13 +115,181 @@ tracks/8/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BasesDestroyed:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TimeUsed:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("TotalRadness:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CinematicBoom:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("CinematicBoom2:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("CinematicBoom3:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CinematicBoom4:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("CinematicBoom5:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("ScoreTune:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("RadnessString:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("RadnessString:scale")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 100)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("CinematicBoom6:playing")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_j1fe5"]
 resource_name = "go_next"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Retry:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainMenu:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_oo8kp"]
 resource_name = "slam"
-length = 1.5
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -128,7 +297,7 @@ tracks/0/path = NodePath("GoreScore:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0.5, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(100, 100), Vector2(1, 1)]
@@ -136,19 +305,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TimeUsed:scale")
+tracks/1/path = NodePath("GoreScore:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(100, 100), Vector2(1, 1)]
+"update": 1,
+"values": [false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TotalRadness:scale")
+tracks/2/path = NodePath("NukesUsed:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -160,59 +329,59 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CinematicBoom:playing")
+tracks/3/path = NodePath("BasesDestroyed:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(1.5, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CinematicBoom2:playing")
+tracks/4/path = NodePath("TimeUsed:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CinematicBoom3:playing")
+tracks/5/path = NodePath("TotalRadness:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(2.5, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("GoreScore:visible")
+tracks/6/path = NodePath("Retry:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("TimeUsed:visible")
+tracks/7/path = NodePath("MainMenu:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -220,7 +389,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("TotalRadness:visible")
+tracks/8/path = NodePath("NukesUsed:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -228,6 +397,150 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BasesDestroyed:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TimeUsed:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("TotalRadness:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CinematicBoom:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("CinematicBoom2:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("CinematicBoom3:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CinematicBoom4:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("CinematicBoom5:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("ScoreTune:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("RadnessString:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("RadnessString:scale")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("CinematicBoom6:playing")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5eixk"]
@@ -254,10 +567,10 @@ color = Color(0, 0, 0, 1)
 
 [node name="GoreScoreLabel" type="Label" parent="." unique_id=1349261346]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 128.0
-offset_right = 696.0
-offset_bottom = 192.0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 704.0
+offset_bottom = 128.0
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
 text = "Gore Score:"
@@ -266,10 +579,58 @@ vertical_alignment = 1
 
 [node name="GoreScore" type="Label" parent="." unique_id=303221656]
 layout_mode = 0
-offset_left = 728.0
-offset_top = 128.0
-offset_right = 844.0
-offset_bottom = 192.0
+offset_left = 736.0
+offset_top = 64.0
+offset_right = 852.0
+offset_bottom = 128.0
+scale = Vector2(100, 100)
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "123"
+
+[node name="NukesUsedLabel" type="Label" parent="." unique_id=869541630]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 160.0
+offset_right = 704.0
+offset_bottom = 224.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Nukes Used:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NukesUsed" type="Label" parent="." unique_id=1823204344]
+visible = false
+layout_mode = 0
+offset_left = 736.0
+offset_top = 160.0
+offset_right = 852.0
+offset_bottom = 224.0
+scale = Vector2(100, 100)
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "123"
+
+[node name="BasesDestroyedLabel" type="Label" parent="." unique_id=1037980947]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 256.0
+offset_right = 702.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Bases Destroyed:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BasesDestroyed" type="Label" parent="." unique_id=921820049]
+visible = false
+layout_mode = 0
+offset_left = 736.0
+offset_top = 256.0
+offset_right = 852.0
+offset_bottom = 320.0
 scale = Vector2(100, 100)
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
@@ -277,10 +638,10 @@ text = "123"
 
 [node name="TimeUsedLabel" type="Label" parent="." unique_id=1321573758]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 256.0
-offset_right = 696.0
-offset_bottom = 320.0
+offset_left = 128.0
+offset_top = 352.0
+offset_right = 704.0
+offset_bottom = 416.0
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
 text = "Time Used:"
@@ -290,10 +651,10 @@ vertical_alignment = 1
 [node name="TimeUsed" type="Label" parent="." unique_id=1338812109]
 visible = false
 layout_mode = 0
-offset_left = 728.0
-offset_top = 256.0
-offset_right = 844.0
-offset_bottom = 320.0
+offset_left = 736.0
+offset_top = 352.0
+offset_right = 852.0
+offset_bottom = 416.0
 scale = Vector2(100, 100)
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
@@ -301,10 +662,10 @@ text = "123"
 
 [node name="TotalRadnessLabel" type="Label" parent="." unique_id=319292402]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 384.0
-offset_right = 696.0
-offset_bottom = 448.0
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 704.0
+offset_bottom = 512.0
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
 text = "Total Radness:"
@@ -314,25 +675,52 @@ vertical_alignment = 1
 [node name="TotalRadness" type="Label" parent="." unique_id=1152896787]
 visible = false
 layout_mode = 0
-offset_left = 728.0
-offset_top = 384.0
-offset_right = 1117.0
-offset_bottom = 448.0
+offset_left = 736.0
+offset_top = 448.0
+offset_right = 1125.0
+offset_bottom = 512.0
 scale = Vector2(100, 100)
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 64
 text = "Supa Slick!"
 
-[node name="PressSpace" type="Label" parent="." unique_id=160118543]
+[node name="RadnessString" type="Label" parent="." unique_id=1227786272]
+visible = false
 layout_mode = 0
-offset_left = 384.0
-offset_top = 640.0
-offset_right = 896.0
-offset_bottom = 704.0
+offset_left = 72.000015
+offset_top = 528.0
+offset_right = 346.0
+offset_bottom = 592.0
+rotation = -0.6981317
+scale = Vector2(100, 100)
 theme_override_fonts/font = ExtResource("1_oo8kp")
 theme_override_font_sizes/font_size = 48
-text = "Press Space"
+text = "SUPA SLICK"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Retry" type="Label" parent="." unique_id=160118543]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 640.0
+offset_right = 536.0
+offset_bottom = 704.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 32
+text = "R to Retry"
+vertical_alignment = 1
+
+[node name="MainMenu" type="Label" parent="." unique_id=1772185341]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 584.0
+offset_right = 696.0
+offset_bottom = 648.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 32
+text = "ESC For Main Menu"
 vertical_alignment = 1
 
 [node name="CinematicBoom" type="AudioStreamPlayer2D" parent="." unique_id=1190268770]
@@ -344,9 +732,17 @@ stream = ExtResource("3_j1fe5")
 [node name="CinematicBoom3" type="AudioStreamPlayer2D" parent="." unique_id=1704486008]
 stream = ExtResource("3_j1fe5")
 
+[node name="CinematicBoom4" type="AudioStreamPlayer2D" parent="." unique_id=1675218266]
+stream = ExtResource("3_j1fe5")
+
+[node name="CinematicBoom5" type="AudioStreamPlayer2D" parent="." unique_id=2113063135]
+stream = ExtResource("3_j1fe5")
+
+[node name="CinematicBoom6" type="AudioStreamPlayer2D" parent="." unique_id=214189233]
+stream = ExtResource("3_j1fe5")
+
+[node name="ScoreTune" type="AudioStreamPlayer2D" parent="." unique_id=2009004392]
+stream = ExtResource("4_xjda6")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2099972843]
 libraries/ = SubResource("AnimationLibrary_5eixk")
-
-[connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dlc8vugb8j5fa"]
+
+[ext_resource type="Script" uid="uid://blclk8neelwaq" path="res://scripts/stat_counter.gd" id="1_wqmba"]
+
+[node name="StatCounter" type="Node2D" unique_id=289883473]
+script = ExtResource("1_wqmba")

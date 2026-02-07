@@ -107,6 +107,8 @@ func die(impact_dir: Vector2 = Vector2.ZERO) -> void:
 	set_deferred("sleeping", true)
 	z_index = 0
 	$CollisionShape2D.set_deferred("disabled", true)
+	
+	StatCounter.add_gore()
 
 func _spawn_blood_burst(dir: Vector2) -> void:
 	var burst := BLOOD_BURST_SCENE.instantiate() as Node2D

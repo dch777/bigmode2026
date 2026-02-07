@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 
 TransitionScreen="*uid://jp38nhsn0x6x"
 Fatcopter="*uid://c4bus7hmqvjvk"
+StatCounter="*uid://dlc8vugb8j5fa"
 
 [display]
 

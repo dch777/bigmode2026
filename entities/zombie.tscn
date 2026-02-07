@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cw4mnpad3v50l"]
 
-[ext_resource type="Script" uid="uid://bttpf0fbcw106" path="res://scripts/zombie.gd" id="1_qca0a"]
+[ext_resource type="Script" path="res://scripts/zombie.gd" id="1_qca0a"]
 [ext_resource type="Texture2D" uid="uid://cjutilpsstk4" path="res://assets/sprites/fallen_zombie.png" id="3_qca0a"]
 [ext_resource type="Script" uid="uid://bs25r7yih6a0o" path="res://scripts/zombie_body.gd" id="4_hud2l"]
 [ext_resource type="Texture2D" uid="uid://b1rkskw1dybmv" path="res://assets/sprites/zombie_body.png" id="5_hud2l"]
 [ext_resource type="AudioStream" uid="uid://dyuoh5khv53qh" path="res://assets/audio/hit.wav" id="5_mwpml"]
-[ext_resource type="Script" uid="uid://bl658cp8xl4ge" path="res://scripts/zombie_head.gd" id="6_1atck"]
+[ext_resource type="Script" path="res://scripts/zombie_head.gd" id="6_1atck"]
 [ext_resource type="Texture2D" uid="uid://d3to82liluoco" path="res://assets/sprites/zombie_head.png" id="6_mwpml"]
 
 [sub_resource type="Curve" id="Curve_xotmo"]
