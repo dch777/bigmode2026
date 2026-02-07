@@ -3,6 +3,8 @@ class_name ZombieBody extends RigidBody2D
 var target: RigidBody2D
 @onready var head = $"../head"
 var dead = false
+const BLOOD_BURST_SCENE := preload("res://prefabs/blood_burst.tscn")
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if dead:
@@ -59,7 +61,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 		if body is Tank and body.linear_velocity.length() > 200 and state.get_contact_impulse(i).length() > 1.0:
 			head.apply_impulse(-state.get_contact_impulse(i))
-			die()
+			die(body.linear_velocity.normalized()) # <-- pass tank direction
 		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and (body.linear_velocity - linear_velocity).length() > 300:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			body.apply_impulse(-state.get_contact_impulse(i))
@@ -71,9 +73,24 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 # 		print((head.global_position - $joint.global_position).length())
 # 		die()
 
-func die():
-	$joint.node_a = ""
 
+func die(impact_dir: Vector2 = Vector2.ZERO) -> void:
+	if dead:
+		return
+	dead = true
+
+	# Use passed direction if available; otherwise fallback to velocities
+	var dir := impact_dir
+	if dir.length() < 0.001:
+		if head and head.linear_velocity.length() > 1.0:
+			dir = head.linear_velocity.normalized()
+		elif linear_velocity.length() > 1.0:
+			dir = linear_velocity.normalized()
+
+	# Spawn blood safely (not during physics flush)
+	call_deferred("_spawn_blood_burst", dir)
+
+	$joint.node_a = ""
 	$oof.playing = true
 
 	$body.visible = false
@@ -90,8 +107,13 @@ func die():
 	angular_damp = 10.0
 	linear_damp = 5.0
 	z_index = 0
-	dead = true
 	$CollisionShape2D.set_deferred("disabled", true)
+
+func _spawn_blood_burst(dir: Vector2) -> void:
+	var burst := BLOOD_BURST_SCENE.instantiate() as Node2D
+	get_tree().current_scene.add_child(burst)
+	burst.global_position = global_position
+	burst.call("spawn", dir)
 
 func screen_exited():
 	if dead:

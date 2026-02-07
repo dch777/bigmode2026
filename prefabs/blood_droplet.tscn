@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c4bbnmosfnr61"]
+
+[ext_resource type="Script" uid="uid://xnkxji5xd3vj" path="res://BloodDroplet.gd" id="1_qfeut"]
+[ext_resource type="Texture2D" uid="uid://djfgwgin0duot" path="res://assets/sprites/blood.png" id="2_qj47h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xa1yl"]
+radius = 1.0
+
+[node name="BloodDroplet" type="RigidBody2D" unique_id=523213312]
+collision_layer = 512
+gravity_scale = 0.0
+linear_damp = 3.0
+angular_damp = 3.0
+script = ExtResource("1_qfeut")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2035457993]
+texture = ExtResource("2_qj47h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=366314158]
+shape = SubResource("CircleShape2D_xa1yl")

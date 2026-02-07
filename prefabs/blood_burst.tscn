@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bj3orwetfolee"]
+
+[ext_resource type="Script" uid="uid://c506qoksh17ay" path="res://BloodBurst.gd" id="1_gmoqu"]
+
+[node name="BloodBurst" type="Node2D" unique_id=1876149181]
+script = ExtResource("1_gmoqu")
+droplet_count = 100
+scatter_radius = 4.0
