@@ -57,6 +57,6 @@ func _bake_to_ground() -> void:
 			randf_range(-stamp_scatter, stamp_scatter),
 			randf_range(-stamp_scatter, stamp_scatter)
 		)
-		stain.z_index = clampi(int(stain.global_position.y), -4096, 4096)
+		#stain.z_index = clampi(int(stain.global_position.y), -4096, 4096)
 
 	queue_free()
