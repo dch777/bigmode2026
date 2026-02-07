@@ -1,0 +1,352 @@
+[gd_scene format=3 uid="uid://cenyj7ifq7cd1"]
+
+[ext_resource type="Script" uid="uid://b4xwc4gtybyp6" path="res://scripts/game_over.gd" id="1_5eixk"]
+[ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="1_oo8kp"]
+[ext_resource type="AudioStream" uid="uid://hpu8tddoiaed" path="res://assets/audio/lordsonny-cinematic-boom-171285.mp3" id="3_j1fe5"]
+
+[sub_resource type="Animation" id="Animation_5eixk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoreScore:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeUsed:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 100)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TotalRadness:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 100)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CinematicBoom:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CinematicBoom2:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CinematicBoom3:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GoreScore:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TimeUsed:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TotalRadness:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_j1fe5"]
+resource_name = "go_next"
+
+[sub_resource type="Animation" id="Animation_oo8kp"]
+resource_name = "slam"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoreScore:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TimeUsed:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TotalRadness:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, 100), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CinematicBoom:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CinematicBoom2:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CinematicBoom3:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GoreScore:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TimeUsed:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TotalRadness:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5eixk"]
+_data = {
+&"RESET": SubResource("Animation_5eixk"),
+&"go_next": SubResource("Animation_j1fe5"),
+&"slam": SubResource("Animation_oo8kp")
+}
+
+[node name="GameOver" type="Control" unique_id=1379010676]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eixk")
+
+[node name="Bg" type="ColorRect" parent="." unique_id=1986738024]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="GoreScoreLabel" type="Label" parent="." unique_id=1349261346]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 128.0
+offset_right = 696.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Gore Score:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GoreScore" type="Label" parent="." unique_id=303221656]
+layout_mode = 0
+offset_left = 728.0
+offset_top = 128.0
+offset_right = 844.0
+offset_bottom = 192.0
+scale = Vector2(100, 100)
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "123"
+
+[node name="TimeUsedLabel" type="Label" parent="." unique_id=1321573758]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 256.0
+offset_right = 696.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Time Used:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TimeUsed" type="Label" parent="." unique_id=1338812109]
+visible = false
+layout_mode = 0
+offset_left = 728.0
+offset_top = 256.0
+offset_right = 844.0
+offset_bottom = 320.0
+scale = Vector2(100, 100)
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "123"
+
+[node name="TotalRadnessLabel" type="Label" parent="." unique_id=319292402]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 384.0
+offset_right = 696.0
+offset_bottom = 448.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Total Radness:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TotalRadness" type="Label" parent="." unique_id=1152896787]
+visible = false
+layout_mode = 0
+offset_left = 728.0
+offset_top = 384.0
+offset_right = 1117.0
+offset_bottom = 448.0
+scale = Vector2(100, 100)
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 64
+text = "Supa Slick!"
+
+[node name="PressSpace" type="Label" parent="." unique_id=160118543]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 640.0
+offset_right = 896.0
+offset_bottom = 704.0
+theme_override_fonts/font = ExtResource("1_oo8kp")
+theme_override_font_sizes/font_size = 48
+text = "Press Space"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CinematicBoom" type="AudioStreamPlayer2D" parent="." unique_id=1190268770]
+stream = ExtResource("3_j1fe5")
+
+[node name="CinematicBoom2" type="AudioStreamPlayer2D" parent="." unique_id=1958847886]
+stream = ExtResource("3_j1fe5")
+
+[node name="CinematicBoom3" type="AudioStreamPlayer2D" parent="." unique_id=1704486008]
+stream = ExtResource("3_j1fe5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2099972843]
+libraries/ = SubResource("AnimationLibrary_5eixk")
+
+[connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="current_animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_current_animation_changed"]

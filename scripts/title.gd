@@ -28,4 +28,4 @@ func _on_glass_bottle_smash_finished() -> void:
 
 
 func _on_timer_2_timeout() -> void:
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	TransitionScreen.transition(load("res://levels/main_menu.tscn"))
