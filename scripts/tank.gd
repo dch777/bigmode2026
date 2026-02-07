@@ -20,7 +20,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 	if default_throttle != 0:
 		throttle = default_throttle
-		steering = default_steering
 
 		if abs(global_position.x) > 740:
 			state.transform.origin.x = -740 * sign(global_position.x)

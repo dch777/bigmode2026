@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://uvj3ymvll72y"]
+
+[ext_resource type="Shader" uid="uid://bu4uy5308vhu4" path="res://assets/shaders/snow.gdshader" id="1_5lphw"]
+[ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="2_y2dis"]
+
+[sub_resource type="Gradient" id="Gradient_6nm46"]
+offsets = PackedFloat32Array(0, 0.6512821)
+colors = PackedColorArray(0.78431374, 0.78431374, 0.78431374, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y2dis"]
+gradient = SubResource("Gradient_6nm46")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5lphw"]
+resource_local_to_scene = true
+shader = ExtResource("1_5lphw")
+shader_parameter/window_size = Vector2(1280, 720)
+shader_parameter/explosion = Vector2(0, 0)
+shader_parameter/is_exploding = false
+shader_parameter/default_velocity = Vector2(-50, 200)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2dis"]
+bg_color = Color(0.54509807, 0.60784316, 0.7058824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cqc5"]
+bg_color = Color(0.22745098, 0.26666668, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5l1uu"]
+bg_color = Color(0.3529412, 0.4117647, 0.53333336, 1)
+
+[node name="LevelSelect" type="Control" unique_id=2010988624]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=603167660]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=740872534]
+z_index = 100
+position = Vector2(700, 280)
+amount = 1000
+texture = SubResource("GradientTexture2D_y2dis")
+lifetime = 2.0
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ShaderMaterial_5lphw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1740968384]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -98.0
+offset_right = 304.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=999648766]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+theme_override_fonts/font = ExtResource("2_y2dis")
+theme_override_font_sizes/font_size = 64
+text = "LEVEL SELECT"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1470536521]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Button1" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1743024574]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y2dis")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
+text = "1"
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=523037064]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y2dis")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
+text = "2"
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=861827215]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y2dis")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
+text = "3"
+
+[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=758255646]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y2dis")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
+text = "4"

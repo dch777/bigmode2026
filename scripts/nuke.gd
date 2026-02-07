@@ -19,7 +19,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if is_exploding:
-		blast_zone.shape.radius = min(blast_zone.shape.radius * 1.05, 1000.0)
+		blast_zone.shape.radius = min(blast_zone.shape.radius * 1.05, 2000.0)
 		if !breakout_mode and next_scene != null:
 			camera.global_position = camera.global_position.lerp(global_position, 4 * delta)
 			camera.zoom = camera.zoom.lerp(Vector2(0.5, 0.5), delta)
@@ -35,6 +35,9 @@ func explode() -> void:
 	$BlastZone.monitoring = true
 	camera.particle_material.set_shader_parameter("explosion", global_position)
 	camera.particle_material.set_shader_parameter("is_exploding", true)
+
+	if target and get_tree().get_current_scene().find_children("*", "Target").size() > 1:
+		next_scene = null
 
 	if !breakout_mode and next_scene != null:
 		camera.top_level = true
@@ -69,7 +72,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			deg += PI/4
 		state.linear_velocity = Vector2.from_angle(deg) * max(state.linear_velocity.length(), 500.0)
 
-	if state.total_gravity.length() > 500:
+	if state.total_gravity.length() > 500 or breakout_mode:
 		collision_mask = 0b10000111
 	else:
 		collision_mask = 0b10000011

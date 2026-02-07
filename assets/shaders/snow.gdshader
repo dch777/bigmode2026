@@ -3,6 +3,7 @@ shader_type particles;
 uniform vec2 window_size;
 uniform vec2 explosion;
 uniform bool is_exploding = false;
+uniform vec2 default_velocity = vec2(0.0, 0.0);
 
 float seed(float init) {
     return fract(sin(dot(vec2(init), vec2(12.9898,78.233))) * 43758.5453123);
@@ -37,6 +38,7 @@ void start() {
 		CUSTOM.z = 0.0;
 	} else {
 		VELOCITY -= EMITTER_VELOCITY * 0.1 * CUSTOM.y;
+		VELOCITY += vec3(default_velocity, 0.0);
 		COLOR = vec4(0.75, 0.8, 0.86, 1.0);
 		CUSTOM.z = 1.0;
 	}
