@@ -1,11 +1,13 @@
 class_name Tank extends RigidBody2D
 
 @export var default_throttle: float = 0.0
+@export var default_steering: float = 0.0
 
 var slip_curve: float = 0.0
 var audio_throttle: float
 var rpm: float
 var boost: float = 0.0
+var skidding: bool = true
 
 func _ready():
 	$engine_polyphony.load_lib("res://assets/audio/engine/", AudioStreamPlayer2D)
@@ -18,11 +20,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 	if default_throttle != 0:
 		throttle = default_throttle
+		steering = default_steering
 
 		if abs(global_position.x) > 740:
 			state.transform.origin.x = -740 * sign(global_position.x)
 		if abs(global_position.y) > 420:
 			state.transform.origin.y = -420 * sign(global_position.y)
+
+		if abs(global_position.x) > 720 or abs(global_position.y) > 400:
+			skidding = false
+		else:
+			skidding = true
 
 	var facing = global_transform.x
 

@@ -8,11 +8,13 @@ extends Node2D
 @export var player: Player
 @export var nuke: Nuke
 
+@export var active = false
+
 func _ready():
 	get_tree().create_timer(randf_range(min_spawn_time, max_spawn_time)).timeout.connect(spawn_wave)
 
 func spawn_wave():
-	if enemy and visible:
+	if active and enemy and visible:
 		var current_scene = get_tree().get_current_scene()
 		var lens_pos: Vector2 = get_viewport().get_camera_2d().get_screen_center_position() + 1.5 * (global_position - get_viewport().get_visible_rect().size / 2.0) 
 

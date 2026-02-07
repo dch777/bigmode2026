@@ -5,7 +5,7 @@ class_name Indicator extends Node2D
 @export var rotate: bool = true
 @export var active: bool = true
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if not is_instance_valid(target):
 		hide()
 		return
@@ -23,6 +23,11 @@ func _process(_delta: float) -> void:
 		return
 
 	show()
+	var hud = get_tree().get_current_scene().find_child("HUD")
+	if hud and global_position.x >= 970 and global_position.y >= 520:
+		hud.dial_dither = true
+	if hud and global_position.x <= 330 and global_position.y >= 480:
+		hud.dash_dither = true
 
 	# Screen center
 	var center: Vector2 = screen_rect.size * 0.5

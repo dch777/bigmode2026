@@ -60,15 +60,19 @@ position = Vector2(392, 3896)
 
 [node name="target" parent="." unique_id=2140751424 instance=ExtResource("5_loblt")]
 position = Vector2(3456, 3840)
+active = true
 
 [node name="target2" parent="." unique_id=1721559908 instance=ExtResource("5_loblt")]
 position = Vector2(1720, 944)
+active = true
 
 [node name="target3" parent="." unique_id=526566255 instance=ExtResource("5_loblt")]
 position = Vector2(5312, 4032)
+active = true
 
 [node name="target4" parent="." unique_id=1506961611 instance=ExtResource("5_loblt")]
 position = Vector2(3824, 1280)
+active = true
 
 [node name="rocks" type="Polygon2D" parent="." unique_id=1986276696]
 color = Color(1, 0, 0, 1)
@@ -121,10 +125,12 @@ player = NodePath("../../../Player")
 wheel_rect = PackedVector2Array(-20, 8, 20, 8, 20, 16, -20, 16)
 
 [node name="nuke" parent="." unique_id=622365965 node_paths=PackedStringArray("player") instance=ExtResource("10_v5yqw")]
-position = Vector2(331, 350)
+position = Vector2(929, 309)
 player = NodePath("../Player")
 
 [node name="HUD" parent="." unique_id=1570198400 node_paths=PackedStringArray("nuke", "player") instance=ExtResource("11_bu7u6")]
 total_countdown_time = 90.0
 nuke = NodePath("../nuke")
 player = NodePath("../Player")
+
+[node name="BloodDecal" type="Node2D" parent="." unique_id=49626040 groups=["blood_layer"]]

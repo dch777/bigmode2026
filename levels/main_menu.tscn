@@ -3,13 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://cx8fqjvsafdl0" path="res://assets/sprites/tileset.png" id="1_6ymyu"]
 [ext_resource type="Script" uid="uid://jmfe4lm3w374" path="res://scripts/background.gd" id="2_7rktv"]
 [ext_resource type="PackedScene" uid="uid://b3fhiy15db34q" path="res://entities/player.tscn" id="3_3ye4h"]
-[ext_resource type="Script" uid="uid://x8nlxf74dec" path="res://scripts/subviewport.gd" id="4_7rktv"]
+[ext_resource type="Shader" uid="uid://de8r5i6cr1asi" path="res://assets/shaders/tread.gdshader" id="4_6xkr4"]
 [ext_resource type="PackedScene" uid="uid://bq3hj0oial6qb" path="res://entities/nuke.tscn" id="5_3ye4h"]
 [ext_resource type="Shader" uid="uid://bu4uy5308vhu4" path="res://assets/shaders/snow.gdshader" id="5_7ty7c"]
+[ext_resource type="Script" uid="uid://baky8smtdrmwi" path="res://scripts/skid_track.gd" id="5_b8wrl"]
 [ext_resource type="Material" uid="uid://dicqgp4w4av86" path="res://assets/shaders/snow.tres" id="5_nwbki"]
 [ext_resource type="Script" uid="uid://dk886mb3aphxw" path="res://scripts/camera.gd" id="5_ofye2"]
-[ext_resource type="PackedScene" uid="uid://dlogmxsqi0iul" path="res://levels/level.scn" id="7_6flho"]
 [ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="7_pppj1"]
+[ext_resource type="PackedScene" uid="uid://dxd441xd80jpe" path="res://levels/tutorial.scn" id="8_6xkr4"]
+[ext_resource type="Script" uid="uid://b5siao3s2xv0m" path="res://scripts/vfx.gd" id="10_6xkr4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwbki"]
 texture = ExtResource("1_6ymyu")
@@ -147,21 +149,7 @@ custom_data_layer_0/name = "damping"
 custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_nwbki")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3ye4h"]
-viewport_path = NodePath("canvas/SubViewport")
-
-[sub_resource type="Gradient" id="Gradient_ny0t1"]
-offsets = PackedFloat32Array(0.95897436, 1)
-colors = PackedColorArray(0.8627451, 0.8627451, 0.8627451, 0.011764706, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nwbki"]
-gradient = SubResource("Gradient_ny0t1")
-width = 44
-height = 10
-fill = 2
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ty7c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8wrl"]
 resource_local_to_scene = true
 shader = ExtResource("5_7ty7c")
 shader_parameter/window_size = Vector2(1280, 720)
@@ -179,7 +167,7 @@ height = 12
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_lppu5"]
+[sub_resource type="Gradient" id="Gradient_w3h5g"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.20942408, 0.39267015, 0.55497384)
 colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1)
@@ -236,6 +224,26 @@ _data = {
 &"blink": SubResource("Animation_b8wrl")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_b8wrl"]
+viewport_path = NodePath("canvas/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s01ir"]
+shader = ExtResource("4_6xkr4")
+shader_parameter/noise_intensity = 0.02000000095
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_s01ir"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0.078431375, 0, 0, 0, 0.078431375)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w3h5g"]
+gradient = SubResource("Gradient_s01ir")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_maniu"]
+shader = ExtResource("4_6xkr4")
+shader_parameter/noise_intensity = 0.02000000095
+shader_parameter/seed = 10000.0
+
 [node name="MainMenu" type="Node2D" unique_id=127128149]
 
 [node name="bg" type="TileMapLayer" parent="." unique_id=748499652]
@@ -243,47 +251,8 @@ tile_map_data = PackedByteArray("AADJ/8j/AAABAAIAAADJ/8f/AAAAAAIAAADJ/8b/AAACAAI
 tile_set = SubResource("TileSet_pppj1")
 script = ExtResource("2_7rktv")
 
-[node name="canvas" type="Node2D" parent="." unique_id=2020544095]
-
-[node name="TextureRect" type="TextureRect" parent="canvas" unique_id=1152020621]
-texture_filter = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2048.0
-offset_top = -2048.0
-offset_right = 2048.0
-offset_bottom = 2048.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("ViewportTexture_3ye4h")
-
-[node name="SubViewport" type="SubViewport" parent="canvas" unique_id=2108770642 node_paths=PackedStringArray("player")]
-transparent_bg = true
-size = Vector2i(4096, 4096)
-render_target_clear_mode = 1
-render_target_update_mode = 4
-script = ExtResource("4_7rktv")
-player = NodePath("../../Player")
-
-[node name="brush" type="Node2D" parent="canvas/SubViewport" unique_id=724209258]
-visible = false
-position = Vector2(-300, 300)
-rotation = 0.7853982
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="track" type="Sprite2D" parent="canvas/SubViewport/brush" unique_id=467408750]
-position = Vector2(0, 10)
-texture = SubResource("GradientTexture2D_nwbki")
-
-[node name="track2" type="Sprite2D" parent="canvas/SubViewport/brush" unique_id=1308582271]
-position = Vector2(0, -10)
-texture = SubResource("GradientTexture2D_nwbki")
-
-[node name="Camera2D" type="Camera2D" parent="canvas/SubViewport" unique_id=1594508751]
-
 [node name="Player" parent="." unique_id=1003144878 instance=ExtResource("3_3ye4h")]
-position = Vector2(-300, 300)
+position = Vector2(-200, 200)
 rotation = 0.7853982
 
 [node name="body" parent="Player" index="2" unique_id=1588423890]
@@ -297,7 +266,7 @@ visible = false
 enabled = false
 
 [node name="GPUParticles2D" parent="Player/body/Camera2D" index="0" unique_id=1625252881]
-process_material = SubResource("ShaderMaterial_7ty7c")
+process_material = SubResource("ShaderMaterial_b8wrl")
 
 [node name="turret" parent="Player" index="3" unique_id=699706274]
 rotation = 1.5707964
@@ -330,15 +299,15 @@ linear_damp_mode = 1
 linear_damp = 0.0
 player = NodePath("../Player")
 breakout_mode = true
-next_scene = ExtResource("7_6flho")
+next_scene = ExtResource("8_6xkr4")
 
 [node name="Explosion1" parent="Nuke" index="0" unique_id=1772254961]
-color_ramp = SubResource("Gradient_lppu5")
+color_ramp = SubResource("Gradient_w3h5g")
 
 [node name="Explosion2" parent="Nuke" index="1" unique_id=958360898]
 lifetime_randomness = 0.0
 scale_amount_max = 40.0
-color_ramp = SubResource("Gradient_lppu5")
+color_ramp = SubResource("Gradient_w3h5g")
 
 [node name="lens" parent="Nuke" index="7" unique_id=147503076]
 active = false
@@ -383,7 +352,7 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_pppj1")
 theme_override_font_sizes/font_size = 128
-text = "TANK THIERRY"
+text = "NUKETREAD"
 autowrap_trim_flags = 128
 
 [node name="start" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1777584502]
@@ -399,6 +368,44 @@ autowrap_trim_flags = 128
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/MarginContainer" unique_id=570141055]
 libraries/ = SubResource("AnimationLibrary_s01ir")
 autoplay = &"blink"
+
+[node name="canvas" type="Node2D" parent="." unique_id=279658441]
+
+[node name="TextureRect" type="TextureRect" parent="canvas" unique_id=371647695]
+texture_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2048.0
+offset_top = -2048.0
+offset_right = 2048.0
+offset_bottom = 2048.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_b8wrl")
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="canvas" unique_id=1706610037]
+transparent_bg = true
+size = Vector2i(4096, 4096)
+render_target_clear_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="canvas/SubViewport" unique_id=484901844]
+script = ExtResource("10_6xkr4")
+
+[node name="track1" type="MeshInstance2D" parent="canvas/SubViewport" unique_id=1607404816 node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_s01ir")
+texture = SubResource("GradientTexture1D_w3h5g")
+script = ExtResource("5_b8wrl")
+player = NodePath("../../../Player")
+wheel_rect = PackedVector2Array(-20, -8, 20, -8, 20, -16, -20, -16)
+
+[node name="track2" type="MeshInstance2D" parent="canvas/SubViewport" unique_id=737761458 node_paths=PackedStringArray("player")]
+material = SubResource("ShaderMaterial_maniu")
+texture = SubResource("GradientTexture1D_w3h5g")
+script = ExtResource("5_b8wrl")
+player = NodePath("../../../Player")
+wheel_rect = PackedVector2Array(-20, 8, 20, 8, 20, 16, -20, 16)
 
 [editable path="Player"]
 [editable path="Nuke"]

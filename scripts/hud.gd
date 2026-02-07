@@ -5,17 +5,33 @@ extends CanvasLayer
 @export var player: Player
 
 var detonate_timer: float = 0.0
+var dial_dither = false
+var dash_dither = false
+
+var dial_intensity = 0.0
+var dash_intensity = 0.0
 
 func _ready() -> void:
 	$Timer.wait_time = total_countdown_time
 	$Timer.start()
 
 func _process(delta: float) -> void:
-	$Label.add_theme_color_override("font_color", get_color($Timer.time_left))
-	$Label.text = format_time($Timer.time_left)
-
 	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta * 5.0), 0, PI + 0.1)
 	$dashboard/base/compass.rotation = player.tank.global_rotation + PI/2
+
+	if dash_dither:
+		dash_intensity = lerp(dash_intensity, 0.5, 5 * delta)
+		dash_dither = false
+	else:
+		dash_intensity = lerp(dash_intensity, 0.0, 5 * delta)
+
+	if dial_dither:
+		dial_intensity = lerp(dial_intensity, 0.5, 5 * delta)
+		dial_dither = false
+	else:
+		dial_intensity = lerp(dial_intensity, 0.0, 5 * delta)
+	$dashboard.material.set_shader_parameter("intensity", dash_intensity)
+	$dial_container.material.set_shader_parameter("intensity", dial_intensity)
 
 	if Input.is_action_just_pressed("detonate"):
 		if detonate_timer <= 0:
@@ -32,7 +48,15 @@ func _process(delta: float) -> void:
 		$dashboard/base/flap_down.show()
 		$dashboard/base/flap_up.hide()
 
-	$dashboard/base/danger.visible = (detonate_timer > 0 or $Timer.time_left < 10) and int(2 * Time.get_unix_time_from_system()) % 2 == 1
+	if !$Timer.is_stopped():
+		$dashboard/base/danger.visible = (detonate_timer > 0 or $Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
+		$warning_mask.visible = ($Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
+		if int(Time.get_unix_time_from_system()) % 2 == 1 and $Timer.time_left < 10 and !$Warning.playing:
+			$Warning.play()
+	else:
+		$dashboard/base/danger.visible = false
+		$warning_mask.visible = false
+
 	$dashboard/base/reloading.visible = player.turret.cooldown_timer > 0
 
 	var time_string = format_time($Timer.time_left)

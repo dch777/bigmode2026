@@ -18,7 +18,7 @@ func _process(_delta):
 	if player == null or player.tank == null:
 		return
 
-	if player.tank.slip_curve < 0.01:
+	if (player.tank.default_throttle == 0.0 and player.tank.slip_curve < 0.01) or (player.tank.default_throttle != 0 and !player.tank.skidding):
 		if has_prev:
 			_add_quad(prev_corners[3], prev_corners[2], prev_corners[0], prev_corners[1], prev_speed, prev_speed, 0, 1)
 		has_prev = false

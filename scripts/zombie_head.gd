@@ -16,7 +16,6 @@ func _integrate_forces(state):
 			zombie_body.die()
 		if body is Turret and state.get_contact_impulse(i).length() > 28:
 			apply_impulse(-state.get_contact_impulse(i) * 0.9)
-			body.apply_impulse(-state.get_contact_impulse(i) * 0.9, state.get_contact_collider_position(i) - body.global_position)
 			zombie_body.die()
 
 func screen_exited():

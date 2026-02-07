@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqojdc5g4c7xa"]
 
 [ext_resource type="Script" uid="uid://8tpimls3lbbx" path="res://scripts/hud.gd" id="1_en2x2"]
-[ext_resource type="FontFile" uid="uid://bmdryr0jiwkgl" path="res://assets/fonts/DS-DIGI.TTF" id="2_1v5rv"]
+[ext_resource type="Shader" uid="uid://cvs1mjhg7j07n" path="res://assets/shaders/dither.gdshader" id="3_65xic"]
 [ext_resource type="Texture2D" uid="uid://q882ncqpfyo4" path="res://assets/sprites/nixie.png" id="3_q43x7"]
 [ext_resource type="Texture2D" uid="uid://ru6xtevvbxdy" path="res://assets/sprites/dashboard_base.png" id="4_1v5rv"]
 [ext_resource type="Texture2D" uid="uid://dpvvyo2ktwc6b" path="res://assets/sprites/accelerometer_dial.png" id="4_srpbi"]
@@ -13,6 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://bl6a8738q4umj" path="res://assets/sprites/dashboard_danger.png" id="9_m0eg6"]
 [ext_resource type="Texture2D" uid="uid://c2tygl5v7yh1f" path="res://assets/sprites/dashboard_reloading.png" id="10_b00kl"]
 [ext_resource type="Texture2D" uid="uid://dbwtytjrq83q" path="res://assets/sprites/dashboard_compass.png" id="11_so1yu"]
+[ext_resource type="AudioStream" uid="uid://dhwvp26d1231d" path="res://assets/audio/warning.mp3" id="15_mp5xd"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mp5xd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65xic"]
+shader = ExtResource("3_65xic")
+shader_parameter/intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ikdk"]
 atlas = ExtResource("3_q43x7")
@@ -38,26 +45,29 @@ region = Rect2(0, 0, 32, 48)
 atlas = ExtResource("4_1v5rv")
 region = Rect2(0, 48, 152, 48)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mp5xd"]
+shader = ExtResource("3_65xic")
+shader_parameter/intensity = 0.0
+
 [node name="HUD" type="CanvasLayer" unique_id=1570198400]
 layer = 100
 script = ExtResource("1_en2x2")
 
-[node name="Label" type="Label" parent="." unique_id=1130134489]
+[node name="warning_mask" type="TextureRect" parent="." unique_id=462697093]
 visible = false
-custom_minimum_size = Vector2(512, 0)
-offset_left = 384.0
-offset_right = 896.0
-offset_bottom = 81.0
-theme_override_fonts/font = ExtResource("2_1v5rv")
-theme_override_font_sizes/font_size = 64
-text = "600"
-horizontal_alignment = 1
-vertical_alignment = 1
+modulate = Color(1, 0, 0.26666668, 0.19607843)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_mp5xd")
 
 [node name="Timer" type="Timer" parent="." unique_id=1922061490]
 one_shot = true
 
 [node name="dashboard" type="VBoxContainer" parent="." unique_id=295536584]
+material = SubResource("ShaderMaterial_65xic")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -67,42 +77,50 @@ grow_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="tubes" type="HBoxContainer" parent="dashboard" unique_id=771740153]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = -10
 
 [node name="digit0" type="TextureRect" parent="dashboard/tubes" unique_id=967474227]
+use_parent_material = true
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_2ikdk")
 
 [node name="digit1" type="TextureRect" parent="dashboard/tubes" unique_id=570079149]
+use_parent_material = true
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_hqust")
 
 [node name="digit2" type="TextureRect" parent="dashboard/tubes" unique_id=1459119448]
+use_parent_material = true
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_fadk3")
 
 [node name="digit3" type="TextureRect" parent="dashboard/tubes" unique_id=1569330882]
+use_parent_material = true
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_t5hne")
 
 [node name="digit4" type="TextureRect" parent="dashboard/tubes" unique_id=805666863]
+use_parent_material = true
 custom_minimum_size = Vector2(64, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_dhgls")
 
 [node name="base" type="TextureRect" parent="dashboard" unique_id=84295537]
+use_parent_material = true
 custom_minimum_size = Vector2(304, 96)
 layout_mode = 2
 texture = SubResource("AtlasTexture_q43x7")
 
 [node name="button" type="TextureRect" parent="dashboard/base" unique_id=2084758796]
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -115,6 +133,7 @@ texture = ExtResource("5_srpbi")
 
 [node name="button_down" type="TextureRect" parent="dashboard/base" unique_id=563744068]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -126,6 +145,7 @@ grow_vertical = 0
 texture = ExtResource("6_spcu4")
 
 [node name="flap_down" type="TextureRect" parent="dashboard/base" unique_id=549388842]
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -138,6 +158,7 @@ texture = ExtResource("7_ff8ar")
 
 [node name="flap_up" type="TextureRect" parent="dashboard/base" unique_id=1131307335]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -150,6 +171,7 @@ texture = ExtResource("8_m0eg6")
 
 [node name="danger" type="TextureRect" parent="dashboard/base" unique_id=809799080]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -162,6 +184,7 @@ texture = ExtResource("9_m0eg6")
 
 [node name="reloading" type="TextureRect" parent="dashboard/base" unique_id=1712712724]
 visible = false
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -173,6 +196,7 @@ grow_vertical = 0
 texture = ExtResource("10_b00kl")
 
 [node name="compass" type="TextureRect" parent="dashboard/base" unique_id=1834622545]
+use_parent_material = true
 custom_minimum_size = Vector2(304, 192)
 layout_mode = 1
 anchors_preset = 2
@@ -185,6 +209,7 @@ pivot_offset = Vector2(236, 150)
 texture = ExtResource("11_so1yu")
 
 [node name="dial_container" type="MarginContainer" parent="." unique_id=1189972408]
+material = SubResource("ShaderMaterial_mp5xd")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -193,6 +218,7 @@ grow_vertical = 2
 theme_override_constants/margin_right = 20
 
 [node name="dial" type="TextureRect" parent="dial_container" unique_id=972730797]
+use_parent_material = true
 custom_minimum_size = Vector2(256, 182)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -200,6 +226,7 @@ size_flags_vertical = 8
 texture = ExtResource("4_srpbi")
 
 [node name="indicator" type="TextureRect" parent="dial_container/dial" unique_id=1439839107]
+use_parent_material = true
 custom_minimum_size = Vector2(256, 182)
 layout_mode = 0
 offset_right = 256.0
@@ -208,5 +235,11 @@ pivot_offset = Vector2(128, 148)
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("5_spcu4")
+
+[node name="Warning" type="AudioStreamPlayer" parent="." unique_id=1967151254]
+stream = ExtResource("15_mp5xd")
+volume_db = -20.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1743412149]
 
 [connection signal="timeout" from="Timer" to="." method="timeout"]

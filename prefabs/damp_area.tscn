@@ -9,4 +9,5 @@ linear_damp_space_override = 3
 linear_damp = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1229085229]
+visible = false
 shape = SubResource("RectangleShape2D_iixcr")
