@@ -13,11 +13,10 @@ var combo_multiplier: int = 1
 
 func _process(delta: float) -> void:
 	time_since_last_kill += delta
-
-func add_gore() -> void:	
-	# Combo expired
 	if time_since_last_kill > get_combo_time_limit():
 		reset_combo()
+
+func add_gore() -> void:
 
 	# Add this kill
 	combo_kills += 1

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8tpimls3lbbx" path="res://scripts/hud.gd" id="1_en2x2"]
 [ext_resource type="FontFile" uid="uid://bmdryr0jiwkgl" path="res://assets/fonts/DS-DIGI.TTF" id="2_1v5rv"]
+[ext_resource type="FontFile" uid="uid://oj2nph73ed6x" path="res://assets/fonts/PxPlus_IBM_BIOS.ttf" id="3_65xic"]
 [ext_resource type="Texture2D" uid="uid://q882ncqpfyo4" path="res://assets/sprites/nixie.png" id="3_q43x7"]
 [ext_resource type="Texture2D" uid="uid://ru6xtevvbxdy" path="res://assets/sprites/dashboard_base.png" id="4_1v5rv"]
 [ext_resource type="Texture2D" uid="uid://dpvvyo2ktwc6b" path="res://assets/sprites/accelerometer_dial.png" id="4_srpbi"]
@@ -38,6 +39,43 @@ region = Rect2(0, 0, 32, 48)
 atlas = ExtResource("4_1v5rv")
 region = Rect2(0, 48, 152, 48)
 
+[sub_resource type="Animation" id="Animation_mp5xd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoreMultiplier:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.83186483]
+}
+
+[sub_resource type="Animation" id="Animation_65xic"]
+resource_name = "wobble"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GoreMultiplier:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.83186483, -0.26178938]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mp5xd"]
+_data = {
+&"RESET": SubResource("Animation_mp5xd"),
+&"wobble": SubResource("Animation_65xic")
+}
+
 [node name="HUD" type="CanvasLayer" unique_id=1570198400]
 layer = 100
 script = ExtResource("1_en2x2")
@@ -53,6 +91,36 @@ theme_override_font_sizes/font_size = 64
 text = "600"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GoreScore" type="Label" parent="." unique_id=150237041]
+custom_minimum_size = Vector2(448, 32)
+offset_left = 416.0
+offset_top = 43.3413
+offset_right = 864.0
+offset_bottom = 75.3413
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_65xic")
+theme_override_font_sizes/font_size = 32
+text = "000000000000"
+horizontal_alignment = 1
+
+[node name="GoreMultiplier" type="Label" parent="." unique_id=1314093696]
+custom_minimum_size = Vector2(128, 0)
+offset_left = 382.80133
+offset_top = 21.063011
+offset_right = 510.80133
+offset_bottom = 53.06302
+rotation = -0.83186483
+pivot_offset = Vector2(65.94507, 15.351746)
+theme_override_colors/font_color = Color(0.89411765, 0.23137255, 0.26666668, 1)
+theme_override_colors/font_outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_65xic")
+theme_override_font_sizes/font_size = 32
+text = "x1"
+horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="." unique_id=1922061490]
 one_shot = true
@@ -208,5 +276,8 @@ pivot_offset = Vector2(128, 148)
 size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = ExtResource("5_spcu4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1659152988]
+libraries/ = SubResource("AnimationLibrary_mp5xd")
 
 [connection signal="timeout" from="Timer" to="." method="timeout"]

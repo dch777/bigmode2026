@@ -9,6 +9,8 @@ var detonate_timer: float = 0.0
 func _ready() -> void:
 	$Timer.wait_time = total_countdown_time
 	$Timer.start()
+	
+	$AnimationPlayer.play("wobble")
 
 func _process(delta: float) -> void:
 	$Label.add_theme_color_override("font_color", get_color($Timer.time_left))
@@ -46,6 +48,11 @@ func _process(delta: float) -> void:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 10 * 32
 		else:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 12 * 32
+			
+	# scoring hud stuff
+	$GoreScore.text = str(StatCounter.gore_score).pad_zeros(12)
+	$GoreMultiplier.text = "x" + str(StatCounter.combo_multiplier)
+	
 
 func format_time(t: float) -> String:
 	var minutes = int(t / 60)
