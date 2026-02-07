@@ -5,6 +5,7 @@ class_name Tank extends RigidBody2D
 var slip_curve: float = 0.0
 var audio_throttle: float
 var rpm: float
+var boost: float = 0.0
 
 func _ready():
 	$engine_polyphony.load_lib("res://assets/audio/engine/", AudioStreamPlayer2D)
@@ -28,8 +29,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var forward_velocity = state.linear_velocity.project(facing)
 	var sideways_velocity = state.linear_velocity.slide(facing)
 
-	var scaled_speed = forward_velocity.length() / 200.0
-	var acceleration_curve = 200 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
+	var scaled_speed = forward_velocity.length() / 175.0
+	var acceleration_curve = 175 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
 	var throttle_force = acceleration_curve * facing * throttle
 
 	var steer_curve = exp(-state.linear_velocity.length()) + 1
@@ -38,17 +39,29 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if Input.is_action_pressed("brake") and state.linear_velocity.length() > 200:
 		steering_torque *= 1.75
 	
-	state.apply_force(throttle_force)
-	state.apply_torque(steering_torque)
-
 	var forward_friction = 35 * -forward_velocity.normalized()
 
 	var slip_angle = state.linear_velocity.angle_to(facing if sign(throttle) >= 0 else -facing) if state.linear_velocity.length() > 30.0 else 0.0
 	slip_curve = exp(-state.linear_velocity.length() / (600 * abs(slip_angle))) if abs(slip_angle) > 0.01 else 0.0
 	var sideways_friction = 650 * slip_curve * -sideways_velocity.normalized()
+	if Input.is_action_pressed("brake") and slip_curve > 0.3 and throttle != 0 and steering != 0:
+		boost += 8 * state.step * slip_curve
+	if slip_curve > 0.3 and throttle != 0 and steering != 0:
+		boost += 5 * state.step * slip_curve
+	elif slip_curve > 0.8:
+		boost -= state.step * 5.0
+	else:
+		boost -= state.step
+	
+	boost = clamp(boost, 0, 5)
+	if steering == 0:
+		throttle_force *= 1 + boost * clamp(1 - (slip_curve * 2), 0, 1)
 
+	state.apply_force(throttle_force)
+	state.apply_torque(steering_torque)
 	state.apply_force(forward_friction)
 	state.apply_force(sideways_friction)
+
 	if state.linear_velocity.length() > 20:
 		state.apply_torque(state.linear_velocity.length() * slip_curve * -sign(slip_angle))
 
@@ -59,7 +72,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 	if throttle != 0:
 		audio_throttle += state.step
-		rpm = clamp(audio_throttle * (throttle_force.length() * 1.5 + state.linear_velocity.length() * 1.5), 400, 7000)
+		rpm = lerp(rpm, float(clamp(audio_throttle * (throttle_force.length() * 1.5 + state.linear_velocity.length() * 1.5), 400, 7000)), state.step * 5)
 	else:
 		audio_throttle -= state.step
 		rpm = lerp(rpm, 400.0, state.step)
@@ -70,5 +83,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	for i in range(state.get_contact_count()):
 		var body = state.get_contact_collider_object(i)
 
-		if body is ZombieBody and linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.4:
-			apply_impulse(-state.get_contact_impulse(i) * 0.88, state.get_contact_local_position(i) - global_position)
+		if body is ZombieBody and linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.1:
+			apply_impulse(-state.get_contact_impulse(i), state.get_contact_local_position(i) - global_position)
+		if body is Nuke:
+			apply_impulse(-state.get_contact_impulse(i), state.get_contact_local_position(i) - global_position)

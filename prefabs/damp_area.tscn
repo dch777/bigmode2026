@@ -4,6 +4,7 @@
 size = Vector2(32, 32)
 
 [node name="DampArea" type="Area2D" unique_id=99849699]
+visible = false
 linear_damp_space_override = 3
 linear_damp = 2.0
 

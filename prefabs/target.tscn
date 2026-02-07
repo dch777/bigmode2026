@@ -3,6 +3,22 @@
 [ext_resource type="Texture2D" uid="uid://dxmv5vntrpfl6" path="res://assets/sprites/target.png" id="1_hkmll"]
 [ext_resource type="PackedScene" uid="uid://dcovnee365jb4" path="res://prefabs/lens.tscn" id="2_my4ps"]
 [ext_resource type="Script" uid="uid://dw766kdc7b2nu" path="res://scripts/spawner.gd" id="2_thquc"]
+[ext_resource type="PackedScene" uid="uid://cw4mnpad3v50l" path="res://entities/zombie.tscn" id="4_thquc"]
+
+[sub_resource type="Gradient" id="Gradient_epu3l"]
+offsets = PackedFloat32Array(0.3794872, 0.3846154)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hkmll"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_epu3l")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_my4ps"]
+viewport_path = NodePath("CanvasLayer/SubViewport")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkmll"]
 radius = 64.0
@@ -10,11 +26,20 @@ radius = 64.0
 [node name="target" type="Sprite2D" unique_id=2140751424]
 scale = Vector2(2, 2)
 texture = ExtResource("1_hkmll")
-script = ExtResource("2_thquc")
 
 [node name="lens" parent="." unique_id=147503076 instance=ExtResource("2_my4ps")]
 zoom = Vector2(0.25, 0.25)
 priority = 98
+
+[node name="circle" parent="lens/CanvasLayer" parent_id_path=PackedInt32Array(147503076, 1982002948) index="1" unique_id=261711098]
+texture = SubResource("GradientTexture2D_hkmll")
+
+[node name="mask" parent="lens/CanvasLayer/circle" index="0" unique_id=1735893369]
+script = ExtResource("2_thquc")
+enemy = ExtResource("4_thquc")
+
+[node name="Sprite2D" parent="lens/CanvasLayer/circle/mask" index="0" unique_id=717142036]
+texture = SubResource("ViewportTexture_my4ps")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1709781636]
 collision_layer = 2
@@ -24,3 +49,5 @@ linear_damp = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1791462277]
 shape = SubResource("CircleShape2D_hkmll")
+
+[editable path="lens"]

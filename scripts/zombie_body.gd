@@ -13,7 +13,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if target:
 		var to_target = target.global_position - global_position
 
-		force += to_target.normalized() * 130.0
+		force += to_target.normalized() * 200.0
 
 	var straight = $straight.is_colliding() and $straight.get_collider() != target
 	var right = $right.is_colliding() and $right.get_collider() != target
@@ -57,11 +57,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	for i in range(state.get_contact_count()):
 		var body = state.get_contact_collider_object(i)
 
-		if body is Tank and body.linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.4:
+		if body is Tank and body.linear_velocity.length() > 150 and state.get_contact_impulse(i).length() > 0.1:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			die()
 		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and (body.linear_velocity - linear_velocity).length() > 300:
 			head.apply_impulse(-state.get_contact_impulse(i))
+			body.apply_impulse(-state.get_contact_impulse(i))
 			die()
 		elif body == target and body is RigidBody2D:
 			body.apply_force(global_transform.x * 300)

@@ -12,5 +12,5 @@ func _process(delta):
 	if body:
 		body.target = target
 	
-	if body == null and head == null:
+	if (body == null and head == null) or (body != null and (target.global_position - body.global_position).length() > 1500):
 		queue_free()

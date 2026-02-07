@@ -6,6 +6,9 @@ class_name Player extends Node2D
 
 signal end_game
 
+func _process(delta):
+	get_window().title = "fps: " + str(Engine.get_frames_per_second())
+
 func _on_center_of_mass_death() -> void:
 	# keep the snow effect
 	$body/Camera2D.process_mode = Node.PROCESS_MODE_ALWAYS
