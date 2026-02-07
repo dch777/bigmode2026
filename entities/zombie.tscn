@@ -23,6 +23,7 @@ script = ExtResource("1_qca0a")
 
 [node name="body" type="RigidBody2D" parent="." unique_id=371954804]
 z_index = 1
+use_parent_material = true
 collision_layer = 4
 collision_mask = 4
 mass = 0.1
@@ -32,12 +33,15 @@ linear_damp = 2.0
 script = ExtResource("4_hud2l")
 
 [node name="body" type="Sprite2D" parent="body" unique_id=1411117552]
+use_parent_material = true
 texture = ExtResource("5_hud2l")
 
 [node name="fallen_body" type="Node2D" parent="body" unique_id=1110173452]
 visible = false
+use_parent_material = true
 
 [node name="FallenZombie" type="Sprite2D" parent="body/fallen_body" unique_id=1791289460]
+use_parent_material = true
 position = Vector2(30, 0)
 texture = ExtResource("3_qca0a")
 
@@ -91,6 +95,7 @@ volume_db = -10.0
 
 [node name="head" type="RigidBody2D" parent="." unique_id=1886154448]
 z_index = 1
+use_parent_material = true
 position = Vector2(-3, 0)
 collision_layer = 3
 collision_mask = 3
@@ -118,6 +123,7 @@ scale_amount_curve = SubResource("Curve_xotmo")
 color = Color(1, 0, 0.26666668, 1)
 
 [node name="ZombieHead" type="Sprite2D" parent="head" unique_id=1694950846]
+use_parent_material = true
 position = Vector2(3, 0)
 texture = ExtResource("6_mwpml")
 

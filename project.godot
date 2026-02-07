@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TransitionScreen="*uid://jp38nhsn0x6x"
+Fatcopter="*uid://c4bus7hmqvjvk"
 
 [display]
 
@@ -93,6 +94,7 @@ detonate={
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
 2d/default_linear_damp=0.5
+2d/solver/solver_iterations=8
 
 [rendering]
 

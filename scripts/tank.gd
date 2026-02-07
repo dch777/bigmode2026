@@ -52,18 +52,25 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var slip_angle = state.linear_velocity.angle_to(facing if sign(throttle) >= 0 else -facing) if state.linear_velocity.length() > 30.0 else 0.0
 	slip_curve = exp(-state.linear_velocity.length() / (600 * abs(slip_angle))) if abs(slip_angle) > 0.01 else 0.0
 	var sideways_friction = 650 * slip_curve * -sideways_velocity.normalized()
+	if steering == 0:
+		sideways_friction *= 2.0
+
 	if Input.is_action_pressed("brake") and slip_curve > 0.3 and throttle != 0 and steering != 0:
 		boost += 8 * state.step * slip_curve
+		boost -= state.step * 0.3
 	if slip_curve > 0.3 and throttle != 0 and steering != 0:
 		boost += 5 * state.step * slip_curve
-	elif slip_curve > 0.8:
+		boost -= state.step * 0.3
+	elif throttle != 0 and slip_curve > 0.8:
 		boost -= state.step * 8.0
-	else:
+	elif throttle != 0:
 		boost -= state.step * 1.5
+	else:
+		boost = 0
 	
 	boost = clamp(boost, 0, 5)
 	if steering == 0:
-		throttle_force *= 1 + boost * clamp(1 - (1.7 * slip_curve), 0, 1)
+		throttle_force *= 1 + boost * clamp(1 - (1 * slip_curve), 0, 1)
 
 	state.apply_force(throttle_force)
 	state.apply_torque(steering_torque)
@@ -74,8 +81,16 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		collision_mask = 1
 	else:
 		collision_mask = 5
-	if state.linear_velocity.length() > 20:
+
+	if steering == 0 and state.linear_velocity.length() > 20:
+		state.apply_torque(5 * state.linear_velocity.length() * slip_curve * -sign(slip_angle))
+		angular_damp = 2.0
+	elif !Input.is_action_pressed("brake") and slip_curve > 0.2 and state.linear_velocity.length() > 20:
 		state.apply_torque(state.linear_velocity.length() * slip_curve * -sign(slip_angle))
+		angular_damp = 1 - slip_curve
+	elif state.linear_velocity.length() > 20:
+		state.apply_torque(state.linear_velocity.length() * slip_curve * -sign(slip_angle))
+		angular_damp = 0.2
 
 	if Input.is_action_pressed("brake"):
 		var brake_friction = 350 * -state.linear_velocity.normalized()

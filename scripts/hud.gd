@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 @export var total_countdown_time = 30.0
-@export var nuke: Nuke
 @export var player: Player
 
 var detonate_timer: float = 0.0
@@ -11,9 +10,7 @@ var dash_dither = false
 var dial_intensity = 0.0
 var dash_intensity = 0.0
 
-func _ready() -> void:
-	$Timer.wait_time = total_countdown_time
-	$Timer.start()
+var time_elapsed = 0.0
 
 func _process(delta: float) -> void:
 	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta * 5.0), 0, PI + 0.1)
@@ -37,8 +34,12 @@ func _process(delta: float) -> void:
 		if detonate_timer <= 0:
 			detonate_timer = 3
 		else:
-			$Timer.start(0.01)
-			$dashboard/base/button_down.show()
+			var nuke = get_tree().get_current_scene().find_child("nuke")
+			if nuke:
+				nuke.explode()
+
+	$dashboard/base/button_down.visible = Input.is_action_pressed("detonate") and detonate_timer > 0
+
 
 	if detonate_timer > 0:
 		detonate_timer -= delta
@@ -48,20 +49,21 @@ func _process(delta: float) -> void:
 		$dashboard/base/flap_down.show()
 		$dashboard/base/flap_up.hide()
 
-	if !$Timer.is_stopped():
-		$dashboard/base/danger.visible = (detonate_timer > 0 or $Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
-		$warning_mask.visible = ($Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
-		if int(Time.get_unix_time_from_system()) % 2 == 1 and $Timer.time_left < 10 and !$Warning.playing:
-			$Warning.play()
-	else:
-		$dashboard/base/danger.visible = false
-		$warning_mask.visible = false
+	# if !$Timer.is_stopped():
+	# 	$dashboard/base/danger.visible = (detonate_timer > 0 or $Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
+	# 	$warning_mask.visible = ($Timer.time_left < 10) and int(Time.get_unix_time_from_system()) % 2 == 1
+	# 	if int(Time.get_unix_time_from_system()) % 2 == 1 and $Timer.time_left < 10 and !$Warning.playing:
+	# 		$Warning.play()
+	# else:
+	# 	$dashboard/base/danger.visible = false
+	# 	$warning_mask.visible = false
 
 	$dashboard/base/reloading.visible = player.turret.cooldown_timer > 0
 
-	var time_string = format_time($Timer.time_left)
-	if $Timer.time_left == 0 and int(2 * Time.get_unix_time_from_system()) % 2 == 0:
-		time_string = "  :  "
+	time_elapsed += delta
+	var time_string = format_time(time_elapsed)
+	# if $Timer.time_left == 0 and int(2 * Time.get_unix_time_from_system()) % 2 == 0:
+	# 	time_string = "  :  "
 
 	for i in range(5):
 		if ord(time_string[i]) - ord("0") < 10 and ord(time_string[i]) - ord("0") >= 0:
@@ -77,10 +79,6 @@ func format_time(t: float) -> String:
 	var milliseconds = int((t - int(t)) * 100)
 
 	return "%02d:%02d" % [minutes, seconds]
-
-func timeout():
-	if nuke:
-		nuke.explode()
 
 func get_color(t: float) -> Color:
 	if t > 2.0 * total_countdown_time / 3.0:

@@ -63,9 +63,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_mp5xd")
 
-[node name="Timer" type="Timer" parent="." unique_id=1922061490]
-one_shot = true
-
 [node name="dashboard" type="VBoxContainer" parent="." unique_id=295536584]
 material = SubResource("ShaderMaterial_65xic")
 anchors_preset = 2
@@ -241,5 +238,3 @@ stream = ExtResource("15_mp5xd")
 volume_db = -20.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1743412149]
-
-[connection signal="timeout" from="Timer" to="." method="timeout"]

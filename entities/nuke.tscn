@@ -13,8 +13,8 @@ bounce = 1.0
 
 [sub_resource type="Gradient" id="Gradient_uilhl"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.34729064, 0.6477833, 0.89528793)
-colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1)
+offsets = PackedFloat32Array(0, 0.34729064, 0.6477833, 0.89528793, 0.9860465)
+colors = PackedColorArray(1, 1, 1, 1, 0.9843137, 0.57254905, 0.16862746, 1, 0.8980392, 0.23137255, 0.26666668, 1, 0.24705882, 0.15686275, 0.19607843, 1, 0.24705882, 0.15686275, 0.19607843, 0)
 
 [sub_resource type="Curve" id="Curve_6cp8y"]
 _data = [Vector2(0, 0.098523855), 0.0, 0.0, 0, 0, Vector2(0.42396313, 1), 0.0, 0.0, 0, 0]
@@ -70,6 +70,7 @@ collision_layer = 134
 collision_mask = 135
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_kd12q")
+can_sleep = false
 linear_velocity = Vector2(5, 0)
 linear_damp = -0.2
 script = ExtResource("1_oembp")
@@ -156,5 +157,6 @@ libraries/ = SubResource("AnimationLibrary_px5pb")
 
 [node name="Timer" type="Timer" parent="." unique_id=107499934]
 
+[connection signal="finished" from="Explosion2" to="." method="particles_finished"]
 [connection signal="body_entered" from="BlastZone" to="." method="blast_radius_entered"]
 [connection signal="death" from="CenterOMass" to="." method="_on_center_o_mass_death"]

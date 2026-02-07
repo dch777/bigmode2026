@@ -9,16 +9,17 @@ class_name Nuke extends RigidBody2D
 
 var is_exploding = false
 var pushed_bodies: Dictionary[RigidBody2D, bool]
+var target: Target
+var exploded: bool = false
 
 signal end_game
 
-func _ready() -> void:
-	#explode()
-	pass
+func _ready():
+	player = get_tree().get_current_scene().find_child("Player")
 
 func _process(delta: float) -> void:
 	if is_exploding:
-		blast_zone.shape.radius = min(blast_zone.shape.radius * 1.05, 10000.0)
+		blast_zone.shape.radius = min(blast_zone.shape.radius * 1.05, 1000.0)
 		if !breakout_mode and next_scene != null:
 			camera.global_position = camera.global_position.lerp(global_position, 4 * delta)
 			camera.zoom = camera.zoom.lerp(Vector2(0.5, 0.5), delta)
@@ -27,6 +28,10 @@ func _process(delta: float) -> void:
 		explode()
 
 func explode() -> void:
+	if exploded:
+		return
+	exploded = true
+
 	$BlastZone.monitoring = true
 	camera.particle_material.set_shader_parameter("explosion", global_position)
 	camera.particle_material.set_shader_parameter("is_exploding", true)
@@ -44,14 +49,9 @@ func explode() -> void:
 	$AudioStreamPlayer2D.play()
 	$AudioStreamPlayer2D2.play()
 
-	await get_tree().create_timer(3.2).timeout
-
-	camera.particle_material.set_shader_parameter("is_exploding", false)
-
-	if breakout_mode or next_scene != null:
+	if breakout_mode:
+		await get_tree().create_timer(3.2).timeout
 		TransitionScreen.transition(next_scene)
-	
-	queue_free()
 
 func blast_radius_entered(body: Node2D):
 	if body is RigidBody2D and body is not Bullet:
@@ -69,6 +69,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			deg += PI/4
 		state.linear_velocity = Vector2.from_angle(deg) * max(state.linear_velocity.length(), 500.0)
 
+	if state.total_gravity.length() > 500:
+		collision_mask = 0b10000111
+	else:
+		collision_mask = 0b10000011
+
 func _on_center_o_mass_death() -> void:
 	camera.top_level = true
 	#camera.particle_material.set_shader_parameter("explosion", global_position)
@@ -78,3 +83,15 @@ func _on_center_o_mass_death() -> void:
 	$AnimationPlayer.play("death")
 
 	process_mode = Node.PROCESS_MODE_DISABLED
+
+func particles_finished():
+	if next_scene:
+		TransitionScreen.transition(next_scene)
+		return
+
+	Fatcopter.drop_nuke(global_position)
+	camera.particle_material.set_shader_parameter("is_exploding", false)
+
+	if target:
+		target.queue_free()
+	queue_free()

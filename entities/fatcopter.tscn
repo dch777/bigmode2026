@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c4bus7hmqvjvk"]
+
+[ext_resource type="Texture2D" uid="uid://boyfmfp7oi2k2" path="res://assets/sprites/fatcopter.png" id="1_eaxe1"]
+[ext_resource type="Script" uid="uid://dmoja34ixn66e" path="res://scripts/fatcopter.gd" id="1_eq1fh"]
+[ext_resource type="Texture2D" uid="uid://ummutsub6q0p" path="res://assets/sprites/fatcopter_blades.png" id="2_eq1fh"]
+
+[node name="fatcopter" type="Node2D" unique_id=2014335629]
+visible = false
+z_index = 99
+script = ExtResource("1_eq1fh")
+
+[node name="Fatcopter" type="Sprite2D" parent="." unique_id=520185699]
+texture = ExtResource("1_eaxe1")
+
+[node name="blades" type="Node2D" parent="." unique_id=344416025]
+position = Vector2(11, 0)
+
+[node name="FatcopterBlades" type="Sprite2D" parent="blades" unique_id=1915826234]
+position = Vector2(-11, 0)
+texture = ExtResource("2_eq1fh")
+
+[node name="nuke_location" type="Node2D" parent="." unique_id=148819387]
+position = Vector2(20, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1271635059]
+rect = Rect2(-70, -64, 150, 128)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="screen_exited"]
