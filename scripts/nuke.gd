@@ -70,6 +70,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		state.linear_velocity = Vector2.from_angle(deg) * max(state.linear_velocity.length(), 500.0)
 
 func _on_center_o_mass_death() -> void:
+	camera.top_level = true
+	#camera.particle_material.set_shader_parameter("explosion", global_position)
+	#camera.particle_material.set_shader_parameter("is_exploding", true)
+	
 	$AnimationPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
 	$AnimationPlayer.play("death")
 

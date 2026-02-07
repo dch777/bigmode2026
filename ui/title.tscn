@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dluta4slmbyu4"]
 
-[ext_resource type="Script" path="res://scripts/title.gd" id="1_8pw88"]
+[ext_resource type="Script" uid="uid://ddvor7cq2bxd6" path="res://scripts/title.gd" id="1_8pw88"]
 [ext_resource type="Texture2D" uid="uid://bckr6kg8s8hkq" path="res://assets/sprites/groundbreaking_black.png" id="1_oxt76"]
 [ext_resource type="Texture2D" uid="uid://cpa6sosvu7ri4" path="res://assets/sprites/groundbreaking.png" id="3_k00jo"]
 [ext_resource type="Texture2D" uid="uid://bwtsy54h34awp" path="res://assets/sprites/crack_black.png" id="3_od2a6"]
