@@ -18,6 +18,9 @@ config/name="bigmode2026"
 run/main_scene="uid://dluta4slmbyu4"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://bckr6kg8s8hkq"
 config/icon="res://icon.svg"
 
 [autoload]

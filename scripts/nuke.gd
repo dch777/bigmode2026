@@ -83,6 +83,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		collision_mask = 0b10000011
 
 func _on_center_o_mass_death() -> void:
+	StatCounter.used_nukes += 1
+	
 	$AnimationPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
 	$AnimationPlayer.play("death")
 
