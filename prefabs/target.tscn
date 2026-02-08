@@ -10,7 +10,7 @@
 offsets = PackedFloat32Array(0.3794872, 0.3846154)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_kn3ff"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0o23t"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_epu3l")
 width = 128
@@ -18,7 +18,7 @@ height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_akui5"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kn3ff"]
 viewport_path = NodePath("CanvasLayer/SubViewport")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hkmll"]
@@ -34,14 +34,16 @@ zoom = Vector2(0.25, 0.25)
 priority = 98
 
 [node name="circle" parent="lens/CanvasLayer" parent_id_path=PackedInt32Array(147503076, 1982002948) index="1" unique_id=261711098]
-texture = SubResource("GradientTexture2D_kn3ff")
+texture = SubResource("GradientTexture2D_0o23t")
 
 [node name="mask" parent="lens/CanvasLayer/circle" index="0" unique_id=1735893369]
 script = ExtResource("2_thquc")
 enemy = ExtResource("4_thquc")
+min_spawn_time = 5.0
+max_spawn_time = 5.0
 
 [node name="Sprite2D" parent="lens/CanvasLayer/circle/mask" index="0" unique_id=717142036]
-texture = SubResource("ViewportTexture_akui5")
+texture = SubResource("ViewportTexture_kn3ff")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1709781636]
 collision_layer = 2

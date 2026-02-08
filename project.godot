@@ -100,7 +100,7 @@ reset={
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
 2d/default_linear_damp=0.5
-2d/solver/solver_iterations=8
+2d/solver/solver_iterations=6
 
 [rendering]
 

@@ -6,8 +6,6 @@ extends Control
 @onready var lame_audio = load("res://assets/audio/freesound_community-wrong-buzzer-6268.mp3")
 @onready var rainbow_mat = ShaderMaterial.new()
 
-const level_select = preload("res://entities/level_select.tscn")
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# display some stuff
@@ -19,7 +17,7 @@ func _ready() -> void:
 	$BasesDestroyed.add_theme_color_override("font_color", Color("63c74d") if StatCounter.completed_objectives == StatCounter.total_objectives else Color("ff0044"))
 	$BasesDestroyed.text = str(StatCounter.completed_objectives) + " of " + str(StatCounter.total_objectives)
 	
-	$TimeUsed.text = str(StatCounter.used_time)
+	$TimeUsed.text = str(format_time(StatCounter.used_time))
 	
 	# do some calculations
 	var final_score = StatCounter.calc_final_score()
@@ -62,4 +60,11 @@ func _process(delta):
 	if Input.is_action_pressed("reset"):
 		TransitionScreen.transition(load(StatCounter.current_scene))
 	if Input.is_action_pressed("pause"):
-		TransitionScreen.transition(level_select)
+		TransitionScreen.transition(load("res://entities/level_select.tscn"))
+
+func format_time(t: float) -> String:
+	var minutes = int(t / 60)
+	var seconds = int(t) % 60
+	var milliseconds = int((t - int(t)) * 100)
+
+	return "%02d:%02d" % [minutes, seconds]

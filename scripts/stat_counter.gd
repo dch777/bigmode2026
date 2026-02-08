@@ -24,7 +24,6 @@ func add_gore() -> void:
 
 	# Check for level up
 	if combo_kills >= combo_reqs:
-		combo_kills -= combo_reqs   # keep overflow
 		combo_multiplier += 1
 		combo_reqs *= 2
 
@@ -38,7 +37,7 @@ func reset_combo() -> void:
 	combo_reqs = 3
 
 func get_combo_time_limit() -> float:
-	return max(1.5, 10.0 / (1.0 + 0.1 * (combo_multiplier - 1)))
+	return max(1.5, 5.0 / (1.0 + 0.1 * (combo_multiplier - 1)))
 
 func calc_final_score() -> int:
 	# straightfroward for gore

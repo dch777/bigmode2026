@@ -39,7 +39,7 @@ func _process(delta):
 			new_bullet.global_position = $end.global_position
 
 			var dir = Vector2.from_angle(global_rotation + PI)
-			new_bullet.linear_velocity = dir * 1000
+			new_bullet.linear_velocity = linear_velocity + dir * 1000
 			body.apply_impulse(-dir * 500)
 			add_child(new_bullet)
 
