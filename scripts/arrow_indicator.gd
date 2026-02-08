@@ -23,11 +23,6 @@ func _process(delta: float) -> void:
 		return
 
 	show()
-	var hud = get_tree().get_current_scene().find_child("HUD")
-	if hud and global_position.x >= 970 and global_position.y >= 520:
-		hud.dial_dither = true
-	if hud and global_position.x <= 330 and global_position.y >= 480:
-		hud.dash_dither = true
 
 	# Screen center
 	var center: Vector2 = screen_rect.size * 0.5
@@ -39,6 +34,15 @@ func _process(delta: float) -> void:
 	var half: Vector2 = inner_rect.size * 0.5
 	var scale: float = max(abs(rel.x) / half.x, abs(rel.y) / half.y)
 	position = center + rel / scale
+
+	var hud = get_tree().get_current_scene().find_child("HUD")
+	if hud and global_position.x >= 970 and global_position.y >= 520:
+		hud.dial_dither = true
+	if hud and global_position.x <= 330 and global_position.y >= 480:
+		hud.dash_dither = true
+	if hud and global_position.x <= 875 and global_position.x >= 400 and global_position.y <= 128:
+		position.y += 48
+		# hud.score_dither = true
 
 	# Arrow sprite points UP by default
 	if rotate:

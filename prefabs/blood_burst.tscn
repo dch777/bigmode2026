@@ -4,5 +4,6 @@
 
 [node name="BloodBurst" type="Node2D" unique_id=1876149181]
 script = ExtResource("1_gmoqu")
-droplet_count = 40
+droplet_count = 20
+droplet_count_max = 50
 scatter_radius = 4.0

@@ -4,13 +4,19 @@ extends CanvasLayer
 @export var player: Player
 
 var detonate_timer: float = 0.0
+
 var dial_dither = false
 var dash_dither = false
+var score_dither = false
 
 var dial_intensity = 0.0
 var dash_intensity = 0.0
+var score_intensity = 0.0
 
 var time_elapsed = 0.0
+
+func _ready() -> void:
+	$AnimationPlayer.play("wobble")
 
 func _process(delta: float) -> void:
 	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta * 5.0), 0, PI + 0.1)
@@ -27,8 +33,16 @@ func _process(delta: float) -> void:
 		dial_dither = false
 	else:
 		dial_intensity = lerp(dial_intensity, 0.0, 5 * delta)
+
+	if score_dither:
+		score_intensity = lerp(score_intensity, 0.5, 5 * delta)
+		score_dither = false
+	else:
+		score_intensity = lerp(score_intensity, 0.0, 5 * delta)
+
 	$dashboard.material.set_shader_parameter("intensity", dash_intensity)
 	$dial_container.material.set_shader_parameter("intensity", dial_intensity)
+	$GoreScore.material.set_shader_parameter("intensity", score_intensity)
 
 	if Input.is_action_just_pressed("detonate"):
 		if detonate_timer <= 0:
@@ -72,6 +86,14 @@ func _process(delta: float) -> void:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 10 * 32
 		else:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 12 * 32
+			
+	# scoring hud stuff
+	$GoreScore.text = str(StatCounter.gore_score).pad_zeros(12)
+	if StatCounter.combo_kills > 0:
+		$GoreMultiplier.text = "x" + str(StatCounter.combo_kills)
+	else:
+		$GoreMultiplier.text = ""
+	StatCounter.used_time = time_elapsed
 
 func format_time(t: float) -> String:
 	var minutes = int(t / 60)

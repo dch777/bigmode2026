@@ -5,6 +5,17 @@ class_name Player extends Node2D
 @onready var turret: Turret = $turret
 @onready var game_over_screen = load("res://ui/game_over.tscn")
 
+@export var enable_drop: bool = true
+
+func _ready():
+	StatCounter.total_objectives = get_tree().get_current_scene().find_children("*", "Target").size()
+	StatCounter.gore_score = 0
+	StatCounter.used_nukes = 0
+	StatCounter.completed_objectives = 0
+	StatCounter.current_scene = get_tree().get_current_scene().scene_file_path
+
+	if enable_drop:
+		Fatcopter.drop_nuke(tank.global_position + Vector2(64, 0))
 
 func _process(delta):
 	get_window().title = "fps: " + str(Engine.get_frames_per_second())

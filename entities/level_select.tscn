@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://uvj3ymvll72y"]
 
+[ext_resource type="Script" uid="uid://di28nktcyuqyc" path="res://scripts/level_select.gd" id="1_5l1uu"]
 [ext_resource type="Shader" uid="uid://bu4uy5308vhu4" path="res://assets/shaders/snow.gdshader" id="1_5lphw"]
 [ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="2_y2dis"]
 
@@ -38,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5l1uu")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=603167660]
 layout_mode = 1
@@ -119,13 +121,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
 text = "3"
 
-[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=758255646]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_y2dis")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
-text = "4"
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button1" to="." method="_on_button_1_button_up"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_button_up"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button3" to="." method="_on_button_3_button_up"]
