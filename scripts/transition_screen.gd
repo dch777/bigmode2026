@@ -14,5 +14,14 @@ func _on_animation_finished(anim_name):
 		animation_player.play("fade_in")
 		
 func transition(next: PackedScene):
+	var scene_name = next.resource_path.get_file().get_basename()
+	
+	if scene_name == "title":
+		AudioController.pause()
+	elif scene_name == "game_over":
+		AudioController.pause()
+	else:
+		AudioController.play_menu_music()
+	
 	next_scene = next
 	animation_player.play("fade_out")

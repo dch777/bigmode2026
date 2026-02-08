@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b00pjv2brtvy7"]
 
-[ext_resource type="Script" uid="uid://8w0aplc1ks20" path="res://snapshot.gd" id="1_7tabv"]
+[ext_resource type="Script" uid="uid://8w0aplc1ks20" path="res://scripts/snapshot.gd" id="1_7tabv"]
 [ext_resource type="TileSet" uid="uid://blogel74bes2u" path="res://assets/tileset.tres" id="2_34ehb"]
 [ext_resource type="Texture2D" uid="uid://gfalca1lbnco" path="res://assets/sprites/tree3.png" id="3_ovajx"]
 [ext_resource type="Script" uid="uid://coe0modjj5vtx" path="res://scripts/trees.gd" id="4_7rjwh"]
