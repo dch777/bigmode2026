@@ -3,7 +3,8 @@ extends AudioStreamPlayer
 const save_the_city = preload("res://assets/audio/Three Red Hearts - Save the City.ogg")
 
 func _play_music(music : AudioStream, volume = 0.0):
-	playing = true
+	if not playing:
+		playing = true
 
 	if stream == music:
 		return

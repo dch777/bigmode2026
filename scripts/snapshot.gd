@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func polygon_to_png():
+	print(';asd')
 	await RenderingServer.frame_post_draw
 
 	var image: Image = viewport.get_texture().get_image()
