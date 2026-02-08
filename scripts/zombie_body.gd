@@ -61,7 +61,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	for i in range(state.get_contact_count()):
 		var body = state.get_contact_collider_object(i)
 
-		if body is Tank and body.linear_velocity.length() > 200 and state.get_contact_impulse(i).length() > 1.0:
+		if body is Tank and body.linear_velocity.length() > 100 and state.get_contact_impulse(i).length() > 1.0:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			die(body.linear_velocity.normalized()) # <-- pass tank direction
 		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and body.linear_velocity.length() > 150:

@@ -1,10 +1,10 @@
 extends Node2D
 
 var gore_score: int	= 0
-var used_nukes: int = 1
+var used_nukes: int = 0
 var used_time: int = 0
-var completed_objectives: int = 1
-var total_objectives: int = 1
+var completed_objectives: int = 0
+var total_objectives: int = 0
 
 var time_since_last_kill: float = 0
 var combo_kills = 0
@@ -13,11 +13,10 @@ var combo_multiplier: int = 1
 
 func _process(delta: float) -> void:
 	time_since_last_kill += delta
-
-func add_gore() -> void:	
-	# Combo expired
 	if time_since_last_kill > get_combo_time_limit():
 		reset_combo()
+
+func add_gore() -> void:
 
 	# Add this kill
 	combo_kills += 1
@@ -38,7 +37,7 @@ func reset_combo() -> void:
 	combo_reqs = 3
 
 func get_combo_time_limit() -> float:
-	return max(0.7, 5.0 / (1.0 + 0.3 * (combo_multiplier - 1)))
+	return max(1.5, 5.0 / (1.0 + 0.1 * (combo_multiplier - 1)))
 
 func calc_final_score() -> int:
 	# straightfroward for gore

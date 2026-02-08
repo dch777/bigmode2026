@@ -36,8 +36,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	var forward_velocity = state.linear_velocity.project(facing)
 	var sideways_velocity = state.linear_velocity.slide(facing)
 
-	var scaled_speed = forward_velocity.length() / 175.0
-	var acceleration_curve = 175 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
+	var scaled_speed = forward_velocity.length() / 200.0
+	var acceleration_curve = 200 * (scaled_speed + 0.5) * exp(-(scaled_speed - 2.0))
 	var throttle_force = acceleration_curve * facing * throttle
 
 	var steer_curve = exp(-state.linear_velocity.length()) + 1

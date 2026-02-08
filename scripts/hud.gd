@@ -12,6 +12,9 @@ var dash_intensity = 0.0
 
 var time_elapsed = 0.0
 
+func _ready() -> void:
+	$AnimationPlayer.play("wobble")
+
 func _process(delta: float) -> void:
 	$dial_container/dial/indicator.rotation = clamp(lerp($dial_container/dial/indicator.rotation, PI * player.tank.linear_velocity.length() / (3.0 * 240.0), delta * 5.0), 0, PI + 0.1)
 	$dashboard/base/compass.rotation = player.tank.global_rotation + PI/2
@@ -72,6 +75,14 @@ func _process(delta: float) -> void:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 10 * 32
 		else:
 			$dashboard/tubes.get_child(i).texture.region.position.x = 12 * 32
+			
+	# scoring hud stuff
+	$GoreScore.text = str(StatCounter.gore_score).pad_zeros(12)
+	if StatCounter.combo_kills > 0:
+		$GoreMultiplier.text = "x" + str(StatCounter.combo_kills)
+	else:
+		$GoreMultiplier.text = ""
+	StatCounter.used_time = time_elapsed
 
 func format_time(t: float) -> String:
 	var minutes = int(t / 60)

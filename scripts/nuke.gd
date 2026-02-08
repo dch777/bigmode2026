@@ -32,10 +32,13 @@ func explode() -> void:
 		return
 	exploded = true
 
+	StatCounter.used_nukes += 1
 	$BlastZone.monitoring = true
 	camera.particle_material.set_shader_parameter("explosion", global_position)
 	camera.particle_material.set_shader_parameter("is_exploding", true)
 
+	if target:
+		target.set_active(false)
 	if target and get_tree().get_current_scene().find_children("*", "Target").size() > 1:
 		next_scene = null
 
@@ -78,23 +81,24 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 		collision_mask = 0b10000011
 
 func _on_center_o_mass_death() -> void:
-	camera.top_level = true
-	#camera.particle_material.set_shader_parameter("explosion", global_position)
-	#camera.particle_material.set_shader_parameter("is_exploding", true)
-	
 	$AnimationPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
 	$AnimationPlayer.play("death")
 
 	process_mode = Node.PROCESS_MODE_DISABLED
 
+func death_finished(anim_name):
+	Fatcopter.drop_nuke(player.tank.global_position + Vector2(128, 0))
+	queue_free()
+
 func particles_finished():
+	if target:
+		target.queue_free()
+		StatCounter.completed_objectives += 1
 	if next_scene:
 		TransitionScreen.transition(next_scene)
 		return
 
-	Fatcopter.drop_nuke(global_position)
+	Fatcopter.drop_nuke(player.tank.global_position + Vector2(128, 0))
 	camera.particle_material.set_shader_parameter("is_exploding", false)
 
-	if target:
-		target.queue_free()
 	queue_free()

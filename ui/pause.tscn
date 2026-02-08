@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://7fkn8a5nvil5"]
+
+[ext_resource type="Script" uid="uid://cgymjmamp5wme" path="res://scripts/pause.gd" id="1_7iet2"]
+[ext_resource type="FontFile" uid="uid://ccwua8oubky4n" path="res://assets/fonts/panzer/Panzer.ttf" id="2_8aaw5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ita1e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84o7k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5jsl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qqk1d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_db7bs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1avt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lrgva"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tgu0a"]
+
+[node name="Pause" type="CanvasLayer" unique_id=1386328056]
+layer = 200
+script = ExtResource("1_7iet2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1430759495]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.490196)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1050026788]
+offset_left = 448.0
+offset_right = 832.0
+offset_bottom = 720.0
+alignment = 1
+
+[node name="Resume" type="Button" parent="VBoxContainer" unique_id=1989700023]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.22745098, 0.26666668, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.3529412, 0.4117647, 0.53333336, 1)
+theme_override_fonts/font = ExtResource("2_8aaw5")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ita1e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_84o7k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d5jsl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qqk1d")
+text = "resume"
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=298459000]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="VBoxContainer" unique_id=1451967935]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.22745098, 0.26666668, 0.4, 1)
+theme_override_colors/font_hover_color = Color(0.3529412, 0.4117647, 0.53333336, 1)
+theme_override_fonts/font = ExtResource("2_8aaw5")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_db7bs")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_k1avt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lrgva")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tgu0a")
+text = "LEVEL SELECT"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="button_up" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_button_up"]

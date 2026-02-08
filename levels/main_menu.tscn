@@ -155,6 +155,7 @@ shader = ExtResource("5_7ty7c")
 shader_parameter/window_size = Vector2(1280, 720)
 shader_parameter/explosion = Vector2(0, 0)
 shader_parameter/is_exploding = false
+shader_parameter/default_velocity = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_6nm46"]
 offsets = PackedFloat32Array(0, 0.6512821)
@@ -254,6 +255,7 @@ script = ExtResource("2_7rktv")
 [node name="Player" parent="." unique_id=1003144878 instance=ExtResource("3_3ye4h")]
 position = Vector2(-200, 200)
 rotation = 0.7853982
+enable_drop = false
 
 [node name="body" parent="Player" index="2" unique_id=1588423890]
 default_throttle = 1.0
