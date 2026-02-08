@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cw4mnpad3v50l"]
 
-[ext_resource type="Script" path="res://scripts/zombie.gd" id="1_qca0a"]
+[ext_resource type="Script" uid="uid://bttpf0fbcw106" path="res://scripts/zombie.gd" id="1_qca0a"]
 [ext_resource type="Texture2D" uid="uid://cjutilpsstk4" path="res://assets/sprites/fallen_zombie.png" id="3_qca0a"]
 [ext_resource type="Script" uid="uid://bs25r7yih6a0o" path="res://scripts/zombie_body.gd" id="4_hud2l"]
 [ext_resource type="Texture2D" uid="uid://b1rkskw1dybmv" path="res://assets/sprites/zombie_body.png" id="5_hud2l"]
 [ext_resource type="AudioStream" uid="uid://dyuoh5khv53qh" path="res://assets/audio/hit.wav" id="5_mwpml"]
-[ext_resource type="Script" path="res://scripts/zombie_head.gd" id="6_1atck"]
+[ext_resource type="Script" uid="uid://bl658cp8xl4ge" path="res://scripts/zombie_head.gd" id="6_1atck"]
+[ext_resource type="Script" uid="uid://bhwjyjfg6dy7a" path="res://scripts/center_of_mass.gd" id="6_3x7dm"]
 [ext_resource type="Texture2D" uid="uid://d3to82liluoco" path="res://assets/sprites/zombie_head.png" id="6_mwpml"]
 
 [sub_resource type="Curve" id="Curve_xotmo"]
@@ -16,7 +17,94 @@ point_count = 3
 radius = 17.5
 height = 37.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mwpml"]
+radius = 2.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hud2l"]
+
+[sub_resource type="Animation" id="Animation_mwpml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/fallen_body/FallenZombie:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head/ZombieHead:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1atck"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/fallen_body/FallenZombie:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head/ZombieHead:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3x7dm"]
+_data = {
+&"RESET": SubResource("Animation_mwpml"),
+&"death": SubResource("Animation_1atck")
+}
 
 [node name="zombie" type="Node2D" unique_id=1623222550]
 script = ExtResource("1_qca0a")
@@ -93,6 +181,15 @@ motor_enabled = true
 stream = ExtResource("5_mwpml")
 volume_db = -10.0
 
+[node name="CenterOfMass" type="Area2D" parent="body" unique_id=968033988]
+position = Vector2(-6, 0)
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("6_3x7dm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/CenterOfMass" unique_id=1730086686]
+shape = SubResource("CircleShape2D_mwpml")
+
 [node name="head" type="RigidBody2D" parent="." unique_id=1886154448]
 z_index = 1
 use_parent_material = true
@@ -134,5 +231,10 @@ shape = SubResource("CircleShape2D_hud2l")
 rect = Rect2(-11, -11, 22, 22)
 show_rect = false
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1814758440]
+libraries/ = SubResource("AnimationLibrary_3x7dm")
+
 [connection signal="screen_exited" from="body/fallen_body/VisibleOnScreenNotifier2D" to="body" method="screen_exited"]
+[connection signal="death" from="body/CenterOfMass" to="." method="_on_center_of_mass_death"]
 [connection signal="screen_exited" from="head/VisibleOnScreenNotifier2D" to="head" method="screen_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

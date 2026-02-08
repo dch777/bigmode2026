@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4bbnmosfnr61"]
 
-[ext_resource type="Script" uid="uid://xnkxji5xd3vj" path="res://BloodDroplet.gd" id="1_qfeut"]
+[ext_resource type="Script" uid="uid://xnkxji5xd3vj" path="res://scripts/BloodDroplet.gd" id="1_qfeut"]
 [ext_resource type="Texture2D" uid="uid://djfgwgin0duot" path="res://assets/sprites/blood.png" id="2_qj47h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xa1yl"]

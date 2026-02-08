@@ -4,11 +4,14 @@ extends CanvasLayer
 @export var player: Player
 
 var detonate_timer: float = 0.0
+
 var dial_dither = false
 var dash_dither = false
+var score_dither = false
 
 var dial_intensity = 0.0
 var dash_intensity = 0.0
+var score_intensity = 0.0
 
 var time_elapsed = 0.0
 
@@ -30,8 +33,16 @@ func _process(delta: float) -> void:
 		dial_dither = false
 	else:
 		dial_intensity = lerp(dial_intensity, 0.0, 5 * delta)
+
+	if score_dither:
+		score_intensity = lerp(score_intensity, 0.5, 5 * delta)
+		score_dither = false
+	else:
+		score_intensity = lerp(score_intensity, 0.0, 5 * delta)
+
 	$dashboard.material.set_shader_parameter("intensity", dash_intensity)
 	$dial_container.material.set_shader_parameter("intensity", dial_intensity)
+	$GoreScore.material.set_shader_parameter("intensity", score_intensity)
 
 	if Input.is_action_just_pressed("detonate"):
 		if detonate_timer <= 0:

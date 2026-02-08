@@ -6,7 +6,7 @@ extends Control
 @onready var lame_audio = load("res://assets/audio/freesound_community-wrong-buzzer-6268.mp3")
 @onready var rainbow_mat = ShaderMaterial.new()
 
-@onready var level_select = preload("res://entities/level_select.tscn")
+const level_select = preload("res://entities/level_select.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

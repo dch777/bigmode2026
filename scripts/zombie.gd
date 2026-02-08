@@ -23,3 +23,14 @@ func _process(delta):
 
 	if death_timer > 6.0 or (body == null and head == null) or (body != null and target != null and (target.global_position - body.global_position).length() > 1500):
 		queue_free()
+
+
+func _on_center_of_mass_death() -> void:
+	$AnimationPlayer.process_mode = Node.PROCESS_MODE_ALWAYS
+	$AnimationPlayer.play("death")
+
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "death":
+		queue_free()

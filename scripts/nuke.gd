@@ -20,6 +20,8 @@ func _ready():
 func _process(delta: float) -> void:
 	if is_exploding:
 		blast_zone.shape.radius = min(blast_zone.shape.radius * 1.05, 2000.0)
+		if blast_zone.shape.radius >= 2000:
+			$BlastZone.monitoring = false
 		if !breakout_mode and next_scene != null:
 			camera.global_position = camera.global_position.lerp(global_position, 4 * delta)
 			camera.zoom = camera.zoom.lerp(Vector2(0.5, 0.5), delta)
@@ -66,7 +68,7 @@ func blast_radius_entered(body: Node2D):
 		body.apply_impulse(dir * 200)
 	
 	if body is ZombieHead:
-		body.zombie_body.die()
+		body.zombie_body.die(Vector2.ZERO, false)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if breakout_mode:
@@ -75,7 +77,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			deg += PI/4
 		state.linear_velocity = Vector2.from_angle(deg) * max(state.linear_velocity.length(), 500.0)
 
-	if state.total_gravity.length() > 500 or breakout_mode:
+	if state.total_gravity.length() < 500 or breakout_mode:
 		collision_mask = 0b10000111
 	else:
 		collision_mask = 0b10000011

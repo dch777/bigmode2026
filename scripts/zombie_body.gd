@@ -64,7 +64,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if body is Tank and body.linear_velocity.length() > 100 and state.get_contact_impulse(i).length() > 1.0:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			die(body.linear_velocity.normalized()) # <-- pass tank direction
-		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and body.linear_velocity.length() > 150:
+		elif body is not Tank and body is not ZombieBody and body is RigidBody2D and body.linear_velocity.length() > 300:
 			head.apply_impulse(-state.get_contact_impulse(i))
 			# body.apply_impulse(-state.get_contact_impulse(i))
 			die()
@@ -72,7 +72,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			body.apply_force(basis_x * 300)
 
 
-func die(impact_dir: Vector2 = Vector2.ZERO) -> void:
+func die(impact_dir: Vector2 = Vector2.ZERO, count_gore: bool = true) -> void:
 	if dead:
 		return
 	dead = true
@@ -108,7 +108,8 @@ func die(impact_dir: Vector2 = Vector2.ZERO) -> void:
 	z_index = 0
 	$CollisionShape2D.set_deferred("disabled", true)
 	
-	StatCounter.add_gore()
+	if count_gore:
+		StatCounter.add_gore()
 
 func _spawn_blood_burst(dir: Vector2) -> void:
 	var burst := BLOOD_BURST_SCENE.instantiate() as Node2D
