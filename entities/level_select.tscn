@@ -118,14 +118,3 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
 text = "3"
-
-[node name="Button4" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=758255646]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_y2dis")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_y2dis")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3cqc5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5l1uu")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_5l1uu")
-text = "4"
