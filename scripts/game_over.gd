@@ -6,6 +6,8 @@ extends Control
 @onready var lame_audio = load("res://assets/audio/freesound_community-wrong-buzzer-6268.mp3")
 @onready var rainbow_mat = ShaderMaterial.new()
 
+@onready var level_select = preload("res://entities/level_select.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# display some stuff
@@ -55,3 +57,9 @@ func _ready() -> void:
 
 	# show em
 	$AnimationPlayer.play("slam")
+
+func _process(delta):
+	if Input.is_action_pressed("reset"):
+		TransitionScreen.transition(load(StatCounter.current_scene))
+	if Input.is_action_pressed("pause"):
+		TransitionScreen.transition(level_select)

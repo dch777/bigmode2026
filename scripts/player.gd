@@ -12,6 +12,7 @@ func _ready():
 	StatCounter.gore_score = 0
 	StatCounter.used_nukes = 0
 	StatCounter.completed_objectives = 0
+	StatCounter.current_scene = get_tree().get_current_scene().scene_file_path
 
 	if enable_drop:
 		Fatcopter.drop_nuke(tank.global_position + Vector2(64, 0))

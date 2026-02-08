@@ -10,6 +10,7 @@ var time_since_last_kill: float = 0
 var combo_kills = 0
 var combo_reqs = 3
 var combo_multiplier: int = 1
+var current_scene
 
 func _process(delta: float) -> void:
 	time_since_last_kill += delta
