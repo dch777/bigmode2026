@@ -11,6 +11,7 @@ func _on_resume_pressed() -> void:
 
 func _on_main_menu_button_up() -> void:
 	TransitionScreen.transition(load("res://entities/level_select.tscn"))
+	Engine.time_scale = 1
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
