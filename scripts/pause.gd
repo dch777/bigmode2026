@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func _on_resume_pressed() -> void:
 	hide()
+	Engine.time_scale = 1
 
 func _on_main_menu_button_up() -> void:
 	TransitionScreen.transition(load("res://entities/level_select.tscn"))
