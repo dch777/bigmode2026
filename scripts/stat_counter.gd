@@ -48,7 +48,7 @@ func calc_final_score() -> int:
 	var points_from_time = max(30000, 81000 - used_time * 100)
 	
 	# 10000 point penalty per extra nuke
-	var points_from_nukes = -10000 * (used_nukes - completed_objectives)
+	var points_from_nukes = -50000 * (used_nukes - completed_objectives)
 	
 	# just determines if they get a game over or not
 	# automatic lame if they didn't finish the objectives
